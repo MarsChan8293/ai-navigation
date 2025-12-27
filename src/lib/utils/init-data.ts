@@ -1,6 +1,6 @@
-const { prisma } = require('./db');
-import type { Prisma, PrismaClient, Category } from '@prisma/client';
-import { WebsiteSettings } from '@/lib/constraint';
+import { prisma } from '../db/db';
+import type { Prisma, Category } from '@prisma/client';
+import { WebsiteSettings } from '../constraint';
 
 
 
@@ -183,7 +183,15 @@ export async function initializeSettings() {
   );
 }
 
-module.exports = {
-  initializeData,
-  initializeSettings
-}; 
+if (require.main === module) {
+  (async () => {
+    try {
+      await initializeData();
+      await initializeSettings();
+      process.exit(0);
+    } catch (error) {
+      console.error(error);
+      process.exit(1);
+    }
+  })();
+} 

@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "mysql"
-  url       = env("DATABASE_URL") // uses connection pooling
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Setting {
@@ -24,7 +24,7 @@ model Setting {
 model Website {
   id          Int      @id @default(autoincrement())
   title       String
-  url         String   
+  url         String   @unique
   description String
   category    Category @relation(fields: [category_id], references: [id])
   category_id Int

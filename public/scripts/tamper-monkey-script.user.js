@@ -12,6 +12,7 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @connect      www.ainavix.com
+// @connect      localhost
 // @icon         https://www.ainavix.com/favicon.ico
 // @run-at       document-end
 // ==/UserScript==
@@ -21,9 +22,9 @@
 
   // 配置
   const CONFIG = {
-    apiEndpoint: "https://www.ainavix.com/api",
-    submitWebsiteEndpoint: "https://www.ainavix.com/api/websites",
-    categoriesEndpoint: "https://www.ainavix.com/api/categories",
+    apiEndpoint: "http://localhost:3000/api",
+    submitWebsiteEndpoint: "http://localhost:3000/api/websites",
+    categoriesEndpoint: "http://localhost:3000/api/categories",
     // 添加拖动和贴边配置
     dragConfig: {
       snapThreshold: 30, // 贴边吸附阈值（像素）

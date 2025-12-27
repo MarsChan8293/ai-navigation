@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import type { Website } from "@/lib/types";
 import { AjaxResponse } from "@/lib/utils";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db/db";
 
 // GET /api/websites
 // 获取所有指定分类的网站

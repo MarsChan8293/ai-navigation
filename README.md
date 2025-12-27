@@ -207,8 +207,8 @@ docker run -d \
 
 2. 安装收藏脚本
 
-   - 点击 [安装脚本](https://ai-nav.vercel.app/scripts/ai-nav-collector.user.js)
-   - 或手动复制 `scripts/ai-nav-collector.user.js` 内容创建新脚本
+   - 点击 [安装脚本](/scripts/tamper-monkey-script.user.js)
+   - 或手动复制 `public/scripts/tamper-monkey-script.user.js` 内容创建新脚本
 
 3. 使用方法
    - 浮动按钮：页面右下角的收藏按钮
@@ -238,7 +238,7 @@ docker run -d \
 
 - **数据存储**:
 
-  - PostgreSQL
+  - SQLite (Prisma)
   - Prisma ORM
   - Redis
 

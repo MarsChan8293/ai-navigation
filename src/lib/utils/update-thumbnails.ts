@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../db/db";
 
 // 支持的图片类型
 const SUPPORTED_IMAGE_TYPES = new Set([
