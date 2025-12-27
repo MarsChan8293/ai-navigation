@@ -22,8 +22,8 @@ export function PersistentHeader({
   return (
     <div className="sticky top-14 z-40 w-full transition-[background,border] duration-100 md:duration-300">
       <div className="w-full px-2 py-3 sm:py-2 md:px-4 md:py-4">
-        <div className="max-w-2xl mx-auto space-y-4 sm:space-y-3 md:space-y-4">
-          <div className="relative h-[36px] sm:h-[40px] md:h-[44px]">
+        <div className="max-w-6xl mx-auto space-y-4 sm:space-y-3 md:space-y-4">
+          <div className="max-w-2xl mx-auto relative h-[36px] sm:h-[40px] md:h-[44px] w-full">
             <SearchBox value={searchQuery} onChange={onSearchChange} />
           </div>
           <div className="relative pt-2 min-h-[32px] sm:min-h-[36px] md:min-h-[40px] mt-1 sm:mt-2">

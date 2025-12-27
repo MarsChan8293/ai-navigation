@@ -21,6 +21,7 @@ import { Brain, Cpu, Sparkles, Zap } from "lucide-react";
 import type { Website, Category } from "@/lib/types";
 import { useTheme } from "next-themes";
 import { WaveText } from "@/ui/animation/wave-text";
+import { LeaderboardSidebar } from "@/components/website/leaderboard-sidebar";
 
 interface HomePageProps {
   initialWebsites: Website[];
@@ -83,6 +84,11 @@ export default function HomePage({
   //   fetch(`/api/websites/${website.id}/visit`, { method: "POST" });
   //   window.open(website.url, "_blank");
   // };
+
+  const currentCategory = categories.find(
+    (c) => c.id === Number(selectedCategory)
+  );
+  const showLeaderboard = currentCategory?.slug === "llm";
 
   return (
     <div className="relative min-h-screen">
@@ -202,11 +208,20 @@ export default function HomePage({
           transition={{ duration: 0.8, delay: 0.6 }}
           className="container mx-auto px-4 pb-24"
         >
-          <WebsiteGrid
-            websites={filteredWebsites}
-            categories={categories}
-            // onVisit={handleVisit}
-          />
+          <div className="flex gap-6">
+            <div className="flex-1 min-w-0">
+              <WebsiteGrid
+                websites={filteredWebsites}
+                categories={categories}
+                // onVisit={handleVisit}
+              />
+            </div>
+            {showLeaderboard && (
+              <aside className="hidden xl:block w-[400px] shrink-0">
+                <LeaderboardSidebar />
+              </aside>
+            )}
+          </div>
         </motion.div>
       </motion.div>
     </div>

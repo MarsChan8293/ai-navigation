@@ -53,6 +53,18 @@ export async function DELETE(
   try {
     const id = parseInt(params.id);
 
+    // 检查分类下是否有网站
+    const websiteCount = await prisma.website.count({
+      where: { category_id: id },
+    });
+
+    if (websiteCount > 0) {
+      return NextResponse.json(
+        AjaxResponse.fail(`无法删除：该分类下包含 ${websiteCount} 个网站。请先移除或转移这些网站。`),
+        { status: 400 }
+      );
+    }
+
     await prisma.category.delete({
       where: { id },
     });

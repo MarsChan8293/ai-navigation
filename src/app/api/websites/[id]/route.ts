@@ -6,7 +6,10 @@ const prisma = new PrismaClient();
 
 // GET /api/websites/[id]
 // 获取单个网站
-export async function GET({ params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const websiteId = parseInt((await params).id);
     const website = await prisma.website.findUnique({
@@ -31,7 +34,10 @@ export async function GET({ params }: { params: Promise<{ id: string }> }) {
 
 // DELETE /api/websites/[id]
 // 删除网站
-export async function DELETE({ params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     if (!(await params).id) {
       return NextResponse.json(AjaxResponse.fail("Website ID is required"), {});

@@ -114,3 +114,7 @@ export async function updateWebsiteThumbnails() {
     await prisma.$disconnect();
   }
 }
+
+if (require.main === module) {
+  updateWebsiteThumbnails();
+}
