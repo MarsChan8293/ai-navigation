@@ -22,7 +22,15 @@ import { useToast } from "@/hooks/use-toast";
 import type { FormInputs } from "@/lib/types";
 import { useSettings } from "@/hooks/use-settings";
 
-export function WebsiteForm() {
+export function WebsiteForm({ 
+  onSuccess, 
+  defaultValues,
+  hideIpdCategory = false
+}: { 
+  onSuccess?: () => void;
+  defaultValues?: Partial<FormInputs>;
+  hideIpdCategory?: boolean;
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [categories, setCategories] = useAtom(categoriesAtom);
@@ -56,11 +64,12 @@ export function WebsiteForm() {
   const form = useForm<FormInputs>({
     resolver: zodResolver(websiteFormSchema),
     defaultValues: {
-      title: "",
-      url: "",
-      description: "",
-      category_id: "",
-      thumbnail: "",
+      title: defaultValues?.title || "",
+      url: defaultValues?.url || "",
+      description: defaultValues?.description || "",
+      category_id: defaultValues?.category_id || "",
+      ipd_category_id: defaultValues?.ipd_category_id || "",
+      thumbnail: defaultValues?.thumbnail || "",
     },
   });
 
@@ -127,8 +136,12 @@ export function WebsiteForm() {
         description: "网站已添加到已通过列表。",
       });
 
-      router.push("/");
-      router.refresh();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push("/");
+        router.refresh();
+      }
     } catch (error) {
       toast({
         title: "错误",
@@ -156,7 +169,7 @@ export function WebsiteForm() {
           variant="outline"
           onClick={fetchWebsiteMetadata}
           disabled={!isValidUrl || isFetching || isSubmitting}
-          className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300"
+          className="w-full sm:w-auto bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300"
         >
           {isFetching ? "获取中..." : "自动获取网站信息"}
         </Button>
@@ -196,27 +209,65 @@ export function WebsiteForm() {
         </label>
         <Select
           onValueChange={(value) => setValue("category_id", value)}
+          value={watch("category_id")}
           disabled={isSubmitting}
         >
           <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
             <SelectValue placeholder="选择分类" />
           </SelectTrigger>
           <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
-            {categories.map((category: { id: number; name: string }) => (
-              <SelectItem
-                key={category.id}
-                value={category.id.toString()}
-                className="hover:bg-primary/10 focus:bg-primary/10"
-              >
-                {category.name}
-              </SelectItem>
-            ))}
+            {categories
+              .filter((c: { slug: string }) => !c.slug.startsWith("ipd-"))
+              .map((category: { id: number; name: string }) => (
+                <SelectItem
+                  key={category.id}
+                  value={category.id.toString()}
+                  className="hover:bg-primary/10 focus:bg-primary/10"
+                >
+                  {category.name}
+                </SelectItem>
+              ))}
           </SelectContent>
         </Select>
         {form.formState.errors.category_id && (
           <p className="text-sm text-red-500/70 mt-1">请选择网站分类</p>
         )}
       </motion.div>
+
+      {/* IPD Category Selection */}
+      {!hideIpdCategory && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.25 }}
+        >
+          <label className="block text-sm font-medium mb-2 text-foreground/80">
+            IPD 分类 (可选)
+          </label>
+          <Select
+            onValueChange={(value) => setValue("ipd_category_id", value)}
+            value={watch("ipd_category_id")}
+            disabled={isSubmitting}
+          >
+            <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
+              <SelectValue placeholder="选择 IPD 分类" />
+            </SelectTrigger>
+            <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
+              {categories
+                .filter((c: { slug: string }) => c.slug.startsWith("ipd-"))
+                .map((category: { id: number; name: string }) => (
+                  <SelectItem
+                    key={category.id}
+                    value={category.id.toString()}
+                    className="hover:bg-primary/10 focus:bg-primary/10"
+                  >
+                    {category.name}
+                  </SelectItem>
+                ))}
+            </SelectContent>
+          </Select>
+        </motion.div>
+      )}
 
       {/* Thumbnail URL */}
       <motion.div
@@ -237,12 +288,12 @@ export function WebsiteForm() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="pt-4"
+        className="pt-2"
       >
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-11 bg-primary/90 hover:bg-primary text-primary-foreground shadow-[0_2px_10px_-3px_rgba(var(--primary),0.3)] transition-all duration-300"
+          className="w-full h-10 bg-primary/90 hover:bg-primary text-primary-foreground shadow-[0_2px_10px_-3px_rgba(var(--primary),0.3)] transition-all duration-300"
         >
           {isSubmitting ? "提交中..." : "提交网站"}
         </Button>

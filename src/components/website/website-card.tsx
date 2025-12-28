@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
   Heart,
   Circle,
+  Trash2,
 } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import {
@@ -33,6 +34,7 @@ interface WebsiteCardProps {
   category?: Category;
   onVisit: (website: Website) => void;
   onStatusUpdate: (id: number, status: Website["status"]) => void;
+  onDelete: (id: number) => void;
 }
 
 export function WebsiteCard({
@@ -40,6 +42,7 @@ export function WebsiteCard({
   category,
   onVisit,
   onStatusUpdate,
+  onDelete,
 }: WebsiteCardProps) {
   const [likes, setLikes] = useState(website.likes);
   const { cardRef, tiltProps } = useCardTilt();
@@ -58,7 +61,10 @@ export function WebsiteCard({
     all: "",
   };
 
-  const handleLike = async () => {
+  const handleLike = async (e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
     const key = `website-${website.id}-liked`;
     const lastLiked = localStorage.getItem(key);
     const now = new Date().getTime();
@@ -199,7 +205,10 @@ export function WebsiteCard({
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => onVisit(website)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onVisit(website);
+                  }}
                   className={cn(
                     "h-7 sm:h-8 px-3 sm:flex-1 text-xs sm:text-sm",
                     "bg-white/[0.02] backdrop-blur-xl border-white/10",
@@ -236,7 +245,10 @@ export function WebsiteCard({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => onStatusUpdate(website.id, "approved")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStatusUpdate(website.id, "approved");
+                    }}
                     className={cn(
                       "h-7 sm:h-8 px-1.5 sm:px-2",
                       "bg-white/[0.02] backdrop-blur-xl border-white/10",
@@ -253,7 +265,8 @@ export function WebsiteCard({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       onStatusUpdate(website.id, "rejected");
                     }}
                     className={cn(
@@ -267,6 +280,18 @@ export function WebsiteCard({
                     <ThumbsDown className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Button>
                 )}
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(website.id);
+                  }}
+                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border rounded-md h-7 w-7 sm:h-8 sm:w-8 p-0 bg-white/[0.02] backdrop-blur-xl border-white/10 hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500 dark:bg-white/[0.01] dark:hover:bg-red-500/10 transition-all duration-300"
+                >
+                  <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                </Button>
               </div>
             </div>
           </div>

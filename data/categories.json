@@ -40,5 +40,236 @@
     "slug": "ai-writing",
     "created_at": "2025-12-27T14:20:30.082Z",
     "updated_at": "2025-12-27T14:20:30.082Z"
+  },
+  {
+    "id": 7,
+    "name": "IPD-需求阶段-需求调研",
+    "slug": "ipd-requirement-research",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 8,
+    "name": "IPD-需求阶段-需求分析",
+    "slug": "ipd-requirement-analysis",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 9,
+    "name": "IPD-需求阶段-需求编写",
+    "slug": "ipd-requirement-coding",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 10,
+    "name": "IPD-需求阶段-需求审讲&反审讲",
+    "slug": "ipd-requirement-review",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 11,
+    "name": "IPD-设计阶段-架构设计",
+    "slug": "ipd-design-architecture",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 12,
+    "name": "IPD-设计阶段-概要设计",
+    "slug": "ipd-design-concept",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 13,
+    "name": "IPD-设计阶段-详细设计",
+    "slug": "ipd-design-detail",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 14,
+    "name": "IPD-设计阶段-设计评审",
+    "slug": "ipd-design-design-review",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 15,
+    "name": "IPD-设计阶段-网络安全设计",
+    "slug": "ipd-design-security",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 16,
+    "name": "IPD-编码阶段-代码编写",
+    "slug": "ipd-coding-code-write",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 17,
+    "name": "IPD-编码阶段-代码走读",
+    "slug": "ipd-coding-code-read",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 18,
+    "name": "IPD-编码阶段-代码检视",
+    "slug": "ipd-coding-code-check",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 19,
+    "name": "IPD-编码阶段-单元测试",
+    "slug": "ipd-coding-unit-test",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 20,
+    "name": "IPD-编码阶段-代码联调",
+    "slug": "ipd-coding-code-union",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 21,
+    "name": "IPD-编码阶段-问题单修改",
+    "slug": "ipd-coding-issue-fix",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 22,
+    "name": "IPD-构建阶段-CleanCode门禁检查",
+    "slug": "ipd-build-cleancode",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 23,
+    "name": "IPD-构建阶段-构建脚本编写",
+    "slug": "ipd-build-script-build",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 24,
+    "name": "IPD-构建阶段-自动化脚本编写",
+    "slug": "ipd-build-auto-script",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 25,
+    "name": "IPD-构建阶段-个人构建",
+    "slug": "ipd-build-personal-build",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 26,
+    "name": "IPD-构建阶段-每日构建",
+    "slug": "ipd-build-daily-build",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 27,
+    "name": "IPD-构建阶段-版本级构建",
+    "slug": "ipd-build-version-build",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 28,
+    "name": "IPD-构建阶段-冒烟测试",
+    "slug": "ipd-build-smoke-test",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 29,
+    "name": "IPD-构建阶段-开源漏洞扫描",
+    "slug": "ipd-build-leak-scan",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 30,
+    "name": "IPD-测试阶段-测试方案设计",
+    "slug": "ipd-test-test-design",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 31,
+    "name": "IPD-测试阶段-测试用例编写",
+    "slug": "ipd-test-test-case-write",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 32,
+    "name": "IPD-测试阶段-自动化脚本编写",
+    "slug": "ipd-test-test-case-auto",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 33,
+    "name": "IPD-测试阶段-版本级测试",
+    "slug": "ipd-test-version-test",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 34,
+    "name": "IPD-测试阶段-提交问题单",
+    "slug": "ipd-test-issue-list",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 35,
+    "name": "IPD-测试阶段-漏测分析",
+    "slug": "ipd-test-leak-analysis",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 36,
+    "name": "IPD-实施阶段-版本发布上网",
+    "slug": "ipd-release-release-publish",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 37,
+    "name": "IPD-实施阶段-部署上线",
+    "slug": "ipd-release-deploy-online",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 38,
+    "name": "IPD-实施阶段-技术支持、运维",
+    "slug": "ipd-release-tech-support",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
+  },
+  {
+    "id": 39,
+    "name": "IPD-实施阶段-网上问题修改",
+    "slug": "ipd-release-qa-improve",
+    "created_at": "2025-12-28T06:44:44.477Z",
+    "updated_at": "2025-12-28T06:44:44.477Z"
   }
 ]

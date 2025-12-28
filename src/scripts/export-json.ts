@@ -33,10 +33,21 @@ async function exportData() {
 
   // Transform to flat structure with category_slug
   const websitesExport = websites.map(site => {
-    const { category, category_id, ...rest } = site;
+    const { category, category_id, ipd_category_id, ...rest } = site;
+    
+    // Find IPD category slug if exists
+    let ipd_category_slug = null;
+    if (ipd_category_id) {
+      const ipdCategory = categories.find(c => c.id === ipd_category_id);
+      if (ipdCategory) {
+        ipd_category_slug = ipdCategory.slug;
+      }
+    }
+
     return {
       ...rest,
-      category_slug: category.slug
+      category_slug: category.slug,
+      ipd_category_slug
     };
   });
 

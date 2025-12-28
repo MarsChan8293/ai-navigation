@@ -110,10 +110,10 @@
 
         .ai-nav-modal-content {
             background: #fff;
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 20px;
             width: 90%;
-            max-width: 500px;
+            max-width: 480px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
@@ -128,14 +128,16 @@
 
         .ai-nav-modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             background: none;
             border: none;
             cursor: pointer;
             padding: 4px;
             color: #666;
-            border-radius: 6px;
+            border-radius: 4px;
+            font-size: 24px;
+            line-height: 1;
             transition: background-color 0.2s;
         }
 
@@ -155,23 +157,23 @@
         }
 
         .ai-nav-form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .ai-nav-label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #444;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .ai-nav-input {
             width: 100%;
-            padding: 8px 12px;
+            padding: 8px 10px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 6px;
+            font-size: 13px;
             transition: all 0.2s;
             background: #fff;
             color: #333;
@@ -185,19 +187,22 @@
 
         .ai-nav-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 6px;
             margin-bottom: 20px;
         }
 
         .ai-nav-category {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             text-align: center;
             transition: all 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             background: #fff;
             color: #333;
         }
@@ -215,19 +220,19 @@
 
         .ai-nav-submit {
             width: 100%;
-            padding: 12px;
+            padding: 10px 12px;
             background: #0070f3;
             color: #fff;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .ai-nav-submit:hover {
@@ -354,11 +359,22 @@
             }
 
             .ai-nav-modal-content {
-                padding: 20px;
+                padding: 16px;
             }
 
             .ai-nav-categories {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 6px;
+            }
+
+            .ai-nav-category {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+
+            .ai-nav-submit {
+                padding: 8px 12px;
+                font-size: 13px;
             }
         }
     `;

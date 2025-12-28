@@ -102,12 +102,12 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
 
       {/* Desktop: Tiled Categories */}
       <div className="hidden md:block">
-        <div className="flex flex-wrap items-center justify-center gap-2 px-4">
+        <div className="flex flex-wrap items-center justify-start gap-2 px-4">
           {categories.map((category) => (
             <motion.button
               key={category.id ?? "all"}
               onClick={() => handleCategorySelect(category.id)}
-              className={`h-8 px-4 text-sm whitespace-nowrap transition-colors duration-300 rounded-md
+              className={`h-8 px-3 text-xs sm:text-sm whitespace-nowrap transition-colors duration-300 rounded-md
                 ${
                   selectedCategory === category.id
                     ? "bg-white dark:bg-primary text-primary dark:text-primary-foreground font-medium shadow-[0_2px_12px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_2px_12px_-2px_rgba(0,0,0,0.4)]"

@@ -91,17 +91,31 @@ async function importData() {
         continue;
       }
 
+      // Find IPD category by slug if exists
+      let ipdCategoryId = null;
+      if (item.ipd_category_slug) {
+        const ipdCategory = await prisma.category.findUnique({
+          where: { slug: item.ipd_category_slug }
+        });
+        if (ipdCategory) {
+          ipdCategoryId = ipdCategory.id;
+        } else {
+          console.warn(`⚠️ IPD Category not found for website "${item.title}" (slug: ${item.ipd_category_slug}). Ignoring IPD category.`);
+        }
+      }
+
       // Remove fields that shouldn't be directly imported or need transformation
       // We keep created_at/updated_at if they exist in JSON to preserve history, 
       // but Prisma might override updated_at on update.
-      const { id, category_slug, rank, ...data } = item;
+      const { id, category_slug, ipd_category_slug, rank, ...data } = item;
 
       // Convert date strings to Date objects if they exist
       const formattedData = {
         ...data,
         created_at: data.created_at ? new Date(data.created_at) : undefined,
         updated_at: data.updated_at ? new Date(data.updated_at) : undefined,
-        category_id: category.id
+        category_id: category.id,
+        ipd_category_id: ipdCategoryId
       };
 
       await prisma.website.upsert({

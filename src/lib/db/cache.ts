@@ -34,6 +34,13 @@ interface CacheEntry<T> {
   size?: number;
 }
 
+export async function invalidateCache(queryName: string) {
+  if (cache.has(queryName)) {
+    cache.delete(queryName);
+    console.log(`[Cache] 已清除缓存: ${queryName}`);
+  }
+}
+
 export async function cachedPrismaQuery<T>(
   queryName: string,
   queryFn: () => Promise<T>,

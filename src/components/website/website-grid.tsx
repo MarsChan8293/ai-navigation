@@ -24,7 +24,7 @@ export default function WebsiteGrid({
 }: WebsiteGridProps) {
   const { toast } = useToast();
   const [isCompact, setIsCompact] = useAtom(isCompactModeAtom);
-  const [, setWebsites] = useAtom(websitesAtom);
+  const [allWebsites, setWebsites] = useAtom(websitesAtom);
 
   const handleVisit = async (website: Website) => {
     fetch(`/api/websites/${website.id}/visit`, { method: "POST" });
@@ -49,7 +49,7 @@ export default function WebsiteGrid({
     });
 
     setWebsites(
-      websites.map((website) =>
+      allWebsites.map((website) =>
         website.id === id ? { ...website, status } : website
       )
     );
@@ -57,6 +57,28 @@ export default function WebsiteGrid({
       title: "状态已更新",
       description: status === "approved" ? "网站已通过审核" : "网站已被拒绝",
     });
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("确定要删除这个网站吗？")) return;
+
+    const response = await fetch(`/api/websites/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      setWebsites(allWebsites.filter((w) => w.id !== id));
+      toast({
+        title: "删除成功",
+        description: "网站已成功删除",
+      });
+    } else {
+      toast({
+        title: "删除失败",
+        description: "无法删除该网站",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -125,6 +147,7 @@ export default function WebsiteGrid({
                     )}
                     onVisit={handleVisit}
                     onStatusUpdate={handleStatusUpdate}
+                    onDelete={handleDelete}
                   />
                 )}
               </motion.div>

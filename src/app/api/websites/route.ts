@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { Website } from "@/lib/types";
 import { AjaxResponse } from "@/lib/utils";
 import { prisma } from "@/lib/db/db";
+import { invalidateCache } from "@/lib/db/cache";
 
 // GET /api/websites
 // 获取所有指定分类的网站
@@ -9,8 +10,15 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const status =
     (searchParams.get("status") as Website["status"]) || "approved";
+  const categoryId = searchParams.get("category_id");
+  const ipdCategoryId = searchParams.get("ipd_category_id");
+
+  const where: any = { status: status === "all" ? undefined : status };
+  if (categoryId) where.category_id = Number(categoryId);
+  if (ipdCategoryId) where.ipd_category_id = Number(ipdCategoryId);
+
   const websites = await prisma.website.findMany({
-    where: { status: status === "all" ? undefined : status },
+    where,
   });
   return NextResponse.json(AjaxResponse.ok(websites));
 }
@@ -48,6 +56,19 @@ export async function POST(request: Request) {
       });
     }
 
+    // Check if IPD category exists if provided
+    if (data.ipd_category_id) {
+      const ipdCategory = await prisma.category.findUnique({
+        where: { id: Number(data.ipd_category_id) },
+      });
+
+      if (!ipdCategory) {
+        return NextResponse.json(AjaxResponse.fail("IPD Category does not exist"), {
+          status: 400,
+        });
+      }
+    }
+
     console.log(data);
 
     // Check if URL already exists
@@ -83,11 +104,14 @@ export async function POST(request: Request) {
         url: data.url.trim(),
         description: data.description?.trim() || "",
         category_id: Number(data.category_id),
+        ipd_category_id: data.ipd_category_id ? Number(data.ipd_category_id) : null,
         thumbnail: data.thumbnail?.trim() || "",
-        status: data.status || "pending",
+        status: data.status || "approved",
         thumbnail_base64: imageBase64 as string,
       },
     });
+
+    invalidateCache("approved-websites");
 
     return NextResponse.json(AjaxResponse.ok(website));
   } catch (error) {

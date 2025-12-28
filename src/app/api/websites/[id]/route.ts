@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
 import { prisma } from "@/lib/db/db";
+import { invalidateCache } from "@/lib/db/cache";
 
 
 // GET /api/websites/[id]
@@ -38,11 +39,15 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    if (!(await params).id) {
+    const resolvedParams = await params;
+    console.log("DELETE request params:", resolvedParams);
+    
+    if (!resolvedParams.id) {
       return NextResponse.json(AjaxResponse.fail("Website ID is required"), {});
     }
 
-    const websiteId = parseInt((await params).id);
+    const websiteId = parseInt(resolvedParams.id);
+    console.log("Parsed websiteId:", websiteId);
 
     // Check if website exists first
     const website = await prisma.website.findUnique({
@@ -59,6 +64,8 @@ export async function DELETE(
     await prisma.website.delete({
       where: { id: websiteId },
     });
+
+    invalidateCache("approved-websites");
 
     return NextResponse.json(AjaxResponse.ok("Website deleted successfully"));
   } catch (error) {
@@ -116,6 +123,19 @@ export async function PUT(
       });
     }
 
+    // Check if IPD category exists if provided
+    if (data.ipd_category_id) {
+      const ipdCategory = await prisma.category.findUnique({
+        where: { id: Number(data.ipd_category_id) },
+      });
+
+      if (!ipdCategory) {
+        return NextResponse.json(AjaxResponse.fail("IPD Category does not exist"), {
+          status: 400,
+        });
+      }
+    }
+
     const website = await prisma.website.update({
       where: { id: websiteId },
       data: {
@@ -123,6 +143,7 @@ export async function PUT(
         url: data.url,
         description: data.description || "",
         category_id: Number(data.category_id),
+        ipd_category_id: data.ipd_category_id ? Number(data.ipd_category_id) : null,
         thumbnail: data.thumbnail || "",
         status: data.status || existingWebsite.status,
       },

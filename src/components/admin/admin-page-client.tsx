@@ -75,7 +75,7 @@ export function AdminPageClient({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="container max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 min-h-[calc(100vh-4rem)] space-y-6"
+      className="container max-w-6xl px-4 sm:px-6 py-4 sm:py-6 min-h-[calc(100vh-4rem)] space-y-6"
     >
       <Tabs defaultValue="websites" className="w-full">
         {/* Header Section */}
@@ -117,8 +117,8 @@ export function AdminPageClient({
         <TabsContent value="websites" className="mt-6">
           <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
             {/* Filter Section */}
-            <div className="border-b border-border/40 bg-background/20 p-4">
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="border-b border-border/40 bg-background/20 p-3 sm:p-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <div className="flex flex-wrap gap-2 flex-1">
                   {["pending", "approved", "rejected"].map((status) => (
                     <motion.button
@@ -127,7 +127,7 @@ export function AdminPageClient({
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setActiveStatus(status as Website["status"])}
                       className={`
-                        flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200
+                        flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs sm:text-sm transition-all duration-200
                         ${
                           activeStatus === status
                             ? "bg-background/40 border-primary/30 shadow-sm " +
@@ -136,7 +136,7 @@ export function AdminPageClient({
                         }
                       `}
                     >
-                      <span className="text-sm font-medium">
+                      <span className="font-medium">
                         {status === "pending"
                           ? "待审核"
                           : status === "approved"
@@ -146,7 +146,7 @@ export function AdminPageClient({
                       <Badge
                         variant={activeStatus === status ? "secondary" : "outline"}
                         className={cn(
-                          "ml-1 bg-background/50",
+                          "ml-0.5 bg-background/50 text-xs",
                           activeStatus === status &&
                             getStatusColor(status as Website["status"])
                         )}
@@ -161,7 +161,7 @@ export function AdminPageClient({
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
-                  <SelectTrigger className="w-full sm:w-[180px] bg-background/40 border-border/40">
+                  <SelectTrigger className="w-full sm:w-[160px] text-sm bg-background/40 border-border/40">
                     <SelectValue placeholder="选择分类" />
                   </SelectTrigger>
                   <SelectContent

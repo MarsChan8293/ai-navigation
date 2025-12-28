@@ -5,116 +5,101 @@
       "key": "title",
       "value": "AI导航",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.860Z"
     },
     {
       "id": 2,
       "key": "siteCopyright",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.692Z",
-      "updated_at": "2025-12-27T14:20:31.692Z"
+      "updated_at": "2025-12-28T07:10:03.861Z"
     },
     {
       "id": 3,
       "key": "googleAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.704Z",
-      "updated_at": "2025-12-27T14:20:31.704Z"
+      "updated_at": "2025-12-28T07:10:03.861Z"
     },
     {
       "id": 4,
       "key": "baiduAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.718Z",
-      "updated_at": "2025-12-27T14:20:31.718Z"
+      "updated_at": "2025-12-28T07:10:03.862Z"
     },
     {
       "id": 5,
       "key": "siteFooter",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.736Z",
-      "updated_at": "2025-12-27T14:20:31.736Z"
+      "updated_at": "2025-12-28T07:10:03.862Z"
     },
     {
       "id": 6,
       "key": "keywords",
       "value": "AI导航,AI工具,人工智能,AI资源",
       "created_at": "2025-12-27T14:20:31.761Z",
-      "updated_at": "2025-12-27T14:20:31.761Z"
+      "updated_at": "2025-12-28T07:10:03.862Z"
     },
     {
       "id": 7,
       "key": "siteIcp",
       "value": "",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.863Z"
     },
     {
       "id": 8,
       "key": "logo",
       "value": "/static/logo.png",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.864Z"
     },
     {
       "id": 9,
       "key": "allowSubmissions",
       "value": "true",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.865Z"
     },
     {
       "id": 10,
       "key": "requireApproval",
-      "value": "true",
+      "value": "false",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.865Z"
     },
     {
       "id": 11,
       "key": "siteEmail",
       "value": "admin@example.com",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.866Z"
     },
     {
       "id": 12,
       "key": "itemsPerPage",
       "value": "12",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.866Z"
     },
     {
       "id": 13,
       "key": "description",
       "value": "发现、分享和收藏优质AI工具与资源",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-27T14:20:31.675Z"
+      "updated_at": "2025-12-28T07:10:03.866Z"
     },
     {
       "id": 15,
       "key": "siteUrl",
       "value": "http://localhost:3000",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T03:46:40.749Z"
+      "updated_at": "2025-12-28T07:10:03.867Z"
     }
   ],
   "websites": [
-    {
-      "id": 1,
-      "title": "ChatGPT",
-      "url": "https://chat.openai.com",
-      "description": "OpenAI 开发的 AI 聊天助手，能够进行自然对话并协助完成各种任务。",
-      "category_id": 1,
-      "thumbnail": "https://chat.openai.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.289Z",
-      "updated_at": "2025-12-27T14:20:30.289Z"
-    },
     {
       "id": 2,
       "title": "360智脑",
@@ -123,27 +108,13 @@
       "category_id": 1,
       "thumbnail": "https://chat.360.com/favicon.ico",
       "thumbnail_base64": null,
-      "status": "approved",
+      "status": "rejected",
       "visits": 0,
-      "likes": 0,
+      "likes": 1,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
-    },
-    {
-      "id": 3,
-      "title": "万知",
-      "url": "https://www.wanzhi.com",
-      "description": "零一万物推出的生产力工具，擅长会议纪要、文档解读和办公协作。",
-      "category_id": 1,
-      "thumbnail": "https://www.wanzhi.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.332Z",
-      "updated_at": "2025-12-27T14:20:30.332Z"
+      "updated_at": "2025-12-28T08:34:04.264Z",
+      "ipd_category_id": null
     },
     {
       "id": 4,
@@ -153,102 +124,13 @@
       "category_id": 1,
       "thumbnail": "https://www.baichuan-ai.com/favicon.ico",
       "thumbnail_base64": null,
-      "status": "approved",
+      "status": "rejected",
       "visits": 0,
-      "likes": 0,
+      "likes": 1,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.352Z",
-      "updated_at": "2025-12-27T14:20:30.352Z"
-    },
-    {
-      "id": 5,
-      "title": "Supermaven",
-      "url": "https://supermaven.com",
-      "description": "以极速响应和超长上下文窗口 (1M tokens) 著称的 AI 插件。",
-      "category_id": 5,
-      "thumbnail": "https://supermaven.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.364Z",
-      "updated_at": "2025-12-27T14:20:30.364Z"
-    },
-    {
-      "id": 6,
-      "title": "Continue",
-      "url": "https://www.continue.dev",
-      "description": "开源的 AI 编程助手，支持自定义模型和本地 LLM 部署。",
-      "category_id": 5,
-      "thumbnail": "https://www.continue.dev/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.378Z",
-      "updated_at": "2025-12-27T14:20:30.378Z"
-    },
-    {
-      "id": 7,
-      "title": "Sourcegraph Cody",
-      "url": "https://about.sourcegraph.com/cody",
-      "description": "利用代码图谱提供精准上下文的 AI 编程助手。",
-      "category_id": 5,
-      "thumbnail": "https://about.sourcegraph.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.392Z",
-      "updated_at": "2025-12-27T14:20:30.392Z"
-    },
-    {
-      "id": 8,
-      "title": "Replit Agent",
-      "url": "https://replit.com/ai",
-      "description": "Replit 推出的 AI 代理，可从零开始构建和部署完整应用。",
-      "category_id": 5,
-      "thumbnail": "https://replit.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.406Z",
-      "updated_at": "2025-12-27T14:20:30.406Z"
-    },
-    {
-      "id": 9,
-      "title": "MarsCode",
-      "url": "https://www.marscode.cn",
-      "description": "字节跳动推出的国内版 AI 编程助手，提供云端 IDE 和插件。",
-      "category_id": 5,
-      "thumbnail": "https://www.marscode.cn/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.428Z",
-      "updated_at": "2025-12-27T14:20:30.428Z"
-    },
-    {
-      "id": 10,
-      "title": "Baidu Comate",
-      "url": "https://comate.baidu.com",
-      "description": "百度推出的智能代码助手，基于文心大模型。",
-      "category_id": 5,
-      "thumbnail": "https://comate.baidu.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.442Z",
-      "updated_at": "2025-12-27T14:20:30.442Z"
+      "updated_at": "2025-12-28T08:38:04.737Z",
+      "ipd_category_id": null
     },
     {
       "id": 11,
@@ -263,7 +145,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.456Z",
-      "updated_at": "2025-12-27T14:20:30.456Z"
+      "updated_at": "2025-12-27T14:20:30.456Z",
+      "ipd_category_id": null
     },
     {
       "id": 12,
@@ -278,7 +161,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 13,
@@ -293,7 +177,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.484Z",
-      "updated_at": "2025-12-27T14:20:30.484Z"
+      "updated_at": "2025-12-27T14:20:30.484Z",
+      "ipd_category_id": null
     },
     {
       "id": 14,
@@ -308,37 +193,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.496Z",
-      "updated_at": "2025-12-27T14:20:30.496Z"
-    },
-    {
-      "id": 15,
-      "title": "讯飞 iFlyCode",
-      "url": "https://iflycode.xfyun.cn",
-      "description": "科大讯飞推出的智能编程助手，基于星火大模型。",
-      "category_id": 5,
-      "thumbnail": "https://iflycode.xfyun.cn/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.522Z",
-      "updated_at": "2025-12-27T14:20:30.522Z"
-    },
-    {
-      "id": 16,
-      "title": "Blackbox AI",
-      "url": "https://www.blackbox.ai",
-      "description": "专注于快速代码搜索、生成和实时代码分析的 AI 助手。",
-      "category_id": 5,
-      "thumbnail": "https://www.blackbox.ai/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.546Z",
-      "updated_at": "2025-12-27T14:20:30.546Z"
+      "updated_at": "2025-12-27T14:20:30.496Z",
+      "ipd_category_id": null
     },
     {
       "id": 17,
@@ -353,67 +209,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.566Z",
-      "updated_at": "2025-12-27T14:20:30.566Z"
-    },
-    {
-      "id": 18,
-      "title": "Devin",
-      "url": "https://www.cognition.ai",
-      "description": "全球首位 AI 软件工程师，能独立完成复杂的编程任务。",
-      "category_id": 5,
-      "thumbnail": "https://www.cognition.ai/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.586Z",
-      "updated_at": "2025-12-27T14:20:30.586Z"
-    },
-    {
-      "id": 19,
-      "title": "Plandex",
-      "url": "https://plandex.ai",
-      "description": "开源的 AI 编程代理，擅长处理跨文件的复杂积压任务。",
-      "category_id": 5,
-      "thumbnail": "https://plandex.ai/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.604Z",
-      "updated_at": "2025-12-27T14:20:30.604Z"
-    },
-    {
-      "id": 20,
-      "title": "MutableAI",
-      "url": "https://mutable.ai",
-      "description": "专注于自动化文档编写、代码重构和测试生成的 AI 助手。",
-      "category_id": 5,
-      "thumbnail": "https://mutable.ai/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.632Z",
-      "updated_at": "2025-12-27T14:20:30.632Z"
-    },
-    {
-      "id": 21,
-      "title": "Sweep",
-      "url": "https://sweep.dev",
-      "description": "将 GitHub Issue 直接转化为代码拉取请求 (PR) 的 AI 代理。",
-      "category_id": 5,
-      "thumbnail": "https://sweep.dev/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.650Z",
-      "updated_at": "2025-12-27T14:20:30.650Z"
+      "updated_at": "2025-12-27T14:20:30.566Z",
+      "ipd_category_id": null
     },
     {
       "id": 22,
@@ -428,7 +225,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.662Z",
-      "updated_at": "2025-12-27T14:20:30.662Z"
+      "updated_at": "2025-12-27T14:20:30.662Z",
+      "ipd_category_id": null
     },
     {
       "id": 23,
@@ -443,7 +241,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.676Z",
-      "updated_at": "2025-12-27T14:20:30.676Z"
+      "updated_at": "2025-12-27T14:20:30.676Z",
+      "ipd_category_id": null
     },
     {
       "id": 24,
@@ -458,7 +257,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.691Z",
-      "updated_at": "2025-12-27T14:20:30.691Z"
+      "updated_at": "2025-12-27T14:20:30.691Z",
+      "ipd_category_id": null
     },
     {
       "id": 25,
@@ -473,7 +273,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.706Z",
-      "updated_at": "2025-12-27T14:20:30.706Z"
+      "updated_at": "2025-12-27T14:20:30.706Z",
+      "ipd_category_id": null
     },
     {
       "id": 26,
@@ -488,37 +289,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.734Z",
-      "updated_at": "2025-12-27T14:20:30.734Z"
-    },
-    {
-      "id": 27,
-      "title": "Tabnine",
-      "url": "https://www.tabnine.com",
-      "description": "专注于私有化部署和企业安全的 AI 编程助手。",
-      "category_id": 5,
-      "thumbnail": "https://www.tabnine.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.754Z",
-      "updated_at": "2025-12-27T14:20:30.754Z"
-    },
-    {
-      "id": 28,
-      "title": "Codeium",
-      "url": "https://codeium.com",
-      "description": "个人用户免费的 AI 编程助手，支持 70 多种编程语言。",
-      "category_id": 5,
-      "thumbnail": "https://codeium.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.768Z",
-      "updated_at": "2025-12-27T14:20:30.768Z"
+      "updated_at": "2025-12-27T14:20:30.734Z",
+      "ipd_category_id": null
     },
     {
       "id": 29,
@@ -533,7 +305,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.782Z",
-      "updated_at": "2025-12-27T14:20:30.782Z"
+      "updated_at": "2025-12-27T14:20:30.782Z",
+      "ipd_category_id": null
     },
     {
       "id": 30,
@@ -548,22 +321,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.794Z",
-      "updated_at": "2025-12-27T14:20:30.794Z"
-    },
-    {
-      "id": 31,
-      "title": "文心一言",
-      "url": "https://yiyan.baidu.com",
-      "description": "百度推出的知识增强大语言模型，能够回答问题、协助创作。",
-      "category_id": 1,
-      "thumbnail": "https://yiyan.baidu.com/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.807Z",
-      "updated_at": "2025-12-27T14:20:30.807Z"
+      "updated_at": "2025-12-27T14:20:30.794Z",
+      "ipd_category_id": null
     },
     {
       "id": 32,
@@ -578,7 +337,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.832Z",
-      "updated_at": "2025-12-27T14:20:30.832Z"
+      "updated_at": "2025-12-27T14:20:30.832Z",
+      "ipd_category_id": null
     },
     {
       "id": 33,
@@ -593,7 +353,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.844Z",
-      "updated_at": "2025-12-27T14:20:30.844Z"
+      "updated_at": "2025-12-27T14:20:30.844Z",
+      "ipd_category_id": null
     },
     {
       "id": 34,
@@ -608,22 +369,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.470Z",
-      "updated_at": "2025-12-27T14:20:30.470Z"
-    },
-    {
-      "id": 35,
-      "title": "Amazon Q",
-      "url": "https://aws.amazon.com/q/developer",
-      "description": "亚马逊推出的 AI 助手，深度集成 AWS 服务。",
-      "category_id": 5,
-      "thumbnail": "https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico",
-      "thumbnail_base64": null,
-      "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.309Z",
-      "updated_at": "2025-12-27T14:20:30.309Z"
+      "updated_at": "2025-12-27T14:20:30.470Z",
+      "ipd_category_id": null
     },
     {
       "id": 36,
@@ -638,7 +385,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 37,
@@ -653,7 +401,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 38,
@@ -668,7 +417,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 39,
@@ -683,7 +433,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 40,
@@ -698,7 +449,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
       "id": 41,
@@ -713,22 +465,21 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "updated_at": "2025-12-27T14:20:30.290Z",
+      "ipd_category_id": null
     },
     {
-      "id": 42,
-      "title": "Mistral AI",
-      "url": "https://chat.mistral.ai",
-      "description": "欧洲 AI 领头羊 Mistral 推出的对话界面，提供强大的开源模型访问。",
-      "category_id": 1,
-      "thumbnail": "https://chat.mistral.ai/favicon.ico",
-      "thumbnail_base64": null,
+      "id": 44,
+      "title": "Example Site",
+      "url": "https://example.com",
+      "description": "This is a test description for the example site.",
+      "category_id": 2,
+      "ipd_category_id": null,
+      "thumbnail": "https://example.com/thumbnail.jpg",
       "status": "approved",
-      "visits": 0,
-      "likes": 0,
-      "active": 1,
-      "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z"
+      "thumbnail_base64": "data:text/html;base64,PCFkb2N0eXBlIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjx0aXRsZT5FeGFtcGxlIERvbWFpbjwvdGl0bGU+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xIj48c3R5bGU+Ym9keXtiYWNrZ3JvdW5kOiNlZWU7d2lkdGg6NjB2dzttYXJnaW46MTV2aCBhdXRvO2ZvbnQtZmFtaWx5OnN5c3RlbS11aSxzYW5zLXNlcmlmfWgxe2ZvbnQtc2l6ZToxLjVlbX1kaXZ7b3BhY2l0eTowLjh9YTpsaW5rLGE6dmlzaXRlZHtjb2xvcjojMzQ4fTwvc3R5bGU+PGJvZHk+PGRpdj48aDE+RXhhbXBsZSBEb21haW48L2gxPjxwPlRoaXMgZG9tYWluIGlzIGZvciB1c2UgaW4gZG9jdW1lbnRhdGlvbiBleGFtcGxlcyB3aXRob3V0IG5lZWRpbmcgcGVybWlzc2lvbi4gQXZvaWQgdXNlIGluIG9wZXJhdGlvbnMuPHA+PGEgaHJlZj0iaHR0cHM6Ly9pYW5hLm9yZy9kb21haW5zL2V4YW1wbGUiPkxlYXJuIG1vcmU8L2E+PC9kaXY+PC9ib2R5PjwvaHRtbD4K",
+      "created_at": "2025-12-28T09:14:32.531Z",
+      "updated_at": "2025-12-28T09:14:32.531Z"
     }
   ],
   "categories": [
@@ -775,14 +526,5 @@
       "updated_at": "2025-12-27T14:20:30.082Z"
     }
   ],
-  "footer_links": [
-    {
-      "id": 1,
-      "title": "GitHub",
-      "url": "https://github.com",
-      "isExternal": true,
-      "created_at": "2025-12-27T14:20:31.654Z",
-      "updated_at": "2025-12-27T14:20:31.654Z"
-    }
-  ]
+  "footer_links": []
 }
