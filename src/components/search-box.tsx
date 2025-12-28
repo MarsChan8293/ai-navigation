@@ -114,15 +114,15 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
 
   return (
     <div className={`relative group max-w-2xl w-full mx-auto ${className}`}>
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-xl blur-2xl opacity-50 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-xl blur-xl opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
 
-      <div className="relative flex items-center gap-2 p-1.5 bg-background/80 dark:bg-background/40 backdrop-blur-xl rounded-xl border border-border/50 shadow-xl">
+      <div className="relative flex items-center gap-2 p-1.5 bg-background/60 dark:bg-background/40 backdrop-blur-xl rounded-xl border border-border/40 shadow-2xl transition-all duration-300 group-focus-within:border-primary/40 group-focus-within:shadow-primary/5">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
-              className="h-9 gap-2 px-2.5 md:px-3 hover:bg-background/60 data-[state=open]:bg-background/60 rounded-lg transition-colors"
+              className="h-10 gap-2 px-3 md:px-4 hover:bg-background/60 data-[state=open]:bg-background/60 rounded-lg transition-all duration-200"
             >
               {selectedEngine.icon}
               <span className="hidden sm:inline font-medium text-sm">
@@ -131,12 +131,12 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
               <ChevronDown className="h-3.5 w-3.5 opacity-50" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-[150px]">
+          <DropdownMenuContent align="start" className="w-[150px] bg-background/95 backdrop-blur-md border-border/40">
             {searchEngines.map((engine) => (
               <DropdownMenuItem
                 key={engine.id}
                 onClick={() => setSelectedEngine(engine)}
-                className="gap-2"
+                className="gap-2 cursor-pointer focus:bg-primary/10 focus:text-primary"
               >
                 {engine.icon}
                 <span className="font-medium">{engine.name}</span>
@@ -146,21 +146,21 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
         </DropdownMenu>
 
         <div className="relative flex-1 min-w-0">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/50 group-hover:text-muted-foreground/70 transition-colors duration-300" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/40 group-focus-within:text-primary/50 transition-colors duration-300" />
           <input
             type="text"
             placeholder="搜索AI工具、教程、资源..."
             value={localValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="w-full h-9 pl-9 pr-3 bg-transparent border-0 ring-1 ring-border/50 hover:ring-border focus:ring-2 focus:ring-primary/30 placeholder:text-muted-foreground/50 rounded-lg transition-all duration-300"
+            className="w-full h-10 pl-10 pr-3 bg-transparent border-0 focus:ring-0 placeholder:text-muted-foreground/40 text-sm sm:text-base transition-all duration-300"
           />
         </div>
 
         <Button
           variant="default"
           size="sm"
-          className="h-9 px-4 rounded-lg bg-primary/90 hover:bg-primary transition-colors shadow-sm"
+          className="h-10 px-5 rounded-lg bg-primary hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/20 active:scale-95"
           onClick={handleSearch}
         >
           搜索

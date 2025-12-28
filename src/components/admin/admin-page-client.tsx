@@ -75,7 +75,7 @@ export function AdminPageClient({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="container max-w-6xl px-4 sm:px-6 py-4 sm:py-6 min-h-[calc(100vh-4rem)] space-y-6"
+      className="container mx-auto max-w-6xl px-4 sm:px-6 py-4 sm:py-6 min-h-[calc(100vh-4rem)] space-y-6"
     >
       <Tabs defaultValue="websites" className="w-full">
         {/* Header Section */}

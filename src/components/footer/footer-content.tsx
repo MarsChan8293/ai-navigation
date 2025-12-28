@@ -17,6 +17,8 @@ import { Input } from "@/ui/common/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils/utils";
 import type { FooterSettings } from "@/lib/types";
+import { useAtomValue } from "jotai";
+import { isAdminModeAtom } from "@/lib/atoms";
 
 export default function FooterContent({
   initialSettings,
@@ -27,6 +29,7 @@ export default function FooterContent({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newLink, setNewLink] = useState({ title: "", url: "" });
   const { toast } = useToast();
+  const [isAdminMode, setIsAdminMode] = useAtom(isAdminModeAtom);
 
   // Initialize settings
   useEffect(() => {
@@ -156,37 +159,43 @@ export default function FooterContent({
                   >
                     {link.title}
                   </a>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className={cn(
-                      "h-5 w-5 p-0 rounded-full",
-                      "hover:bg-destructive/10 hover:text-destructive",
-                      "transition-colors duration-200"
-                    )}
-                    onClick={() => handleRemoveLink(link.id)}
-                  >
-                    ×
-                  </Button>
+                  {isAdminMode && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={cn(
+                        "h-5 w-5 p-0 rounded-full",
+                        "hover:bg-destructive/10 hover:text-destructive",
+                        "transition-colors duration-200"
+                      )}
+                      onClick={() => handleRemoveLink(link.id)}
+                    >
+                      ×
+                    </Button>
+                  )}
                 </div>
               ))
             ) : (
-              <div className="text-xs text-muted-foreground/60 italic">
-                点击右侧加号添加页脚链接
-              </div>
+              isAdminMode && (
+                <div className="text-xs text-muted-foreground/60 italic">
+                  点击右侧加号添加页脚链接
+                </div>
+              )
             )}
-            <Button
-              variant="ghost"
-              size="sm"
-              className={cn(
-                "h-5 w-5 p-0 rounded-full",
-                "hover:bg-primary/10 hover:text-primary",
-                "transition-colors duration-200"
-              )}
-              onClick={() => setIsDialogOpen(true)}
-            >
-              <Plus className="h-3 w-3" />
-            </Button>
+            {isAdminMode && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  "h-5 w-5 p-0 rounded-full",
+                  "hover:bg-primary/10 hover:text-primary",
+                  "transition-colors duration-200"
+                )}
+                onClick={() => setIsDialogOpen(true)}
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">

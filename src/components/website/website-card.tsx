@@ -28,13 +28,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/ui/common/tooltip";
+import { useAtomValue } from "jotai";
+import { isAdminModeAtom } from "@/lib/atoms";
 
 interface WebsiteCardProps {
   website: Website;
   category?: Category;
   onVisit: (website: Website) => void;
-  onStatusUpdate: (id: number, status: Website["status"]) => void;
-  onDelete: (id: number) => void;
+  onStatusUpdate?: (id: number, status: Website["status"]) => void;
+  onDelete?: (id: number) => void;
 }
 
 export function WebsiteCard({
@@ -46,6 +48,7 @@ export function WebsiteCard({
 }: WebsiteCardProps) {
   const [likes, setLikes] = useState(website.likes);
   const { cardRef, tiltProps } = useCardTilt();
+  const isAdminMode = useAtomValue(isAdminModeAtom);
 
   const statusColors: Record<Website["status"], string> = {
     pending: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
@@ -158,15 +161,17 @@ export function WebsiteCard({
                   <h3 className="text-sm sm:text-base font-medium truncate group-hover:text-primary transition-colors">
                     {website.title}
                   </h3>
-                  <Badge
-                    variant="secondary"
-                    className={cn(
-                      "font-normal text-[10px] sm:text-xs",
-                      statusColors[website.status]
-                    )}
-                  >
-                    {statusText[website.status]}
-                  </Badge>
+                  {isAdminMode && (
+                    <Badge
+                      variant="secondary"
+                      className={cn(
+                        "font-normal text-[10px] sm:text-xs",
+                        statusColors[website.status]
+                      )}
+                    >
+                      {statusText[website.status]}
+                    </Badge>
+                  )}
                 </div>
               </div>
               <Badge
@@ -193,7 +198,11 @@ export function WebsiteCard({
             <div className="relative px-2 py-1.5 sm:px-3 sm:py-2 flex items-center justify-between border-t border-border/5">
               {/* Stats */}
               <div className="flex items-center gap-3 text-[10px] sm:text-xs text-muted-foreground">
-                <span>{website.visits} 次访问</span>
+                {website.visits > 0 ? (
+                  <span>{website.visits} 次访问</span>
+                ) : (
+                  <Badge variant="outline" className="text-[10px] border-primary/20 text-primary/70 bg-primary/5">新发布</Badge>
+                )}
                 <div className="flex items-center gap-1">
                   <Heart className="w-3 h-3" />
                   <span>{likes}</span>
@@ -203,17 +212,16 @@ export function WebsiteCard({
               {/* Actions */}
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <Button
-                  variant="outline"
+                  variant="default"
                   size="sm"
                   onClick={(e) => {
                     e.stopPropagation();
                     onVisit(website);
                   }}
                   className={cn(
-                    "h-7 sm:h-8 px-3 sm:flex-1 text-xs sm:text-sm",
-                    "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                    "hover:bg-white/[0.04] hover:border-white/20 hover:text-primary",
-                    "dark:bg-white/[0.01] dark:hover:bg-white/[0.02]",
+                    "h-7 sm:h-8 px-3 sm:flex-1 text-xs sm:text-sm font-medium",
+                    "bg-primary text-primary-foreground shadow-sm",
+                    "hover:bg-primary/90 hover:shadow-md hover:-translate-y-0.5",
                     "transition-all duration-300"
                   )}
                 >
@@ -227,9 +235,8 @@ export function WebsiteCard({
                   onClick={handleLike}
                   className={cn(
                     "h-7 w-7 sm:h-8 sm:w-8 p-0",
-                    "bg-white/[0.02] backdrop-blur-xl border-white/10",
+                    "bg-background border-border/40",
                     "hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500",
-                    "dark:bg-white/[0.01] dark:hover:bg-red-500/10",
                     "transition-all duration-300"
                   )}
                 >
@@ -241,13 +248,13 @@ export function WebsiteCard({
                   </motion.div>
                 </Button>
 
-                {website.status !== "approved" && (
+                {isAdminMode && website.status !== "approved" && (
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onStatusUpdate(website.id, "approved");
+                      onStatusUpdate?.(website.id, "approved");
                     }}
                     className={cn(
                       "h-7 sm:h-8 px-1.5 sm:px-2",
@@ -261,13 +268,13 @@ export function WebsiteCard({
                   </Button>
                 )}
 
-                {website.status !== "rejected" && (
+                {isAdminMode && website.status !== "rejected" && (
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
-                      onStatusUpdate(website.id, "rejected");
+                      onStatusUpdate?.(website.id, "rejected");
                     }}
                     className={cn(
                       "h-7 sm:h-8 px-1.5 sm:px-2",
@@ -281,17 +288,19 @@ export function WebsiteCard({
                   </Button>
                 )}
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete(website.id);
-                  }}
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border rounded-md h-7 w-7 sm:h-8 sm:w-8 p-0 bg-white/[0.02] backdrop-blur-xl border-white/10 hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500 dark:bg-white/[0.01] dark:hover:bg-red-500/10 transition-all duration-300"
-                >
-                  <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                </Button>
+                {isAdminMode && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDelete?.(website.id);
+                    }}
+                    className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border rounded-md h-7 w-7 sm:h-8 sm:w-8 p-0 bg-white/[0.02] backdrop-blur-xl border-white/10 hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500 dark:bg-white/[0.01] dark:hover:bg-red-500/10 transition-all duration-300"
+                  >
+                    <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  </Button>
+                )}
               </div>
             </div>
           </div>

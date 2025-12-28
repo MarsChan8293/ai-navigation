@@ -7,6 +7,7 @@ import {
   useScroll,
   useTransform,
   AnimatePresence,
+  useMotionValueEvent,
 } from "framer-motion";
 import { websitesAtom } from "@/lib/atoms";
 import {
@@ -43,7 +44,12 @@ export default function HomePage({
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 400], [1, 0.9]);
   const heroTranslateY = useTransform(scrollY, [0, 400], [0, -100]);
-  const isScrolled = useTransform(scrollY, (value) => value > 300);
+  
+  const [isScrolled, setIsScrolled] = useState(false);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 300);
+  });
+
   const [filteredWebsites, setFilteredWebsites] = useState<Website[]>([]);
 
   // 初始化数据
@@ -115,7 +121,7 @@ export default function HomePage({
         searchQuery={searchQuery}
         onSearchChange={(searchQuery) => setSearchQuery(searchQuery)}
         categories={categories}
-        isScrolled={isScrolled.get()}
+        isScrolled={isScrolled}
       />
 
       {/* Main Content */}

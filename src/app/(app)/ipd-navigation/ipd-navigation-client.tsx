@@ -217,11 +217,11 @@ export function IpdNavigationClient() {
 
   return (
     <div className="min-h-screen bg-background/50">
-      <div className="container px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-left mb-8"
+          className="text-center mb-8"
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-4">IPD网站导航</h1>
           <p className="text-muted-foreground">
@@ -233,7 +233,7 @@ export function IpdNavigationClient() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="max-w-2xl mb-8"
+          className="max-w-2xl mx-auto mb-8"
         >
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -252,9 +252,9 @@ export function IpdNavigationClient() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="relative mb-6 overflow-x-auto"
+            className="relative mb-6 overflow-x-auto no-scrollbar"
           >
-            <div className="flex items-center gap-4 min-w-max bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 rounded-lg">
+            <div className="flex items-center justify-start md:justify-center gap-4 min-w-max bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-4 rounded-lg mx-auto">
               <div className="px-6 py-3 bg-slate-700 text-white font-bold text-lg whitespace-nowrap">
                 IPD流程
               </div>

@@ -8,6 +8,7 @@ export const categoriesAtom = atom<Category[]>([]);
 export const searchQueryAtom = atom("");
 export const selectedCategoryAtom = atom<number | null>(1);
 export const isCompactModeAtom = atomWithStorage("isCompactMode", false);
+export const isAdminModeAtom = atomWithStorage("isAdminMode", false);
 
 export const footerSettingsAtom = atom<FooterSettings>({
   copyright: "© 2024 网站导航",

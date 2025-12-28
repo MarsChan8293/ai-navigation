@@ -15,12 +15,16 @@ interface WebsiteGridProps {
   categories: Category[];
   // onVisit: (website: Website) => void;
   className?: string;
+  onStatusUpdate?: (id: number, status: Website["status"]) => void;
+  onDelete?: (id: number) => void;
 }
 
 export default function WebsiteGrid({
   websites,
   categories,
   className,
+  onStatusUpdate,
+  onDelete,
 }: WebsiteGridProps) {
   const { toast } = useToast();
   const [isCompact, setIsCompact] = useAtom(isCompactModeAtom);

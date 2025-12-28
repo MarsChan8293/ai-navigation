@@ -11,7 +11,7 @@ export default function SubmitPage() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-2xl px-4 sm:px-6 pb-20"
+      className="max-w-2xl mx-auto px-4 sm:px-6 pb-20"
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8 pt-6 sm:pt-10">
         <motion.h1
