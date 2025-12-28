@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Star, ExternalLink } from "lucide-react";
 import { Card } from "@/ui/common/card";
@@ -107,16 +107,20 @@ export function IpdNavigationClient() {
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<IpdItem | null>(null);
 
-  // 过滤数据
-  const filteredPhases = ipdPhases.map((phase) => ({
-    ...phase,
-    items: phase.items.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    ),
-  }));
+  // 过滤数据 - 使用 useMemo 优化性能
+  const filteredPhases = useMemo(
+    () =>
+      ipdPhases.map((phase) => ({
+        ...phase,
+        items: phase.items.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+      })),
+    [searchQuery]
+  );
 
   // 获取颜色类名
-  const getItemColorClass = (color?: string) => {
+  const getItemColorClass = useCallback((color?: string) => {
     switch (color) {
       case "yellow":
         return "bg-yellow-100 dark:bg-yellow-900/30 border-yellow-300 dark:border-yellow-700";
@@ -127,11 +131,11 @@ export function IpdNavigationClient() {
       default:
         return "bg-background border-border";
     }
-  };
+  }, []);
 
-  const handleItemClick = (item: IpdItem) => {
+  const handleItemClick = useCallback((item: IpdItem) => {
     setSelectedItem(item);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background/50">
