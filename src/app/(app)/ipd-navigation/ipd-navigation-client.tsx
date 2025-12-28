@@ -119,18 +119,9 @@ export function IpdNavigationClient() {
     [searchQuery]
   );
 
-  // 获取颜色类名
-  const getItemColorClass = useCallback((color?: string) => {
-    switch (color) {
-      case "yellow":
-        return "bg-yellow-100 dark:bg-yellow-900/30 border-yellow-300 dark:border-yellow-700";
-      case "green":
-        return "bg-green-100 dark:bg-green-900/30 border-green-300 dark:border-green-700";
-      case "dark":
-        return "bg-slate-900 dark:bg-slate-800 text-white border-slate-700";
-      default:
-        return "bg-background border-border";
-    }
+  // 获取颜色类名 - 统一使用白底黑字
+  const getItemColorClass = useCallback(() => {
+    return "bg-white dark:bg-gray-100 text-black border-gray-300 dark:border-gray-400";
   }, []);
 
   const handleItemClick = useCallback((item: IpdItem) => {
@@ -236,7 +227,7 @@ export function IpdNavigationClient() {
                             onClick={() => handleItemClick(item)}
                             className={cn(
                               "relative p-4 rounded-lg border-2 text-left transition-all duration-200",
-                              getItemColorClass(item.color),
+                              getItemColorClass(),
                               "hover:shadow-lg"
                             )}
                           >
@@ -277,7 +268,7 @@ export function IpdNavigationClient() {
                       onClick={() => handleItemClick(item)}
                       className={cn(
                         "relative w-full p-3 rounded-lg border text-left transition-all duration-200",
-                        getItemColorClass(item.color),
+                        getItemColorClass(),
                         "hover:shadow-md"
                       )}
                     >
