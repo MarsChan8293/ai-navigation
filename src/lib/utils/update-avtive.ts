@@ -1,12 +1,30 @@
 import { prisma } from "../db/db";
 
+async function checkUrl(url: string): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const response = await fetch(url, {
+      method: "HEAD",
+      signal: controller.signal,
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
+
+    clearTimeout(timeoutId);
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 export async function updateWebsiteActive() {
   try {
-    // 获取所有需要检查的网站
     const websites = await prisma.website.findMany({
-      where: {
-        status: "approved",
-      },
+      where: { status: "approved" },
       select: {
         id: true,
         url: true,
@@ -16,29 +34,30 @@ export async function updateWebsiteActive() {
 
     console.log(`开始检查 ${websites.length} 个网站的可访问性`);
 
-    // 逐个检查网站
     for (const website of websites) {
       try {
-        await fetch(`/api/websites/active`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url: website.url, id: website.id }),
-        }).then((res) => res.json());
+        const isAlive = await checkUrl(website.url);
+        await prisma.website.update({
+          where: { id: website.id },
+          data: { active: isAlive ? 1 : 0 },
+        });
+        console.log(
+          `网站 [${website.title}] (ID: ${website.id}) 状态更新为 ${
+            isAlive ? "可访问" : "不可访问"
+          }`
+        );
       } catch (error) {
         if (error instanceof Error) {
           console.log(
-            `检查网站 [${website.title}] (ID: ${website.id}) 失败: ${error.message}`
+            `更新网站 [${website.title}] (ID: ${website.id}) 状态失败: ${error.message}`
           );
         } else {
           console.log(
-            `检查网站 [${website.title}] (ID: ${website.id}) 失败: 未知错误`
+            `更新网站 [${website.title}] (ID: ${website.id}) 状态失败: 未知错误`
           );
         }
       }
 
-      // 添加延迟，避免请求过快
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 

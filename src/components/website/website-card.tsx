@@ -31,7 +31,6 @@ import {
 interface WebsiteCardProps {
   website: Website;
   category?: Category;
-  isAdmin: boolean;
   onVisit: (website: Website) => void;
   onStatusUpdate: (id: number, status: Website["status"]) => void;
 }
@@ -39,7 +38,6 @@ interface WebsiteCardProps {
 export function WebsiteCard({
   website,
   category,
-  isAdmin,
   onVisit,
   onStatusUpdate,
 }: WebsiteCardProps) {
@@ -234,7 +232,7 @@ export function WebsiteCard({
                   </motion.div>
                 </Button>
 
-                {isAdmin && website.status !== "approved" && (
+                {website.status !== "approved" && (
                   <Button
                     variant="outline"
                     size="sm"
@@ -251,7 +249,7 @@ export function WebsiteCard({
                   </Button>
                 )}
 
-                {isAdmin && website.status !== "rejected" && (
+                {website.status !== "rejected" && (
                   <Button
                     variant="outline"
                     size="sm"

@@ -8,7 +8,6 @@ export enum WebsiteSettings {
     allowSubmissions = 'allowSubmissions',
     requireApproval = 'requireApproval',
     itemsPerPage = 'itemsPerPage',
-    adminPassword = 'adminPassword',
     siteUrl = 'siteUrl',
     siteEmail = 'siteEmail',
     siteCopyright = 'siteCopyright',

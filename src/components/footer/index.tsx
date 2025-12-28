@@ -12,8 +12,10 @@ export async function Footer() {
       () =>
         prisma.footerLink.findMany({
           select: {
+            id: true,
             title: true,
             url: true,
+            isExternal: true,
           },
           orderBy: {
             created_at: "asc",

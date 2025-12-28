@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAtomValue, useAtom } from "jotai";
-import { isAdminModeAtom, isCompactModeAtom, websitesAtom } from "@/lib/atoms";
+import { useAtom } from "jotai";
+import { isCompactModeAtom, websitesAtom } from "@/lib/atoms";
 import { useToast } from "@/hooks/use-toast";
 import { WebsiteCard } from "./website-card";
 import { CompactCard } from "./compact-card";
@@ -22,7 +22,6 @@ export default function WebsiteGrid({
   categories,
   className,
 }: WebsiteGridProps) {
-  const isAdmin = useAtomValue(isAdminModeAtom);
   const { toast } = useToast();
   const [isCompact, setIsCompact] = useAtom(isCompactModeAtom);
   const [, setWebsites] = useAtom(websitesAtom);
@@ -124,7 +123,6 @@ export default function WebsiteGrid({
                     category={categories.find(
                       (c) => c.id === website.category_id
                     )}
-                    isAdmin={isAdmin}
                     onVisit={handleVisit}
                     onStatusUpdate={handleStatusUpdate}
                   />

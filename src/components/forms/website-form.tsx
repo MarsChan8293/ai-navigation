@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
-import { categoriesAtom, isAdminModeAtom } from "@/lib/atoms";
+import { categoriesAtom } from "@/lib/atoms";
 import { fetchMetadata } from "@/lib/utils";
 import { websiteFormSchema } from "@/lib/utils";
 import { FormField } from "./form-field";
@@ -26,7 +26,6 @@ export function WebsiteForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [categories, setCategories] = useAtom(categoriesAtom);
-  const [isAdmin] = useAtom(isAdminModeAtom);
   const { settings } = useSettings();
   const router = useRouter();
   const { toast } = useToast();
@@ -107,7 +106,7 @@ export function WebsiteForm() {
     setIsSubmitting(true);
     try {
       // Check if submissions are allowed based on settings
-      if (!isAdmin && settings?.allowSubmissions === false) {
+      if (settings?.allowSubmissions === false) {
         throw new Error("网站提交功能暂时关闭");
       }
 
@@ -125,12 +124,10 @@ export function WebsiteForm() {
 
       toast({
         title: "提交成功！",
-        description: isAdmin
-          ? "网站已添加到已通过列表。"
-          : "您的网站已提交审核。",
+        description: "网站已添加到已通过列表。",
       });
 
-      router.push(isAdmin ? "/admin" : "/");
+      router.push("/");
       router.refresh();
     } catch (error) {
       toast({

@@ -24,7 +24,6 @@ export function SettingsPageClient({
       allowSubmissions: "true",
       requireApproval: "true",
       itemsPerPage: "12",
-      adminPassword: "",
       siteUrl: "",
       siteEmail: "",
       siteCopyright: "",
@@ -243,21 +242,6 @@ export function SettingsPageClient({
                   <option value="true">是</option>
                   <option value="false">否</option>
                 </select>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                  管理员密码
-                </label>
-                <input
-                  type="password"
-                  className="flex h-10 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  value={settings.adminPassword || ""}
-                  onChange={(e) =>
-                    setSettings({ ...settings, adminPassword: e.target.value })
-                  }
-                  placeholder="留空则不修改密码"
-                />
               </div>
 
               <div className="space-y-2">

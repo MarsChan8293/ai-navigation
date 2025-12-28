@@ -7,8 +7,10 @@ export async function GET() {
   try {
     const links = await prisma.footerLink.findMany({
       select: {
+        id: true,
         title: true,
         url: true,
+        isExternal: true,
       },
       orderBy: {
         created_at: "asc",

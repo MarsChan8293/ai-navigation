@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { Trophy, Plus, Brain, Download, Info } from "lucide-react";
+import { Trophy, Plus, Brain, Download, Info, Settings } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import ThemeSwitch from "@/components/theme-switcher/theme-switch";
-import MobileMenu from "./mobile-menu";
 import {
   Tooltip,
   TooltipContent,
@@ -95,11 +94,20 @@ export default function Header() {
               </Button>
             </Link>
 
+            <Link href="/admin">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <Settings className="h-4 w-4" />
+                <span>管理</span>
+              </Button>
+            </Link>
+
             <ThemeSwitch />
           </div>
 
-          {/* Mobile Menu */}
-          <MobileMenu />
         </div>
       </nav>
     </header>

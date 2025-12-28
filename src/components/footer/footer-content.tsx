@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import { Button } from "@/ui/common/button";
 import { Plus } from "lucide-react";
-import { isAdminModeAtom, footerSettingsAtom } from "@/lib/atoms";
+import { footerSettingsAtom } from "@/lib/atoms";
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,6 @@ export default function FooterContent({
 }: {
   initialSettings: FooterSettings;
 }) {
-  const [isAdmin] = useAtom(isAdminModeAtom);
   const [settings, setSettings] = useAtom(footerSettingsAtom);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newLink, setNewLink] = useState({ title: "", url: "" });
@@ -36,8 +35,10 @@ export default function FooterContent({
       icpBeian: initialSettings.icpBeian || "",
       links:
         initialSettings.links?.map((link) => ({
+          id: link.id,
           title: link.title,
           url: link.url,
+          isExternal: link.isExternal,
         })) || [],
       customHtml: initialSettings.customHtml || "",
     });
@@ -62,11 +63,15 @@ export default function FooterContent({
         body: JSON.stringify(newLink),
       });
 
-      if (!response.ok) throw new Error("Failed to add link");
+      const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || "Failed to add link");
+      }
 
       setSettings((prev) => ({
         ...prev,
-        links: [...prev.links, { title: newLink.title, url: newLink.url }],
+        links: [...prev.links, result.data],
       }));
 
       setNewLink({ title: "", url: "" });
@@ -85,17 +90,30 @@ export default function FooterContent({
     }
   };
 
-  const handleRemoveLink = async (index: number) => {
+  const handleRemoveLink = async (id?: number) => {
+    if (typeof id !== "number") {
+      toast({
+        title: "删除失败",
+        description: "缺少链接ID，无法删除链接",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
-      const response = await fetch(`/api/footer-links?id=${index}`, {
+      const response = await fetch(`/api/footer-links?id=${id}`, {
         method: "DELETE",
       });
 
-      if (!response.ok) throw new Error("Failed to remove link");
+      const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || "Failed to remove link");
+      }
 
       setSettings((prev) => ({
         ...prev,
-        links: prev.links.filter((_, i) => i !== index),
+        links: prev.links.filter((link) => link.id !== id),
       }));
 
       toast({
@@ -126,7 +144,10 @@ export default function FooterContent({
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             {settings.links.length > 0 ? (
               settings.links.map((link, index) => (
-                <div key={index} className="flex items-center gap-1.5">
+                <div
+                  key={link.id ?? `${link.title}-${index}`}
+                  className="flex items-center gap-1.5"
+                >
                   <a
                     href={link.url}
                     target="_blank"
@@ -135,41 +156,37 @@ export default function FooterContent({
                   >
                     {link.title}
                   </a>
-                  {isAdmin && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "h-5 w-5 p-0 rounded-full",
-                        "hover:bg-destructive/10 hover:text-destructive",
-                        "transition-colors duration-200"
-                      )}
-                      onClick={() => handleRemoveLink(index)}
-                    >
-                      ×
-                    </Button>
-                  )}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={cn(
+                      "h-5 w-5 p-0 rounded-full",
+                      "hover:bg-destructive/10 hover:text-destructive",
+                      "transition-colors duration-200"
+                    )}
+                    onClick={() => handleRemoveLink(link.id)}
+                  >
+                    ×
+                  </Button>
                 </div>
               ))
             ) : (
               <div className="text-xs text-muted-foreground/60 italic">
-                {isAdmin ? "点击右侧加号添加页脚链接" : "暂无页脚链接"}
+                点击右侧加号添加页脚链接
               </div>
             )}
-            {isAdmin && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  "h-5 w-5 p-0 rounded-full",
-                  "hover:bg-primary/10 hover:text-primary",
-                  "transition-colors duration-200"
-                )}
-                onClick={() => setIsDialogOpen(true)}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              className={cn(
+                "h-5 w-5 p-0 rounded-full",
+                "hover:bg-primary/10 hover:text-primary",
+                "transition-colors duration-200"
+              )}
+              onClick={() => setIsDialogOpen(true)}
+            >
+              <Plus className="h-3 w-3" />
+            </Button>
           </div>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">

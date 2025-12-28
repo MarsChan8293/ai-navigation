@@ -4,15 +4,8 @@ import { StoreProvider } from "@/components/providers/store-provider";
 import { Toaster } from "@/ui/common/sonner";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/index";
-import SWRProvider from "@/components/providers/swr-provider";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { Analytics as OtherAnalytics } from "@/components/analytics";
-import { thumbnailUpdateJob } from "@/lib/tasks/cron";
-
-// 启动定时任务
-if (process.env.NODE_ENV === "production") {
-  thumbnailUpdateJob.start();
-}
 
 export default function RootLayout({
   children,

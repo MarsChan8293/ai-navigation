@@ -466,7 +466,6 @@ export async function initializeSettings() {
     { key: WebsiteSettings.allowSubmissions, value: 'true' },
     { key: WebsiteSettings.requireApproval, value: 'true' },
     { key: WebsiteSettings.itemsPerPage, value: '12' },
-    { key: WebsiteSettings.adminPassword, value: process.env.ADMIN_PASSWORD || 'admin' },
     { key: WebsiteSettings.siteUrl, value: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000' },
     { key: WebsiteSettings.siteEmail, value: process.env.SITE_EMAIL || 'admin@example.com' },
     { key: WebsiteSettings.siteCopyright, value: '© 2024 AI导航. All rights reserved.' },

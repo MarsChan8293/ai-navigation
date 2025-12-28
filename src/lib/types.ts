@@ -34,8 +34,10 @@ export interface Setting {
 }
 
 export interface FooterLink {
+  id?: number;
   title: string;
   url: string;
+  isExternal?: boolean;
 }
 
 // 页脚设置

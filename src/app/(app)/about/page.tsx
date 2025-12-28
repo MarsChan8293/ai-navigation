@@ -48,7 +48,7 @@ export default function AboutPage() {
       title: "安装助手",
       description: "安装浏览器扩展和AI导航助手脚本，一键采集AI工具信息",
       action: (
-        <Link href="/scripts/ai-nav-collector.user.js">
+        <Link href="/scripts/tamper-monkey-script.user.js">
           <Button
             variant="outline"
             size="sm"
