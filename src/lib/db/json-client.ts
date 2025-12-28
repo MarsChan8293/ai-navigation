@@ -1,4 +1,35 @@
 import { getDb, Data, Website, Category, Setting, FooterLink } from './json-db'
+import * as z from "zod"
+import { websiteFormSchema } from '../utils/validations'
+
+class Mutex {
+  private mutex = Promise.resolve();
+
+  lock(): Promise<() => void> {
+    let begin: (unlock: () => void) => void = () => {};
+
+    this.mutex = this.mutex.then(() => {
+      return new Promise(resolve => {
+        begin = resolve as any;
+      });
+    });
+
+    return new Promise(resolve => {
+      begin(() => resolve(undefined as any));
+    });
+  }
+
+  async dispatch<T>(fn: (() => T) | (() => PromiseLike<T>)): Promise<T> {
+    const unlock = await this.lock();
+    try {
+      return await Promise.resolve(fn());
+    } finally {
+      unlock();
+    }
+  }
+}
+
+const writeLock = new Mutex();
 
 // Helper to convert string dates back to Date objects
 const parseDates = <T>(item: T): T => {
@@ -27,7 +58,20 @@ class ModelDelegate<T extends { id: number }> {
     if (args?.where) {
       items = items.filter(item => {
         for (const key in args.where) {
-          if ((item as any)[key] !== args.where[key]) return false
+          const filterValue = args.where[key];
+          const itemValue = (item as any)[key];
+
+          if (typeof filterValue === 'object' && filterValue !== null) {
+             if ('not' in filterValue) {
+                 if (itemValue === filterValue.not) return false;
+             } else if ('in' in filterValue && Array.isArray(filterValue.in)) {
+                 if (!filterValue.in.includes(itemValue)) return false;
+             } else {
+                 if (itemValue !== filterValue) return false
+             }
+          } else {
+             if (itemValue !== filterValue) return false
+          }
         }
         return true
       })
@@ -41,6 +85,19 @@ class ModelDelegate<T extends { id: number }> {
         if (direction === 'asc') return a[key] > b[key] ? 1 : -1
         return a[key] < b[key] ? 1 : -1
       })
+    }
+
+    // Select support
+    if (args?.select) {
+        items = items.map(item => {
+            const selectedItem: any = {};
+            for (const key in args.select) {
+                if (args.select[key]) {
+                    selectedItem[key] = (item as any)[key];
+                }
+            }
+            return selectedItem as T;
+        });
     }
 
     return items.map(parseDates)
@@ -69,53 +126,58 @@ class ModelDelegate<T extends { id: number }> {
   }
 
   async create(args: { data: any }) {
-
-    const db = await this.getDbInstance()
-    const newItem = {
-      id: getNextId(db.data[this.tableName]),
-      ...args.data,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    }
-    db.data[this.tableName].push(newItem)
-    await db.write()
-    return parseDates(newItem)
+    return writeLock.dispatch(async () => {
+      const db = await this.getDbInstance()
+      const newItem = {
+        id: getNextId(db.data[this.tableName]),
+        ...args.data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+      db.data[this.tableName].push(newItem)
+      await db.write()
+      return parseDates(newItem)
+    })
   }
 
   async update(args: { where: { id?: number; [key: string]: any }; data: any }) {
-    const db = await this.getDbInstance()
-    const index = db.data[this.tableName].findIndex((i: any) => {
-        for (const key in args.where) {
-            if (i[key] !== args.where[key]) return false
-        }
-        return true
+    return writeLock.dispatch(async () => {
+      const db = await this.getDbInstance()
+      const index = db.data[this.tableName].findIndex((i: any) => {
+          for (const key in args.where) {
+              if (i[key] !== args.where[key]) return false
+          }
+          return true
+      })
+      if (index === -1) throw new Error('Record not found')
+      
+      const updatedItem = {
+        ...db.data[this.tableName][index],
+        ...args.data,
+        updated_at: new Date().toISOString()
+      }
+      db.data[this.tableName][index] = updatedItem
+      await db.write()
+      return parseDates(updatedItem)
     })
-    if (index === -1) throw new Error('Record not found')
-    
-    const updatedItem = {
-      ...db.data[this.tableName][index],
-      ...args.data,
-      updated_at: new Date().toISOString()
-    }
-    db.data[this.tableName][index] = updatedItem
-    await db.write()
-    return parseDates(updatedItem)
   }
 
   async delete(args: { where: { id?: number; [key: string]: any } }) {
-    const db = await this.getDbInstance()
-    const index = db.data[this.tableName].findIndex((i: any) => {
-        for (const key in args.where) {
-            if (i[key] !== args.where[key]) return false
-        }
-        return true
+    return writeLock.dispatch(async () => {
+      const db = await this.getDbInstance()
+      const index = db.data[this.tableName].findIndex((i: any) => {
+          for (const key in args.where) {
+              if (i[key] !== args.where[key]) return false
+          }
+          return true
+      })
+      if (index === -1) throw new Error('Record not found')
+      
+      const deletedItem = db.data[this.tableName][index]
+      db.data[this.tableName].splice(index, 1)
+      await db.write()
+      return parseDates(deletedItem)
     })
-    if (index === -1) throw new Error('Record not found')
-    
-    const deletedItem = db.data[this.tableName][index]
-    db.data[this.tableName].splice(index, 1)
-    await db.write()
-    return parseDates(deletedItem)
   }
 
   async upsert(args: { where: any; create: any; update: any }) {
@@ -134,8 +196,8 @@ class ModelDelegate<T extends { id: number }> {
   }
 }
 
-// Website specific delegate to handle relations
-class WebsiteDelegate extends ModelDelegate<Website> {
+// Website specific delegate to handle relations and validation
+class WebsiteModelDelegate extends ModelDelegate<Website> {
   async findMany(args?: any) {
     const websites = await super.findMany(args)
     if (args?.include?.category) {
@@ -161,17 +223,79 @@ class WebsiteDelegate extends ModelDelegate<Website> {
     }
     return website
   }
+
+  async create(args: { data: any }) {
+    // Validate data using websiteFormSchema
+    // We need to handle potential type mismatches (e.g. category_id as number)
+    // and exclude fields that are not in the schema (id, created_at, etc.)
+    
+    const dataToValidate = { ...args.data }
+    
+    // Convert category_id to string for validation if it exists
+    if (dataToValidate.category_id !== undefined) {
+      dataToValidate.category_id = String(dataToValidate.category_id)
+    }
+    
+    // Handle thumbnail being null (schema expects string or undefined)
+    if (dataToValidate.thumbnail === null) {
+      dataToValidate.thumbnail = undefined
+    }
+
+    // Validate against schema
+    // This will throw ZodError if validation fails
+    const parsed = websiteFormSchema.parse(dataToValidate)
+
+    // Validate category_id exists in database
+    const db = await this.getDbInstance()
+    const categories = db.data.categories as Category[]
+    const categoryExists = categories.some(c => c.id === Number(parsed.category_id))
+    
+    if (!categoryExists) {
+      throw new Error(`Category with id ${parsed.category_id} not found`)
+    }
+
+    return super.create(args)
+  }
+
+  async update(args: { where: { id?: number; [key: string]: any }; data: any }) {
+    // Validate data using websiteFormSchema (partial for updates)
+    const dataToValidate = { ...args.data }
+    
+    if (dataToValidate.category_id !== undefined) {
+      dataToValidate.category_id = String(dataToValidate.category_id)
+    }
+    
+    if (dataToValidate.thumbnail === null) {
+      dataToValidate.thumbnail = undefined
+    }
+
+    // Use partial schema for updates
+    const parsed = websiteFormSchema.partial().parse(dataToValidate)
+
+    // If category_id is being updated, validate it exists
+    if (parsed.category_id) {
+      const db = await this.getDbInstance()
+      const categories = db.data.categories as Category[]
+      const categoryExists = categories.some(c => c.id === Number(parsed.category_id))
+      
+      if (!categoryExists) {
+        throw new Error(`Category with id ${parsed.category_id} not found`)
+      }
+    }
+
+    return super.update(args)
+  }
 }
 
 
 export class JsonClient {
-  website: WebsiteDelegate
+  website: WebsiteModelDelegate
   category: ModelDelegate<Category>
   setting: ModelDelegate<Setting>
   footerLink: ModelDelegate<FooterLink>
 
   constructor() {
-    this.website = new WebsiteDelegate('websites', getDb)
+    this.website = new WebsiteModelDelegate('websites', getDb)
     this.category = new ModelDelegate<Category>('categories', getDb)
     this.setting = new ModelDelegate<Setting>('settings', getDb)
     this.footerLink = new ModelDelegate<FooterLink>('footer_links', getDb)

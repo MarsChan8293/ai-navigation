@@ -185,7 +185,7 @@ export function IpdNavigationClient() {
   const fetchWebsites = useCallback(async (categoryId: number) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/websites?ipd_category_id=${categoryId}`);
+      const response = await fetch(`/api/websites?category_id=${categoryId}`);
       const data = await response.json();
       if (data.success) {
         setWebsites(data.data);

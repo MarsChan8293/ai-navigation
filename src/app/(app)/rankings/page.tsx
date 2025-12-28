@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db/db";
 import { RankingsClient } from "@/components/website/rankings-client";
 
 export default async function RankingsPage() {

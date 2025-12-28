@@ -91,7 +91,6 @@ cp .env.example .env.local
 5. 初始化数据库:
 
 ```bash
-npx prisma migrate dev
 npm run init-data
 ```
 

@@ -25,12 +25,10 @@ import { useSettings } from "@/hooks/use-settings";
 export function WebsiteForm({ 
   onSuccess, 
   defaultValues,
-  hideIpdCategory = false,
   hideCategory = false
 }: { 
   onSuccess?: () => void;
   defaultValues?: Partial<FormInputs>;
-  hideIpdCategory?: boolean;
   hideCategory?: boolean;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,7 +68,6 @@ export function WebsiteForm({
       url: defaultValues?.url || "",
       description: defaultValues?.description || "",
       category_id: defaultValues?.category_id || "",
-      ipd_category_id: defaultValues?.ipd_category_id || "",
       thumbnail: defaultValues?.thumbnail || "",
     },
   });
@@ -230,7 +227,6 @@ export function WebsiteForm({
             </SelectTrigger>
             <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
               {categories
-                .filter((c: { slug: string }) => !c.slug.startsWith("ipd-"))
                 .map((category: { id: number; name: string }) => (
                   <SelectItem
                     key={category.id}
@@ -245,41 +241,6 @@ export function WebsiteForm({
           {form.formState.errors.category_id && (
             <p className="text-sm text-red-500/70 mt-1">请选择网站分类</p>
           )}
-        </motion.div>
-      )}
-
-      {/* IPD Category Selection */}
-      {!hideIpdCategory && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.25 }}
-        >
-          <label className="block text-sm font-medium mb-2 text-foreground/80">
-            IPD 分类 (可选)
-          </label>
-          <Select
-            onValueChange={(value) => setValue("ipd_category_id", value)}
-            value={watch("ipd_category_id")}
-            disabled={isSubmitting}
-          >
-            <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
-              <SelectValue placeholder="选择 IPD 分类" />
-            </SelectTrigger>
-            <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
-              {categories
-                .filter((c: { slug: string }) => c.slug.startsWith("ipd-"))
-                .map((category: { id: number; name: string }) => (
-                  <SelectItem
-                    key={category.id}
-                    value={category.id.toString()}
-                    className="hover:bg-primary/10 focus:bg-primary/10"
-                  >
-                    {category.name}
-                  </SelectItem>
-                ))}
-            </SelectContent>
-          </Select>
         </motion.div>
       )}
 

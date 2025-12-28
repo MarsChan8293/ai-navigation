@@ -5,98 +5,98 @@
       "key": "title",
       "value": "AI导航",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.856Z"
+      "updated_at": "2025-12-28T13:38:33.371Z"
     },
     {
       "id": 2,
       "key": "siteCopyright",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.692Z",
-      "updated_at": "2025-12-28T13:12:43.857Z"
+      "updated_at": "2025-12-28T13:38:33.372Z"
     },
     {
       "id": 3,
       "key": "googleAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.704Z",
-      "updated_at": "2025-12-28T13:12:43.859Z"
+      "updated_at": "2025-12-28T13:38:33.383Z"
     },
     {
       "id": 4,
       "key": "baiduAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.718Z",
-      "updated_at": "2025-12-28T13:12:43.859Z"
+      "updated_at": "2025-12-28T13:38:33.385Z"
     },
     {
       "id": 5,
       "key": "siteFooter",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.736Z",
-      "updated_at": "2025-12-28T13:12:43.860Z"
+      "updated_at": "2025-12-28T13:38:33.386Z"
     },
     {
       "id": 6,
       "key": "keywords",
       "value": "AI导航,AI工具,人工智能,AI资源",
       "created_at": "2025-12-27T14:20:31.761Z",
-      "updated_at": "2025-12-28T13:12:43.861Z"
+      "updated_at": "2025-12-28T13:38:33.387Z"
     },
     {
       "id": 7,
       "key": "siteIcp",
       "value": "",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.861Z"
+      "updated_at": "2025-12-28T13:38:33.388Z"
     },
     {
       "id": 8,
       "key": "logo",
       "value": "/static/logo.png",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.861Z"
+      "updated_at": "2025-12-28T13:38:33.388Z"
     },
     {
       "id": 9,
       "key": "allowSubmissions",
       "value": "true",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.862Z"
+      "updated_at": "2025-12-28T13:38:33.389Z"
     },
     {
       "id": 10,
       "key": "requireApproval",
       "value": "true",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.862Z"
+      "updated_at": "2025-12-28T13:38:33.390Z"
     },
     {
       "id": 11,
       "key": "siteEmail",
       "value": "admin@example.com",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.863Z"
+      "updated_at": "2025-12-28T13:38:33.390Z"
     },
     {
       "id": 12,
       "key": "itemsPerPage",
       "value": "12",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.863Z"
+      "updated_at": "2025-12-28T13:38:33.391Z"
     },
     {
       "id": 13,
       "key": "description",
       "value": "发现、分享和收藏优质AI工具与资源",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.864Z"
+      "updated_at": "2025-12-28T13:38:33.391Z"
     },
     {
       "id": 15,
       "key": "siteUrl",
       "value": "http://localhost:3000",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T13:12:43.864Z"
+      "updated_at": "2025-12-28T13:38:33.392Z"
     }
   ],
   "websites": [
@@ -105,7 +105,7 @@
       "title": "360智脑",
       "url": "https://chat.360.com",
       "description": "360 集团推出的认知型通用大模型，擅长资料检索和安全分析。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://chat.360.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -113,7 +113,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.886Z",
+      "updated_at": "2025-12-28T13:38:33.425Z",
       "ipd_category_id": null
     },
     {
@@ -121,7 +121,7 @@
       "title": "百川大模型",
       "url": "https://www.baichuan-ai.com",
       "description": "百川智能推出，在中文语境理解和医疗等专业领域表现出色。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.baichuan-ai.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -129,7 +129,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.352Z",
-      "updated_at": "2025-12-28T13:12:43.887Z",
+      "updated_at": "2025-12-28T13:38:33.426Z",
       "ipd_category_id": null
     },
     {
@@ -137,7 +137,7 @@
       "title": "通义灵码",
       "url": "https://lingma.aliyun.com",
       "description": "阿里巴巴推出的 AI 编程助手，深度集成阿里云生态。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://lingma.aliyun.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -145,7 +145,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.456Z",
-      "updated_at": "2025-12-28T13:12:43.890Z",
+      "updated_at": "2025-12-28T13:38:33.430Z",
       "ipd_category_id": null
     },
     {
@@ -153,7 +153,7 @@
       "title": "Claude Code",
       "url": "https://claude.ai/code",
       "description": "Anthropic 推出的命令行 AI 助手，可直接在终端编写和调试代码。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://claude.ai/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -161,7 +161,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.891Z",
+      "updated_at": "2025-12-28T13:38:33.431Z",
       "ipd_category_id": null
     },
     {
@@ -169,7 +169,7 @@
       "title": "Trae",
       "url": "https://www.trae.ai",
       "description": "字节跳动推出的自适应 AI IDE，基于 VS Code 构建，深度集成 AI 能力。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://www.trae.ai/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -177,7 +177,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.484Z",
-      "updated_at": "2025-12-28T13:12:43.892Z",
+      "updated_at": "2025-12-28T13:38:33.432Z",
       "ipd_category_id": null
     },
     {
@@ -185,7 +185,7 @@
       "title": "Cursor",
       "url": "https://www.cursor.com",
       "description": "目前最受欢迎的 AI 驱动代码编辑器，提供强大的代码补全和对话功能。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://www.cursor.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -193,7 +193,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.496Z",
-      "updated_at": "2025-12-28T13:12:43.892Z",
+      "updated_at": "2025-12-28T13:38:33.433Z",
       "ipd_category_id": null
     },
     {
@@ -201,7 +201,7 @@
       "title": "Aider",
       "url": "https://aider.chat",
       "description": "强大的命令行 AI 编程助手，支持与 Git 深度集成进行配对编程。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://aider.chat/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -209,7 +209,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.566Z",
-      "updated_at": "2025-12-28T13:12:43.894Z",
+      "updated_at": "2025-12-28T13:38:33.436Z",
       "ipd_category_id": null
     },
     {
@@ -217,7 +217,7 @@
       "title": "海螺AI",
       "url": "https://www.hailuoai.com",
       "description": "Minimax 推出的生产力助手，以极速响应和高质量语音交互著称。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.hailuoai.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -225,7 +225,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.662Z",
-      "updated_at": "2025-12-28T13:12:43.896Z",
+      "updated_at": "2025-12-28T13:38:33.441Z",
       "ipd_category_id": null
     },
     {
@@ -233,7 +233,7 @@
       "title": "Perplexity",
       "url": "https://www.perplexity.ai",
       "description": "领先的 AI 搜索引擎，提供带引用的精准回答，改变信息检索方式。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.perplexity.ai/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -241,7 +241,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.676Z",
-      "updated_at": "2025-12-28T13:12:43.896Z",
+      "updated_at": "2025-12-28T13:38:33.441Z",
       "ipd_category_id": null
     },
     {
@@ -249,7 +249,7 @@
       "title": "Kimi",
       "url": "https://kimi.moonshot.cn",
       "description": "月之暗面开发，支持超长上下文处理，擅长长文本分析。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://kimi.moonshot.cn/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -257,7 +257,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.691Z",
-      "updated_at": "2025-12-28T13:12:43.897Z",
+      "updated_at": "2025-12-28T13:38:33.442Z",
       "ipd_category_id": null
     },
     {
@@ -265,7 +265,7 @@
       "title": "腾讯元宝",
       "url": "https://yuanbao.tencent.com",
       "description": "腾讯基于混元大模型推出的 AI 助手，深度集成腾讯生态。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://yuanbao.tencent.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -273,7 +273,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.706Z",
-      "updated_at": "2025-12-28T13:12:43.898Z",
+      "updated_at": "2025-12-28T13:38:33.443Z",
       "ipd_category_id": null
     },
     {
@@ -289,7 +289,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.734Z",
-      "updated_at": "2025-12-28T13:12:43.899Z",
+      "updated_at": "2025-12-28T13:38:33.443Z",
       "ipd_category_id": null
     },
     {
@@ -297,7 +297,7 @@
       "title": "DeepSeek",
       "url": "https://www.deepseek.com",
       "description": "深度求索开发的国产开源大模型，在编程和数学方面表现出色。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.deepseek.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -305,7 +305,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.782Z",
-      "updated_at": "2025-12-28T13:12:43.901Z",
+      "updated_at": "2025-12-28T13:38:33.445Z",
       "ipd_category_id": null
     },
     {
@@ -313,7 +313,7 @@
       "title": "通义千问",
       "url": "https://tongyi.aliyun.com",
       "description": "阿里巴巴开发的超大规模语言模型，具备多轮对话、文案创作能力。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://img.alicdn.com/imgextra/i4/O1CN0176999917699999999_!!6000000000000-2-tps-128-128.png",
       "thumbnail_base64": null,
       "status": "approved",
@@ -321,7 +321,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.794Z",
-      "updated_at": "2025-12-28T13:12:43.901Z",
+      "updated_at": "2025-12-28T13:38:33.446Z",
       "ipd_category_id": null
     },
     {
@@ -329,7 +329,7 @@
       "title": "GitHub Copilot",
       "url": "https://github.com/features/copilot",
       "description": "GitHub 和 OpenAI 合作开发的 AI 编程助手，提供智能代码补全。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://github.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -337,7 +337,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.832Z",
-      "updated_at": "2025-12-28T13:12:43.902Z",
+      "updated_at": "2025-12-28T13:38:33.448Z",
       "ipd_category_id": null
     },
     {
@@ -345,7 +345,7 @@
       "title": "跃问",
       "url": "https://www.yuexia.com",
       "description": "阶跃星辰推出的 AI 助手，具备强大的多模态理解和逻辑推理能力。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.yuexia.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -353,7 +353,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.844Z",
-      "updated_at": "2025-12-28T13:12:43.903Z",
+      "updated_at": "2025-12-28T13:38:33.449Z",
       "ipd_category_id": null
     },
     {
@@ -361,7 +361,7 @@
       "title": "腾讯云 AI 代码助手",
       "url": "https://copilot.tencent.com",
       "description": "腾讯云推出的 AI 编程助手，支持多种主流 IDE。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://copilot.tencent.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -369,7 +369,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.470Z",
-      "updated_at": "2025-12-28T13:12:43.903Z",
+      "updated_at": "2025-12-28T13:38:33.450Z",
       "ipd_category_id": null
     },
     {
@@ -377,7 +377,7 @@
       "title": "Poe",
       "url": "https://poe.com",
       "description": "Quora 推出的 AI 聚合平台，可访问多种领先的 AI 模型。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://poe.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -385,7 +385,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.905Z",
+      "updated_at": "2025-12-28T13:38:33.451Z",
       "ipd_category_id": null
     },
     {
@@ -393,7 +393,7 @@
       "title": "智谱清言",
       "url": "https://chatglm.cn",
       "description": "智谱 AI 基于 ChatGLM 开发的 AI 助手，具备强大的对话和理解能力。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://chatglm.cn/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -401,7 +401,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.905Z",
+      "updated_at": "2025-12-28T13:38:33.452Z",
       "ipd_category_id": null
     },
     {
@@ -409,7 +409,7 @@
       "title": "Claude",
       "url": "https://claude.ai",
       "description": "Anthropic 开发的 AI 助手，擅长写作、分析和编程等任务。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://claude.ai/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -417,7 +417,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.906Z",
+      "updated_at": "2025-12-28T13:38:33.453Z",
       "ipd_category_id": null
     },
     {
@@ -425,7 +425,7 @@
       "title": "Gemini",
       "url": "https://gemini.google.com",
       "description": "Google 开发的多模态 AI 助手，集成 Google 生态，支持多种任务。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.gstatic.com/lamda/images/favicon_v1_150160c13ff2af2630b3.png",
       "thumbnail_base64": null,
       "status": "approved",
@@ -433,7 +433,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.906Z",
+      "updated_at": "2025-12-28T13:38:33.454Z",
       "ipd_category_id": null
     },
     {
@@ -441,7 +441,7 @@
       "title": "豆包",
       "url": "https://www.doubao.com",
       "description": "字节跳动推出的 AI 智能助手，国内用户量最大的 AI 应用之一。",
-      "category_id": 1,
+      "category_id": 7,
       "thumbnail": "https://www.doubao.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -449,7 +449,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.907Z",
+      "updated_at": "2025-12-28T13:38:33.455Z",
       "ipd_category_id": null
     },
     {
@@ -457,7 +457,7 @@
       "title": "Windsurf",
       "url": "https://codeium.com/windsurf",
       "description": "Codeium 推出的新一代 AI IDE，具备强大的上下文理解和代理能力。",
-      "category_id": 5,
+      "category_id": 16,
       "thumbnail": "https://codeium.com/favicon.ico",
       "thumbnail_base64": null,
       "status": "approved",
@@ -465,7 +465,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.907Z",
+      "updated_at": "2025-12-28T13:38:33.460Z",
       "ipd_category_id": null
     },
     {
@@ -519,8 +519,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.289Z",
-      "updated_at": "2025-12-28T13:12:43.885Z",
-      "category_id": 1,
+      "updated_at": "2025-12-28T13:38:33.423Z",
+      "category_id": 7,
       "ipd_category_id": null
     },
     {
@@ -535,8 +535,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.332Z",
-      "updated_at": "2025-12-28T13:12:43.886Z",
-      "category_id": 1,
+      "updated_at": "2025-12-28T13:38:33.425Z",
+      "category_id": 7,
       "ipd_category_id": null
     },
     {
@@ -551,8 +551,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.364Z",
-      "updated_at": "2025-12-28T13:12:43.888Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.427Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -567,8 +567,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.378Z",
-      "updated_at": "2025-12-28T13:12:43.888Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.427Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -583,8 +583,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.392Z",
-      "updated_at": "2025-12-28T13:12:43.888Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.428Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -599,8 +599,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.406Z",
-      "updated_at": "2025-12-28T13:12:43.889Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.428Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -615,8 +615,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.428Z",
-      "updated_at": "2025-12-28T13:12:43.889Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.429Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -631,8 +631,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.442Z",
-      "updated_at": "2025-12-28T13:12:43.890Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.429Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -647,8 +647,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.522Z",
-      "updated_at": "2025-12-28T13:12:43.893Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.435Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -663,8 +663,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.546Z",
-      "updated_at": "2025-12-28T13:12:43.893Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.436Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -679,8 +679,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.586Z",
-      "updated_at": "2025-12-28T13:12:43.894Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.437Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -695,8 +695,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.604Z",
-      "updated_at": "2025-12-28T13:12:43.894Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.438Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -711,8 +711,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.632Z",
-      "updated_at": "2025-12-28T13:12:43.895Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.439Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -727,8 +727,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.650Z",
-      "updated_at": "2025-12-28T13:12:43.895Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.440Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -743,8 +743,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.754Z",
-      "updated_at": "2025-12-28T13:12:43.899Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.444Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -759,8 +759,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.768Z",
-      "updated_at": "2025-12-28T13:12:43.900Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.445Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -775,8 +775,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.807Z",
-      "updated_at": "2025-12-28T13:12:43.902Z",
-      "category_id": 1,
+      "updated_at": "2025-12-28T13:38:33.448Z",
+      "category_id": 7,
       "ipd_category_id": null
     },
     {
@@ -791,8 +791,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.309Z",
-      "updated_at": "2025-12-28T13:12:43.904Z",
-      "category_id": 5,
+      "updated_at": "2025-12-28T13:38:33.451Z",
+      "category_id": 16,
       "ipd_category_id": null
     },
     {
@@ -807,8 +807,8 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T13:12:43.908Z",
-      "category_id": 1,
+      "updated_at": "2025-12-28T13:38:33.460Z",
+      "category_id": 7,
       "ipd_category_id": null
     },
     {
@@ -831,273 +831,273 @@
       "name": "AI 聊天",
       "slug": "ai-chat",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.865Z"
+      "updated_at": "2025-12-28T13:38:33.394Z"
     },
     {
       "id": 2,
       "name": "AI 工具",
       "slug": "ai-tools",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.866Z"
+      "updated_at": "2025-12-28T13:38:33.396Z"
     },
     {
       "id": 3,
       "name": "大语言模型",
       "slug": "llm",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.867Z"
+      "updated_at": "2025-12-28T13:38:33.396Z"
     },
     {
       "id": 4,
       "name": "AI 绘画",
       "slug": "ai-art",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.867Z"
+      "updated_at": "2025-12-28T13:38:33.397Z"
     },
     {
       "id": 5,
       "name": "AI 编程",
       "slug": "ai-coding",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.868Z"
+      "updated_at": "2025-12-28T13:38:33.398Z"
     },
     {
       "id": 6,
       "name": "AI 写作",
       "slug": "ai-writing",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T13:12:43.868Z"
+      "updated_at": "2025-12-28T13:38:33.398Z"
     },
     {
       "id": 7,
       "name": "IPD-需求阶段-需求调研",
       "slug": "ipd-requirement-research",
       "created_at": "2025-12-28T13:12:21.176Z",
-      "updated_at": "2025-12-28T13:12:43.869Z"
+      "updated_at": "2025-12-28T13:38:33.399Z"
     },
     {
       "id": 8,
       "name": "IPD-需求阶段-需求分析",
       "slug": "ipd-requirement-analysis",
       "created_at": "2025-12-28T13:12:21.177Z",
-      "updated_at": "2025-12-28T13:12:43.869Z"
+      "updated_at": "2025-12-28T13:38:33.400Z"
     },
     {
       "id": 9,
       "name": "IPD-需求阶段-需求编写",
       "slug": "ipd-requirement-coding",
       "created_at": "2025-12-28T13:12:21.177Z",
-      "updated_at": "2025-12-28T13:12:43.870Z"
+      "updated_at": "2025-12-28T13:38:33.401Z"
     },
     {
       "id": 10,
       "name": "IPD-需求阶段-需求审讲&反审讲",
       "slug": "ipd-requirement-review",
       "created_at": "2025-12-28T13:12:21.177Z",
-      "updated_at": "2025-12-28T13:12:43.870Z"
+      "updated_at": "2025-12-28T13:38:33.402Z"
     },
     {
       "id": 11,
       "name": "IPD-设计阶段-架构设计",
       "slug": "ipd-design-architecture",
       "created_at": "2025-12-28T13:12:21.178Z",
-      "updated_at": "2025-12-28T13:12:43.870Z"
+      "updated_at": "2025-12-28T13:38:33.403Z"
     },
     {
       "id": 12,
       "name": "IPD-设计阶段-概要设计",
       "slug": "ipd-design-concept",
       "created_at": "2025-12-28T13:12:21.178Z",
-      "updated_at": "2025-12-28T13:12:43.871Z"
+      "updated_at": "2025-12-28T13:38:33.403Z"
     },
     {
       "id": 13,
       "name": "IPD-设计阶段-详细设计",
       "slug": "ipd-design-detail",
       "created_at": "2025-12-28T13:12:21.179Z",
-      "updated_at": "2025-12-28T13:12:43.871Z"
+      "updated_at": "2025-12-28T13:38:33.404Z"
     },
     {
       "id": 14,
       "name": "IPD-设计阶段-设计评审",
       "slug": "ipd-design-design-review",
       "created_at": "2025-12-28T13:12:21.179Z",
-      "updated_at": "2025-12-28T13:12:43.872Z"
+      "updated_at": "2025-12-28T13:38:33.404Z"
     },
     {
       "id": 15,
       "name": "IPD-设计阶段-网络安全设计",
       "slug": "ipd-design-security",
       "created_at": "2025-12-28T13:12:21.179Z",
-      "updated_at": "2025-12-28T13:12:43.872Z"
+      "updated_at": "2025-12-28T13:38:33.405Z"
     },
     {
       "id": 16,
       "name": "IPD-编码阶段-代码编写",
       "slug": "ipd-coding-code-write",
       "created_at": "2025-12-28T13:12:21.180Z",
-      "updated_at": "2025-12-28T13:12:43.873Z"
+      "updated_at": "2025-12-28T13:38:33.406Z"
     },
     {
       "id": 17,
       "name": "IPD-编码阶段-代码走读",
       "slug": "ipd-coding-code-read",
       "created_at": "2025-12-28T13:12:21.180Z",
-      "updated_at": "2025-12-28T13:12:43.873Z"
+      "updated_at": "2025-12-28T13:38:33.406Z"
     },
     {
       "id": 18,
       "name": "IPD-编码阶段-代码检视",
       "slug": "ipd-coding-code-check",
       "created_at": "2025-12-28T13:12:21.180Z",
-      "updated_at": "2025-12-28T13:12:43.874Z"
+      "updated_at": "2025-12-28T13:38:33.407Z"
     },
     {
       "id": 19,
       "name": "IPD-编码阶段-单元测试",
       "slug": "ipd-coding-unit-test",
       "created_at": "2025-12-28T13:12:21.181Z",
-      "updated_at": "2025-12-28T13:12:43.874Z"
+      "updated_at": "2025-12-28T13:38:33.407Z"
     },
     {
       "id": 20,
       "name": "IPD-编码阶段-代码联调",
       "slug": "ipd-coding-code-union",
       "created_at": "2025-12-28T13:12:21.181Z",
-      "updated_at": "2025-12-28T13:12:43.874Z"
+      "updated_at": "2025-12-28T13:38:33.408Z"
     },
     {
       "id": 21,
       "name": "IPD-编码阶段-问题单修改",
       "slug": "ipd-coding-issue-fix",
       "created_at": "2025-12-28T13:12:21.182Z",
-      "updated_at": "2025-12-28T13:12:43.875Z"
+      "updated_at": "2025-12-28T13:38:33.408Z"
     },
     {
       "id": 22,
       "name": "IPD-构建阶段-CleanCode门禁检查",
       "slug": "ipd-build-cleancode",
       "created_at": "2025-12-28T13:12:21.182Z",
-      "updated_at": "2025-12-28T13:12:43.875Z"
+      "updated_at": "2025-12-28T13:38:33.408Z"
     },
     {
       "id": 23,
       "name": "IPD-构建阶段-构建脚本编写",
       "slug": "ipd-build-script-build",
       "created_at": "2025-12-28T13:12:21.183Z",
-      "updated_at": "2025-12-28T13:12:43.876Z"
+      "updated_at": "2025-12-28T13:38:33.409Z"
     },
     {
       "id": 24,
       "name": "IPD-构建阶段-自动化脚本编写",
       "slug": "ipd-build-auto-script",
       "created_at": "2025-12-28T13:12:21.183Z",
-      "updated_at": "2025-12-28T13:12:43.876Z"
+      "updated_at": "2025-12-28T13:38:33.409Z"
     },
     {
       "id": 25,
       "name": "IPD-构建阶段-个人构建",
       "slug": "ipd-build-personal-build",
       "created_at": "2025-12-28T13:12:21.183Z",
-      "updated_at": "2025-12-28T13:12:43.876Z"
+      "updated_at": "2025-12-28T13:38:33.410Z"
     },
     {
       "id": 26,
       "name": "IPD-构建阶段-每日构建",
       "slug": "ipd-build-daily-build",
       "created_at": "2025-12-28T13:12:21.184Z",
-      "updated_at": "2025-12-28T13:12:43.877Z"
+      "updated_at": "2025-12-28T13:38:33.410Z"
     },
     {
       "id": 27,
       "name": "IPD-构建阶段-版本级构建",
       "slug": "ipd-build-version-build",
       "created_at": "2025-12-28T13:12:21.184Z",
-      "updated_at": "2025-12-28T13:12:43.877Z"
+      "updated_at": "2025-12-28T13:38:33.411Z"
     },
     {
       "id": 28,
       "name": "IPD-构建阶段-冒烟测试",
       "slug": "ipd-build-smoke-test",
       "created_at": "2025-12-28T13:12:21.185Z",
-      "updated_at": "2025-12-28T13:12:43.878Z"
+      "updated_at": "2025-12-28T13:38:33.411Z"
     },
     {
       "id": 29,
       "name": "IPD-构建阶段-开源漏洞扫描",
       "slug": "ipd-build-leak-scan",
       "created_at": "2025-12-28T13:12:21.185Z",
-      "updated_at": "2025-12-28T13:12:43.878Z"
+      "updated_at": "2025-12-28T13:38:33.412Z"
     },
     {
       "id": 30,
       "name": "IPD-测试阶段-测试方案设计",
       "slug": "ipd-test-test-design",
       "created_at": "2025-12-28T13:12:21.186Z",
-      "updated_at": "2025-12-28T13:12:43.878Z"
+      "updated_at": "2025-12-28T13:38:33.414Z"
     },
     {
       "id": 31,
       "name": "IPD-测试阶段-测试用例编写",
       "slug": "ipd-test-test-case-write",
       "created_at": "2025-12-28T13:12:21.186Z",
-      "updated_at": "2025-12-28T13:12:43.879Z"
+      "updated_at": "2025-12-28T13:38:33.415Z"
     },
     {
       "id": 32,
       "name": "IPD-测试阶段-自动化脚本编写",
       "slug": "ipd-test-test-case-auto",
       "created_at": "2025-12-28T13:12:21.186Z",
-      "updated_at": "2025-12-28T13:12:43.879Z"
+      "updated_at": "2025-12-28T13:38:33.415Z"
     },
     {
       "id": 33,
       "name": "IPD-测试阶段-版本级测试",
       "slug": "ipd-test-version-test",
       "created_at": "2025-12-28T13:12:21.187Z",
-      "updated_at": "2025-12-28T13:12:43.880Z"
+      "updated_at": "2025-12-28T13:38:33.416Z"
     },
     {
       "id": 34,
       "name": "IPD-测试阶段-提交问题单",
       "slug": "ipd-test-issue-list",
       "created_at": "2025-12-28T13:12:21.187Z",
-      "updated_at": "2025-12-28T13:12:43.880Z"
+      "updated_at": "2025-12-28T13:38:33.417Z"
     },
     {
       "id": 35,
       "name": "IPD-测试阶段-漏测分析",
       "slug": "ipd-test-leak-analysis",
       "created_at": "2025-12-28T13:12:21.188Z",
-      "updated_at": "2025-12-28T13:12:43.881Z"
+      "updated_at": "2025-12-28T13:38:33.418Z"
     },
     {
       "id": 36,
       "name": "IPD-实施阶段-版本发布上网",
       "slug": "ipd-release-release-publish",
       "created_at": "2025-12-28T13:12:21.188Z",
-      "updated_at": "2025-12-28T13:12:43.881Z"
+      "updated_at": "2025-12-28T13:38:33.418Z"
     },
     {
       "id": 37,
       "name": "IPD-实施阶段-部署上线",
       "slug": "ipd-release-deploy-online",
       "created_at": "2025-12-28T13:12:21.189Z",
-      "updated_at": "2025-12-28T13:12:43.882Z"
+      "updated_at": "2025-12-28T13:38:33.419Z"
     },
     {
       "id": 38,
       "name": "IPD-实施阶段-技术支持、运维",
       "slug": "ipd-release-tech-support",
       "created_at": "2025-12-28T13:12:21.189Z",
-      "updated_at": "2025-12-28T13:12:43.882Z"
+      "updated_at": "2025-12-28T13:38:33.420Z"
     },
     {
       "id": 39,
       "name": "IPD-实施阶段-网上问题修改",
       "slug": "ipd-release-qa-improve",
       "created_at": "2025-12-28T13:12:21.189Z",
-      "updated_at": "2025-12-28T13:12:43.883Z"
+      "updated_at": "2025-12-28T13:38:33.421Z"
     }
   ],
   "footer_links": [
@@ -1107,7 +1107,7 @@
       "url": "https://github.com",
       "isExternal": true,
       "created_at": "2025-12-28T13:12:21.190Z",
-      "updated_at": "2025-12-28T13:12:43.884Z"
+      "updated_at": "2025-12-28T13:38:33.422Z"
     }
   ]
 }

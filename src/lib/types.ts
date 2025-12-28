@@ -4,7 +4,6 @@ export interface Website {
   url: string;
   description: string;
   category_id: number;
-  ipd_category_id?: number | null;
   thumbnail: string | null;
   thumbnail_base64: string | null;
   active: number;
@@ -24,7 +23,6 @@ export interface FormInputs {
   url: string;
   description: string;
   category_id: string;
-  ipd_category_id?: string;
   thumbnail?: string;
 }
 

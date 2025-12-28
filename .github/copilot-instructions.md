@@ -4,7 +4,7 @@ You are an expert AI coding agent working on the AI Navigation project, a modern
 
 ## 🏗 Architecture & Tech Stack
 - **Framework**: Next.js 15 (App Router)
-- **Database**: Prisma 6 with SQLite
+- **Database**: JSON file database with lowdb
 - **State Management**: 
   - **Server State**: SWR and React Query (TanStack Query)
   - **Client State**: Jotai (atoms located in [src/lib/atoms/index.ts](src/lib/atoms/index.ts))
@@ -46,7 +46,6 @@ When adding or updating websites, use the `fetchMetadata` utility in [src/lib/ut
 
 ## 🚀 Developer Workflows
 - **Development**: `npm run dev && sleep 20` (uses Turbopack)，attention:the web server will be ready  at least 20 seconds after run command.
-- **Database Migrations**: `npx prisma migrate dev`
 - **Seed Data**: `npm run init-data` (runs [src/lib/utils/init-data.ts](src/lib/utils/init-data.ts))
 - **Prisma Studio**: `npx prisma studio` to view/edit data
 

@@ -11,7 +11,6 @@ export const websiteFormSchema = z.object({
     .min(10, "描述至少需要10个字符")
     .max(500, "描述不能超过500个字符"),
   category_id: z.string().min(1, "请选择分类"),
-  ipd_category_id: z.string().optional(),
   thumbnail: z.string().url("请输入有效的图片地址").optional().or(z.literal("")),
 });
 
