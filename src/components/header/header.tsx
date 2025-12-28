@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Trophy, Plus, Brain, Download, Info } from "lucide-react";
+import { Trophy, Plus, Brain, Download, Info, Network } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import ThemeSwitch from "@/components/theme-switcher/theme-switch";
 import MobileMenu from "./mobile-menu";
@@ -40,6 +40,17 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
+            <Link href="/ipd-navigation">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2"
+              >
+                <Network className="h-4 w-4" />
+                <span>IPD网站导航</span>
+              </Button>
+            </Link>
+
             <Link href="/rankings">
               <Button
                 variant="ghost"

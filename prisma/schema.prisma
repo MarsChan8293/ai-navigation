@@ -65,3 +65,54 @@ model FooterLink {
   @@map("footer_links")
   @@index([url])
 }
+
+// IPD流程阶段（顶层）
+model IPDPhase {
+  id         Int        @id @default(autoincrement())
+  name       String     // IPD流程、需求分析、设计、开发&测试、发布&部署
+  slug       String     @unique
+  order_num  Int        // 排序序号
+  color      String?    // 阶段颜色
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  stages     IPDStage[]
+
+  @@map("ipd_phases")
+  @@index([slug])
+  @@index([order_num])
+}
+
+// IPD具体阶段项
+model IPDStage {
+  id           Int          @id @default(autoincrement())
+  name         String       // 需求调研、架构设计、代码编写等
+  phase        IPDPhase     @relation(fields: [phase_id], references: [id], onDelete: Cascade)
+  phase_id     Int
+  order_num    Int          // 排序序号
+  bg_color     String?      // 背景色（如：light_yellow, light_green, navy等）
+  is_important Boolean      @default(false) // 是否标记重要（显示红星）
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @updatedAt
+  websites     IPDWebsite[]
+
+  @@map("ipd_stages")
+  @@index([phase_id])
+  @@index([order_num])
+}
+
+// IPD阶段关联的网站
+model IPDWebsite {
+  id          Int      @id @default(autoincrement())
+  title       String   // 网站名称
+  url         String   // 网站地址
+  description String?  // 网站描述
+  stage       IPDStage @relation(fields: [stage_id], references: [id], onDelete: Cascade)
+  stage_id    Int
+  order_num   Int      @default(0) // 排序序号
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("ipd_websites")
+  @@index([stage_id])
+  @@index([order_num])
+}

@@ -45,3 +45,32 @@ export interface FooterSettings {
   icpBeian: string;
   customHtml: string;
 }
+
+// IPD导航相关类型
+export interface IPDPhase {
+  id: number;
+  name: string;
+  slug: string;
+  order_num: number;
+  color: string | null;
+  stages: IPDStage[];
+}
+
+export interface IPDStage {
+  id: number;
+  name: string;
+  phase_id: number;
+  order_num: number;
+  bg_color: string | null;
+  is_important: boolean;
+  websites: IPDWebsite[];
+}
+
+export interface IPDWebsite {
+  id: number;
+  title: string;
+  url: string;
+  description: string | null;
+  stage_id: number;
+  order_num: number;
+}

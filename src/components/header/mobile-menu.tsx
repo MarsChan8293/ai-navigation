@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Trophy, Plus, Download, Info, Menu, X } from "lucide-react";
+import { Trophy, Plus, Download, Info, Menu, X, Network } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import ThemeSwitch from "@/components/theme-switcher/theme-switch";
 import {
@@ -25,6 +25,15 @@ export default function MobileMenu() {
         <div className="absolute left-0 right-0 mt-2 mx-4 p-4 rounded-xl shadow-lg bg-background/90 backdrop-blur-xl border">
           <div className="flex flex-col gap-3">
             <div className="space-y-2">
+              <Link href="/ipd-navigation" className="w-full">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start hover:bg-primary/5 font-medium text-base rounded-lg h-12"
+                >
+                  <Network className="h-5 w-5 mr-3 text-primary" />
+                  IPD网站导航
+                </Button>
+              </Link>
               <Link href="/rankings" className="w-full">
                 <Button
                   variant="ghost"
