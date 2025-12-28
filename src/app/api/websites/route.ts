@@ -92,11 +92,18 @@ export async function POST(request: Request) {
     }
 
     // 将图片转换为base64
-    const image = await fetch(data.thumbnail);
-    const imageBuffer = await image.arrayBuffer();
-    const imageBase64 = `data:${image.headers.get(
-      "content-type"
-    )};base64,${Buffer.from(imageBuffer).toString("base64")}`;
+    let imageBase64 = "";
+    if (data.thumbnail) {
+      try {
+        const image = await fetch(data.thumbnail);
+        const imageBuffer = await image.arrayBuffer();
+        imageBase64 = `data:${image.headers.get(
+          "content-type"
+        )};base64,${Buffer.from(imageBuffer).toString("base64")}`;
+      } catch (error) {
+        console.error("Failed to fetch thumbnail:", error);
+      }
+    }
 
     const website = await prisma.website.create({
       data: {
@@ -107,7 +114,7 @@ export async function POST(request: Request) {
         ipd_category_id: data.ipd_category_id ? Number(data.ipd_category_id) : null,
         thumbnail: data.thumbnail?.trim() || "",
         status: data.status || "approved",
-        thumbnail_base64: imageBase64 as string,
+        thumbnail_base64: imageBase64,
       },
     });
 

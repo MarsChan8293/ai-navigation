@@ -122,6 +122,11 @@ export function IpdNavigationClient() {
     [searchQuery]
   );
 
+  const currentPhase = useMemo(
+    () => filteredPhases.find((p) => p.id === selectedStage),
+    [filteredPhases, selectedStage]
+  );
+
   useEffect(() => {
     const loadCategories = async () => {
       try {
@@ -141,26 +146,25 @@ export function IpdNavigationClient() {
   }, [categories.length, setCategories]);
 
   useEffect(() => {
-    const phase = filteredPhases.find((p) => p.id === selectedStage);
-    if (!phase) {
+    if (!currentPhase) {
       setSelectedItem(null);
       setWebsites([]);
       return;
     }
 
-    const firstItem = phase.items[0];
+    const firstItem = currentPhase.items[0];
     if (!firstItem) {
       setSelectedItem(null);
       setWebsites([]);
       return;
     }
 
-    const exists = phase.items.some((item) => item.id === selectedItem?.id);
+    const exists = currentPhase.items.some((item) => item.id === selectedItem?.id);
     if (!exists) {
       setSelectedItem(firstItem);
       setViewMode("list");
     }
-  }, [filteredPhases, selectedStage, selectedItem]);
+  }, [currentPhase, selectedItem]);
 
   useEffect(() => {
     if (!selectedItem) {
@@ -283,112 +287,100 @@ export function IpdNavigationClient() {
             </div>
           </motion.div>
 
-          <AnimatePresence mode="wait">
-            {selectedStage && (
-              <motion.div
-                key={selectedStage}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {filteredPhases.map((phase) =>
-                  phase.id === selectedStage ? (
-                    <Card key={phase.id} className="p-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <div>
-                          <h2 className="text-2xl font-bold">{phase.name}</h2>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant={viewMode === "list" ? "default" : "outline"}
-                            onClick={() => setViewMode("list")}
-                            className="flex items-center gap-2"
-                          >
-                            <ChevronRight className="h-4 w-4" />
-                            <span>查看网站</span>
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant={viewMode === "submit" ? "default" : "outline"}
-                            onClick={() => setViewMode("submit")}
-                            className="flex items-center gap-2"
-                          >
-                            <Plus className="h-4 w-4" />
-                            <span>提交网站</span>
-                          </Button>
-                        </div>
+          {currentPhase && (
+            <Card key={currentPhase.id} className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold">{currentPhase.name}</h2>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    variant={viewMode === "list" ? "default" : "outline"}
+                    onClick={() => setViewMode("list")}
+                    className="flex items-center gap-2"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                    <span>查看网站</span>
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant={viewMode === "submit" ? "default" : "outline"}
+                    onClick={() => setViewMode("submit")}
+                    className="flex items-center gap-2"
+                  >
+                    <Plus className="h-4 w-4" />
+                    <span>提交网站</span>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-3">
+                <div className="space-y-2 lg:col-span-1">
+                  {currentPhase.items.map((item) => (
+                    <motion.button
+                      key={item.id}
+                      whileHover={{ x: 4 }}
+                      onClick={() => handleItemClick(item, "list")}
+                      className={cn(
+                        "w-full max-w-[180px] text-left p-3 rounded-lg border transition-all duration-200 flex items-center justify-between gap-2.5",
+                        selectedItem?.id === item.id
+                          ? "border-primary bg-primary/5 text-primary shadow-md"
+                          : "bg-card border-border hover:border-primary/50 hover:shadow-sm"
+                      )}
+                    >
+                      <div className="flex-1">
+                        <div className="font-semibold leading-snug">{item.name}</div>
+                      </div>
+                      <ChevronRight className="h-4 w-4 flex-shrink-0" />
+                    </motion.button>
+                  ))}
+                </div>
+
+                <div ref={resultsRef} className="lg:col-span-2">
+                  {selectedItem ? (
+                    <div className="space-y-4">
+                      <div>
+                        <div className="text-xs font-bold uppercase text-primary tracking-widest">当前活动</div>
+                        <h3 className="text-2xl font-bold mt-1">{selectedItem.name}</h3>
+                        <p className="text-sm text-muted-foreground">{viewMode === "list" ? "为您精选的相关网站" : "提交新的相关资源"}</p>
                       </div>
 
-                      <div className="grid gap-6 lg:grid-cols-3">
-                        <div className="space-y-2 lg:col-span-1">
-                          {phase.items.map((item) => (
-                            <motion.button
-                              key={item.id}
-                              whileHover={{ x: 4 }}
-                              onClick={() => handleItemClick(item, "list")}
-                              className={cn(
-                                "w-full max-w-[180px] text-left p-3 rounded-lg border transition-all duration-200 flex items-center justify-between gap-2.5",
-                                selectedItem?.id === item.id
-                                  ? "border-primary bg-primary/5 text-primary shadow-md"
-                                  : "bg-card border-border hover:border-primary/50 hover:shadow-sm"
-                              )}
-                            >
-                              <div className="flex-1">
-                                <div className="font-semibold leading-snug">{item.name}</div>
-                              </div>
-                              <ChevronRight className="h-4 w-4 flex-shrink-0" />
-                            </motion.button>
-                          ))}
+                      {viewMode === "list" ? (
+                        isLoading ? (
+                          <div className="flex items-center justify-center py-16 text-muted-foreground">
+                            <Loader2 className="h-6 w-6 animate-spin mr-2" />
+                            <span>正在加载资源...</span>
+                          </div>
+                        ) : (
+                          <WebsiteGrid
+                            websites={websites}
+                            categories={categories}
+                            className="mt-2"
+                          />
+                        )
+                      ) : (
+                        <div className="bg-muted/30 p-6 rounded-2xl border border-border/50">
+                          <WebsiteForm
+                            onSuccess={handleSubmissionSuccess}
+                            hideIpdCategory={true}
+                            hideCategory={true}
+                            defaultValues={{
+                              category_id: "2",
+                              ipd_category_id: currentCategoryId?.toString() || ""
+                            }}
+                          />
                         </div>
-
-                        <div ref={resultsRef} className="lg:col-span-2">
-                          {selectedItem ? (
-                            <div className="space-y-4">
-                              <div>
-                                <div className="text-xs font-bold uppercase text-primary tracking-widest">当前活动</div>
-                                <h3 className="text-2xl font-bold mt-1">{selectedItem.name}</h3>
-                                <p className="text-sm text-muted-foreground">{viewMode === "list" ? "为您精选的相关网站" : "提交新的相关资源"}</p>
-                              </div>
-
-                              {viewMode === "list" ? (
-                                isLoading ? (
-                                  <div className="flex items-center justify-center py-16 text-muted-foreground">
-                                    <Loader2 className="h-6 w-6 animate-spin mr-2" />
-                                    <span>正在加载资源...</span>
-                                  </div>
-                                ) : (
-                                  <WebsiteGrid
-                                    websites={websites}
-                                    categories={categories}
-                                    className="mt-2"
-                                  />
-                                )
-                              ) : (
-                                <div className="bg-muted/30 p-6 rounded-2xl border border-border/50">
-                                  <WebsiteForm
-                                    onSuccess={handleSubmissionSuccess}
-                                    hideIpdCategory={true}
-                                    defaultValues={{
-                                      ipd_category_id: currentCategoryId?.toString() || ""
-                                    }}
-                                  />
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <div className="flex items-center justify-center h-full min-h-[240px] text-muted-foreground">
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                  ) : null
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center h-full min-h-[240px] text-muted-foreground">
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Card>
+          )}
         </div>
       </div>
     </div>

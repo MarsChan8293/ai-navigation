@@ -5,98 +5,98 @@
       "key": "title",
       "value": "AI导航",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.860Z"
+      "updated_at": "2025-12-28T13:12:43.856Z"
     },
     {
       "id": 2,
       "key": "siteCopyright",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.692Z",
-      "updated_at": "2025-12-28T07:10:03.861Z"
+      "updated_at": "2025-12-28T13:12:43.857Z"
     },
     {
       "id": 3,
       "key": "googleAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.704Z",
-      "updated_at": "2025-12-28T07:10:03.861Z"
+      "updated_at": "2025-12-28T13:12:43.859Z"
     },
     {
       "id": 4,
       "key": "baiduAnalytics",
       "value": "",
       "created_at": "2025-12-27T14:20:31.718Z",
-      "updated_at": "2025-12-28T07:10:03.862Z"
+      "updated_at": "2025-12-28T13:12:43.859Z"
     },
     {
       "id": 5,
       "key": "siteFooter",
       "value": "© 2024 AI导航. All rights reserved.",
       "created_at": "2025-12-27T14:20:31.736Z",
-      "updated_at": "2025-12-28T07:10:03.862Z"
+      "updated_at": "2025-12-28T13:12:43.860Z"
     },
     {
       "id": 6,
       "key": "keywords",
       "value": "AI导航,AI工具,人工智能,AI资源",
       "created_at": "2025-12-27T14:20:31.761Z",
-      "updated_at": "2025-12-28T07:10:03.862Z"
+      "updated_at": "2025-12-28T13:12:43.861Z"
     },
     {
       "id": 7,
       "key": "siteIcp",
       "value": "",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.863Z"
+      "updated_at": "2025-12-28T13:12:43.861Z"
     },
     {
       "id": 8,
       "key": "logo",
       "value": "/static/logo.png",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.864Z"
+      "updated_at": "2025-12-28T13:12:43.861Z"
     },
     {
       "id": 9,
       "key": "allowSubmissions",
       "value": "true",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.865Z"
+      "updated_at": "2025-12-28T13:12:43.862Z"
     },
     {
       "id": 10,
       "key": "requireApproval",
-      "value": "false",
+      "value": "true",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.865Z"
+      "updated_at": "2025-12-28T13:12:43.862Z"
     },
     {
       "id": 11,
       "key": "siteEmail",
       "value": "admin@example.com",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.866Z"
+      "updated_at": "2025-12-28T13:12:43.863Z"
     },
     {
       "id": 12,
       "key": "itemsPerPage",
       "value": "12",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.866Z"
+      "updated_at": "2025-12-28T13:12:43.863Z"
     },
     {
       "id": 13,
       "key": "description",
       "value": "发现、分享和收藏优质AI工具与资源",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.866Z"
+      "updated_at": "2025-12-28T13:12:43.864Z"
     },
     {
       "id": 15,
       "key": "siteUrl",
       "value": "http://localhost:3000",
       "created_at": "2025-12-27T14:20:31.675Z",
-      "updated_at": "2025-12-28T07:10:03.867Z"
+      "updated_at": "2025-12-28T13:12:43.864Z"
     }
   ],
   "websites": [
@@ -108,12 +108,12 @@
       "category_id": 1,
       "thumbnail": "https://chat.360.com/favicon.ico",
       "thumbnail_base64": null,
-      "status": "rejected",
+      "status": "approved",
       "visits": 0,
-      "likes": 1,
+      "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-28T08:34:04.264Z",
+      "updated_at": "2025-12-28T13:12:43.886Z",
       "ipd_category_id": null
     },
     {
@@ -124,12 +124,12 @@
       "category_id": 1,
       "thumbnail": "https://www.baichuan-ai.com/favicon.ico",
       "thumbnail_base64": null,
-      "status": "rejected",
+      "status": "approved",
       "visits": 0,
-      "likes": 1,
+      "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.352Z",
-      "updated_at": "2025-12-28T08:38:04.737Z",
+      "updated_at": "2025-12-28T13:12:43.887Z",
       "ipd_category_id": null
     },
     {
@@ -145,7 +145,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.456Z",
-      "updated_at": "2025-12-27T14:20:30.456Z",
+      "updated_at": "2025-12-28T13:12:43.890Z",
       "ipd_category_id": null
     },
     {
@@ -161,7 +161,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.891Z",
       "ipd_category_id": null
     },
     {
@@ -177,7 +177,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.484Z",
-      "updated_at": "2025-12-27T14:20:30.484Z",
+      "updated_at": "2025-12-28T13:12:43.892Z",
       "ipd_category_id": null
     },
     {
@@ -193,7 +193,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.496Z",
-      "updated_at": "2025-12-27T14:20:30.496Z",
+      "updated_at": "2025-12-28T13:12:43.892Z",
       "ipd_category_id": null
     },
     {
@@ -209,7 +209,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.566Z",
-      "updated_at": "2025-12-27T14:20:30.566Z",
+      "updated_at": "2025-12-28T13:12:43.894Z",
       "ipd_category_id": null
     },
     {
@@ -225,7 +225,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.662Z",
-      "updated_at": "2025-12-27T14:20:30.662Z",
+      "updated_at": "2025-12-28T13:12:43.896Z",
       "ipd_category_id": null
     },
     {
@@ -241,7 +241,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.676Z",
-      "updated_at": "2025-12-27T14:20:30.676Z",
+      "updated_at": "2025-12-28T13:12:43.896Z",
       "ipd_category_id": null
     },
     {
@@ -257,7 +257,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.691Z",
-      "updated_at": "2025-12-27T14:20:30.691Z",
+      "updated_at": "2025-12-28T13:12:43.897Z",
       "ipd_category_id": null
     },
     {
@@ -273,7 +273,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.706Z",
-      "updated_at": "2025-12-27T14:20:30.706Z",
+      "updated_at": "2025-12-28T13:12:43.898Z",
       "ipd_category_id": null
     },
     {
@@ -289,7 +289,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.734Z",
-      "updated_at": "2025-12-27T14:20:30.734Z",
+      "updated_at": "2025-12-28T13:12:43.899Z",
       "ipd_category_id": null
     },
     {
@@ -305,7 +305,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.782Z",
-      "updated_at": "2025-12-27T14:20:30.782Z",
+      "updated_at": "2025-12-28T13:12:43.901Z",
       "ipd_category_id": null
     },
     {
@@ -321,7 +321,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.794Z",
-      "updated_at": "2025-12-27T14:20:30.794Z",
+      "updated_at": "2025-12-28T13:12:43.901Z",
       "ipd_category_id": null
     },
     {
@@ -337,7 +337,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.832Z",
-      "updated_at": "2025-12-27T14:20:30.832Z",
+      "updated_at": "2025-12-28T13:12:43.902Z",
       "ipd_category_id": null
     },
     {
@@ -353,7 +353,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.844Z",
-      "updated_at": "2025-12-27T14:20:30.844Z",
+      "updated_at": "2025-12-28T13:12:43.903Z",
       "ipd_category_id": null
     },
     {
@@ -369,7 +369,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.470Z",
-      "updated_at": "2025-12-27T14:20:30.470Z",
+      "updated_at": "2025-12-28T13:12:43.903Z",
       "ipd_category_id": null
     },
     {
@@ -385,7 +385,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.905Z",
       "ipd_category_id": null
     },
     {
@@ -401,7 +401,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.905Z",
       "ipd_category_id": null
     },
     {
@@ -417,7 +417,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.906Z",
       "ipd_category_id": null
     },
     {
@@ -433,7 +433,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.906Z",
       "ipd_category_id": null
     },
     {
@@ -449,7 +449,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.907Z",
       "ipd_category_id": null
     },
     {
@@ -465,7 +465,7 @@
       "likes": 0,
       "active": 1,
       "created_at": "2025-12-27T14:20:30.290Z",
-      "updated_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.907Z",
       "ipd_category_id": null
     },
     {
@@ -480,6 +480,349 @@
       "thumbnail_base64": "data:text/html;base64,PCFkb2N0eXBlIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjx0aXRsZT5FeGFtcGxlIERvbWFpbjwvdGl0bGU+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xIj48c3R5bGU+Ym9keXtiYWNrZ3JvdW5kOiNlZWU7d2lkdGg6NjB2dzttYXJnaW46MTV2aCBhdXRvO2ZvbnQtZmFtaWx5OnN5c3RlbS11aSxzYW5zLXNlcmlmfWgxe2ZvbnQtc2l6ZToxLjVlbX1kaXZ7b3BhY2l0eTowLjh9YTpsaW5rLGE6dmlzaXRlZHtjb2xvcjojMzQ4fTwvc3R5bGU+PGJvZHk+PGRpdj48aDE+RXhhbXBsZSBEb21haW48L2gxPjxwPlRoaXMgZG9tYWluIGlzIGZvciB1c2UgaW4gZG9jdW1lbnRhdGlvbiBleGFtcGxlcyB3aXRob3V0IG5lZWRpbmcgcGVybWlzc2lvbi4gQXZvaWQgdXNlIGluIG9wZXJhdGlvbnMuPHA+PGEgaHJlZj0iaHR0cHM6Ly9pYW5hLm9yZy9kb21haW5zL2V4YW1wbGUiPkxlYXJuIG1vcmU8L2E+PC9kaXY+PC9ib2R5PjwvaHRtbD4K",
       "created_at": "2025-12-28T09:14:32.531Z",
       "updated_at": "2025-12-28T09:14:32.531Z"
+    },
+    {
+      "id": 45,
+      "title": "Qoder IDE - 重新定义 AI 编程体验",
+      "url": "https://qoderide.net/",
+      "description": "智能代理编程平台，提供最优AI模型和上下文感知补全，让编程更高效",
+      "category_id": 5,
+      "ipd_category_id": null,
+      "thumbnail": "https://qoderide.net/./images/opengraph-image.png",
+      "status": "approved",
+      "thumbnail_base64": "data:image/png;base64,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",
+      "created_at": "2025-12-28T12:58:13.126Z",
+      "updated_at": "2025-12-28T12:58:13.126Z"
+    },
+    {
+      "id": 46,
+      "title": "IPD Test Site 2",
+      "url": "https://test-ipd-2.com",
+      "description": "This is another test site for IPD navigation.",
+      "category_id": 2,
+      "ipd_category_id": null,
+      "thumbnail": "",
+      "status": "approved",
+      "thumbnail_base64": "",
+      "created_at": "2025-12-28T13:03:57.567Z",
+      "updated_at": "2025-12-28T13:03:57.567Z"
+    },
+    {
+      "id": 47,
+      "title": "ChatGPT",
+      "url": "https://chat.openai.com",
+      "description": "OpenAI 开发的 AI 聊天助手，能够进行自然对话并协助完成各种任务。",
+      "thumbnail": "https://chat.openai.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.289Z",
+      "updated_at": "2025-12-28T13:12:43.885Z",
+      "category_id": 1,
+      "ipd_category_id": null
+    },
+    {
+      "id": 48,
+      "title": "万知",
+      "url": "https://www.wanzhi.com",
+      "description": "零一万物推出的生产力工具，擅长会议纪要、文档解读和办公协作。",
+      "thumbnail": "https://www.wanzhi.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.332Z",
+      "updated_at": "2025-12-28T13:12:43.886Z",
+      "category_id": 1,
+      "ipd_category_id": null
+    },
+    {
+      "id": 49,
+      "title": "Supermaven",
+      "url": "https://supermaven.com",
+      "description": "以极速响应和超长上下文窗口 (1M tokens) 著称的 AI 插件。",
+      "thumbnail": "https://supermaven.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.364Z",
+      "updated_at": "2025-12-28T13:12:43.888Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 50,
+      "title": "Continue",
+      "url": "https://www.continue.dev",
+      "description": "开源的 AI 编程助手，支持自定义模型和本地 LLM 部署。",
+      "thumbnail": "https://www.continue.dev/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.378Z",
+      "updated_at": "2025-12-28T13:12:43.888Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 51,
+      "title": "Sourcegraph Cody",
+      "url": "https://about.sourcegraph.com/cody",
+      "description": "利用代码图谱提供精准上下文的 AI 编程助手。",
+      "thumbnail": "https://about.sourcegraph.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.392Z",
+      "updated_at": "2025-12-28T13:12:43.888Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 52,
+      "title": "Replit Agent",
+      "url": "https://replit.com/ai",
+      "description": "Replit 推出的 AI 代理，可从零开始构建和部署完整应用。",
+      "thumbnail": "https://replit.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.406Z",
+      "updated_at": "2025-12-28T13:12:43.889Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 53,
+      "title": "MarsCode",
+      "url": "https://www.marscode.cn",
+      "description": "字节跳动推出的国内版 AI 编程助手，提供云端 IDE 和插件。",
+      "thumbnail": "https://www.marscode.cn/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.428Z",
+      "updated_at": "2025-12-28T13:12:43.889Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 54,
+      "title": "Baidu Comate",
+      "url": "https://comate.baidu.com",
+      "description": "百度推出的智能代码助手，基于文心大模型。",
+      "thumbnail": "https://comate.baidu.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.442Z",
+      "updated_at": "2025-12-28T13:12:43.890Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 55,
+      "title": "讯飞 iFlyCode",
+      "url": "https://iflycode.xfyun.cn",
+      "description": "科大讯飞推出的智能编程助手，基于星火大模型。",
+      "thumbnail": "https://iflycode.xfyun.cn/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.522Z",
+      "updated_at": "2025-12-28T13:12:43.893Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 56,
+      "title": "Blackbox AI",
+      "url": "https://www.blackbox.ai",
+      "description": "专注于快速代码搜索、生成和实时代码分析的 AI 助手。",
+      "thumbnail": "https://www.blackbox.ai/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.546Z",
+      "updated_at": "2025-12-28T13:12:43.893Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 57,
+      "title": "Devin",
+      "url": "https://www.cognition.ai",
+      "description": "全球首位 AI 软件工程师，能独立完成复杂的编程任务。",
+      "thumbnail": "https://www.cognition.ai/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.586Z",
+      "updated_at": "2025-12-28T13:12:43.894Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 58,
+      "title": "Plandex",
+      "url": "https://plandex.ai",
+      "description": "开源的 AI 编程代理，擅长处理跨文件的复杂积压任务。",
+      "thumbnail": "https://plandex.ai/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.604Z",
+      "updated_at": "2025-12-28T13:12:43.894Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 59,
+      "title": "MutableAI",
+      "url": "https://mutable.ai",
+      "description": "专注于自动化文档编写、代码重构和测试生成的 AI 助手。",
+      "thumbnail": "https://mutable.ai/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.632Z",
+      "updated_at": "2025-12-28T13:12:43.895Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 60,
+      "title": "Sweep",
+      "url": "https://sweep.dev",
+      "description": "将 GitHub Issue 直接转化为代码拉取请求 (PR) 的 AI 代理。",
+      "thumbnail": "https://sweep.dev/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.650Z",
+      "updated_at": "2025-12-28T13:12:43.895Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 61,
+      "title": "Tabnine",
+      "url": "https://www.tabnine.com",
+      "description": "专注于私有化部署和企业安全的 AI 编程助手。",
+      "thumbnail": "https://www.tabnine.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.754Z",
+      "updated_at": "2025-12-28T13:12:43.899Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 62,
+      "title": "Codeium",
+      "url": "https://codeium.com",
+      "description": "个人用户免费的 AI 编程助手，支持 70 多种编程语言。",
+      "thumbnail": "https://codeium.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.768Z",
+      "updated_at": "2025-12-28T13:12:43.900Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 63,
+      "title": "文心一言",
+      "url": "https://yiyan.baidu.com",
+      "description": "百度推出的知识增强大语言模型，能够回答问题、协助创作。",
+      "thumbnail": "https://yiyan.baidu.com/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.807Z",
+      "updated_at": "2025-12-28T13:12:43.902Z",
+      "category_id": 1,
+      "ipd_category_id": null
+    },
+    {
+      "id": 64,
+      "title": "Amazon Q",
+      "url": "https://aws.amazon.com/q/developer",
+      "description": "亚马逊推出的 AI 助手，深度集成 AWS 服务。",
+      "thumbnail": "https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.309Z",
+      "updated_at": "2025-12-28T13:12:43.904Z",
+      "category_id": 5,
+      "ipd_category_id": null
+    },
+    {
+      "id": 65,
+      "title": "Mistral AI",
+      "url": "https://chat.mistral.ai",
+      "description": "欧洲 AI 领头羊 Mistral 推出的对话界面，提供强大的开源模型访问。",
+      "thumbnail": "https://chat.mistral.ai/favicon.ico",
+      "thumbnail_base64": null,
+      "status": "approved",
+      "visits": 0,
+      "likes": 0,
+      "active": 1,
+      "created_at": "2025-12-27T14:20:30.290Z",
+      "updated_at": "2025-12-28T13:12:43.908Z",
+      "category_id": 1,
+      "ipd_category_id": null
+    },
+    {
+      "id": 66,
+      "title": "IPD Final Test Site",
+      "url": "https://test-ipd-final.com",
+      "description": "This is the final test site for IPD navigation.",
+      "category_id": 2,
+      "ipd_category_id": 7,
+      "thumbnail": "",
+      "status": "approved",
+      "thumbnail_base64": "",
+      "created_at": "2025-12-28T13:13:42.475Z",
+      "updated_at": "2025-12-28T13:13:42.475Z"
     }
   ],
   "categories": [
@@ -488,43 +831,283 @@
       "name": "AI 聊天",
       "slug": "ai-chat",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-27T14:20:30.082Z"
+      "updated_at": "2025-12-28T13:12:43.865Z"
     },
     {
       "id": 2,
       "name": "AI 工具",
       "slug": "ai-tools",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-27T14:20:30.082Z"
+      "updated_at": "2025-12-28T13:12:43.866Z"
     },
     {
       "id": 3,
       "name": "大语言模型",
       "slug": "llm",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T12:03:26.570Z"
+      "updated_at": "2025-12-28T13:12:43.867Z"
     },
     {
       "id": 4,
       "name": "AI 绘画",
       "slug": "ai-art",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-27T14:20:30.082Z"
+      "updated_at": "2025-12-28T13:12:43.867Z"
     },
     {
       "id": 5,
       "name": "AI 编程",
       "slug": "ai-coding",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-27T14:20:30.082Z"
+      "updated_at": "2025-12-28T13:12:43.868Z"
     },
     {
       "id": 6,
       "name": "AI 写作",
       "slug": "ai-writing",
       "created_at": "2025-12-27T14:20:30.082Z",
-      "updated_at": "2025-12-28T12:03:29.498Z"
+      "updated_at": "2025-12-28T13:12:43.868Z"
+    },
+    {
+      "id": 7,
+      "name": "IPD-需求阶段-需求调研",
+      "slug": "ipd-requirement-research",
+      "created_at": "2025-12-28T13:12:21.176Z",
+      "updated_at": "2025-12-28T13:12:43.869Z"
+    },
+    {
+      "id": 8,
+      "name": "IPD-需求阶段-需求分析",
+      "slug": "ipd-requirement-analysis",
+      "created_at": "2025-12-28T13:12:21.177Z",
+      "updated_at": "2025-12-28T13:12:43.869Z"
+    },
+    {
+      "id": 9,
+      "name": "IPD-需求阶段-需求编写",
+      "slug": "ipd-requirement-coding",
+      "created_at": "2025-12-28T13:12:21.177Z",
+      "updated_at": "2025-12-28T13:12:43.870Z"
+    },
+    {
+      "id": 10,
+      "name": "IPD-需求阶段-需求审讲&反审讲",
+      "slug": "ipd-requirement-review",
+      "created_at": "2025-12-28T13:12:21.177Z",
+      "updated_at": "2025-12-28T13:12:43.870Z"
+    },
+    {
+      "id": 11,
+      "name": "IPD-设计阶段-架构设计",
+      "slug": "ipd-design-architecture",
+      "created_at": "2025-12-28T13:12:21.178Z",
+      "updated_at": "2025-12-28T13:12:43.870Z"
+    },
+    {
+      "id": 12,
+      "name": "IPD-设计阶段-概要设计",
+      "slug": "ipd-design-concept",
+      "created_at": "2025-12-28T13:12:21.178Z",
+      "updated_at": "2025-12-28T13:12:43.871Z"
+    },
+    {
+      "id": 13,
+      "name": "IPD-设计阶段-详细设计",
+      "slug": "ipd-design-detail",
+      "created_at": "2025-12-28T13:12:21.179Z",
+      "updated_at": "2025-12-28T13:12:43.871Z"
+    },
+    {
+      "id": 14,
+      "name": "IPD-设计阶段-设计评审",
+      "slug": "ipd-design-design-review",
+      "created_at": "2025-12-28T13:12:21.179Z",
+      "updated_at": "2025-12-28T13:12:43.872Z"
+    },
+    {
+      "id": 15,
+      "name": "IPD-设计阶段-网络安全设计",
+      "slug": "ipd-design-security",
+      "created_at": "2025-12-28T13:12:21.179Z",
+      "updated_at": "2025-12-28T13:12:43.872Z"
+    },
+    {
+      "id": 16,
+      "name": "IPD-编码阶段-代码编写",
+      "slug": "ipd-coding-code-write",
+      "created_at": "2025-12-28T13:12:21.180Z",
+      "updated_at": "2025-12-28T13:12:43.873Z"
+    },
+    {
+      "id": 17,
+      "name": "IPD-编码阶段-代码走读",
+      "slug": "ipd-coding-code-read",
+      "created_at": "2025-12-28T13:12:21.180Z",
+      "updated_at": "2025-12-28T13:12:43.873Z"
+    },
+    {
+      "id": 18,
+      "name": "IPD-编码阶段-代码检视",
+      "slug": "ipd-coding-code-check",
+      "created_at": "2025-12-28T13:12:21.180Z",
+      "updated_at": "2025-12-28T13:12:43.874Z"
+    },
+    {
+      "id": 19,
+      "name": "IPD-编码阶段-单元测试",
+      "slug": "ipd-coding-unit-test",
+      "created_at": "2025-12-28T13:12:21.181Z",
+      "updated_at": "2025-12-28T13:12:43.874Z"
+    },
+    {
+      "id": 20,
+      "name": "IPD-编码阶段-代码联调",
+      "slug": "ipd-coding-code-union",
+      "created_at": "2025-12-28T13:12:21.181Z",
+      "updated_at": "2025-12-28T13:12:43.874Z"
+    },
+    {
+      "id": 21,
+      "name": "IPD-编码阶段-问题单修改",
+      "slug": "ipd-coding-issue-fix",
+      "created_at": "2025-12-28T13:12:21.182Z",
+      "updated_at": "2025-12-28T13:12:43.875Z"
+    },
+    {
+      "id": 22,
+      "name": "IPD-构建阶段-CleanCode门禁检查",
+      "slug": "ipd-build-cleancode",
+      "created_at": "2025-12-28T13:12:21.182Z",
+      "updated_at": "2025-12-28T13:12:43.875Z"
+    },
+    {
+      "id": 23,
+      "name": "IPD-构建阶段-构建脚本编写",
+      "slug": "ipd-build-script-build",
+      "created_at": "2025-12-28T13:12:21.183Z",
+      "updated_at": "2025-12-28T13:12:43.876Z"
+    },
+    {
+      "id": 24,
+      "name": "IPD-构建阶段-自动化脚本编写",
+      "slug": "ipd-build-auto-script",
+      "created_at": "2025-12-28T13:12:21.183Z",
+      "updated_at": "2025-12-28T13:12:43.876Z"
+    },
+    {
+      "id": 25,
+      "name": "IPD-构建阶段-个人构建",
+      "slug": "ipd-build-personal-build",
+      "created_at": "2025-12-28T13:12:21.183Z",
+      "updated_at": "2025-12-28T13:12:43.876Z"
+    },
+    {
+      "id": 26,
+      "name": "IPD-构建阶段-每日构建",
+      "slug": "ipd-build-daily-build",
+      "created_at": "2025-12-28T13:12:21.184Z",
+      "updated_at": "2025-12-28T13:12:43.877Z"
+    },
+    {
+      "id": 27,
+      "name": "IPD-构建阶段-版本级构建",
+      "slug": "ipd-build-version-build",
+      "created_at": "2025-12-28T13:12:21.184Z",
+      "updated_at": "2025-12-28T13:12:43.877Z"
+    },
+    {
+      "id": 28,
+      "name": "IPD-构建阶段-冒烟测试",
+      "slug": "ipd-build-smoke-test",
+      "created_at": "2025-12-28T13:12:21.185Z",
+      "updated_at": "2025-12-28T13:12:43.878Z"
+    },
+    {
+      "id": 29,
+      "name": "IPD-构建阶段-开源漏洞扫描",
+      "slug": "ipd-build-leak-scan",
+      "created_at": "2025-12-28T13:12:21.185Z",
+      "updated_at": "2025-12-28T13:12:43.878Z"
+    },
+    {
+      "id": 30,
+      "name": "IPD-测试阶段-测试方案设计",
+      "slug": "ipd-test-test-design",
+      "created_at": "2025-12-28T13:12:21.186Z",
+      "updated_at": "2025-12-28T13:12:43.878Z"
+    },
+    {
+      "id": 31,
+      "name": "IPD-测试阶段-测试用例编写",
+      "slug": "ipd-test-test-case-write",
+      "created_at": "2025-12-28T13:12:21.186Z",
+      "updated_at": "2025-12-28T13:12:43.879Z"
+    },
+    {
+      "id": 32,
+      "name": "IPD-测试阶段-自动化脚本编写",
+      "slug": "ipd-test-test-case-auto",
+      "created_at": "2025-12-28T13:12:21.186Z",
+      "updated_at": "2025-12-28T13:12:43.879Z"
+    },
+    {
+      "id": 33,
+      "name": "IPD-测试阶段-版本级测试",
+      "slug": "ipd-test-version-test",
+      "created_at": "2025-12-28T13:12:21.187Z",
+      "updated_at": "2025-12-28T13:12:43.880Z"
+    },
+    {
+      "id": 34,
+      "name": "IPD-测试阶段-提交问题单",
+      "slug": "ipd-test-issue-list",
+      "created_at": "2025-12-28T13:12:21.187Z",
+      "updated_at": "2025-12-28T13:12:43.880Z"
+    },
+    {
+      "id": 35,
+      "name": "IPD-测试阶段-漏测分析",
+      "slug": "ipd-test-leak-analysis",
+      "created_at": "2025-12-28T13:12:21.188Z",
+      "updated_at": "2025-12-28T13:12:43.881Z"
+    },
+    {
+      "id": 36,
+      "name": "IPD-实施阶段-版本发布上网",
+      "slug": "ipd-release-release-publish",
+      "created_at": "2025-12-28T13:12:21.188Z",
+      "updated_at": "2025-12-28T13:12:43.881Z"
+    },
+    {
+      "id": 37,
+      "name": "IPD-实施阶段-部署上线",
+      "slug": "ipd-release-deploy-online",
+      "created_at": "2025-12-28T13:12:21.189Z",
+      "updated_at": "2025-12-28T13:12:43.882Z"
+    },
+    {
+      "id": 38,
+      "name": "IPD-实施阶段-技术支持、运维",
+      "slug": "ipd-release-tech-support",
+      "created_at": "2025-12-28T13:12:21.189Z",
+      "updated_at": "2025-12-28T13:12:43.882Z"
+    },
+    {
+      "id": 39,
+      "name": "IPD-实施阶段-网上问题修改",
+      "slug": "ipd-release-qa-improve",
+      "created_at": "2025-12-28T13:12:21.189Z",
+      "updated_at": "2025-12-28T13:12:43.883Z"
     }
   ],
-  "footer_links": []
+  "footer_links": [
+    {
+      "id": 1,
+      "title": "GitHub",
+      "url": "https://github.com",
+      "isExternal": true,
+      "created_at": "2025-12-28T13:12:21.190Z",
+      "updated_at": "2025-12-28T13:12:43.884Z"
+    }
+  ]
 }

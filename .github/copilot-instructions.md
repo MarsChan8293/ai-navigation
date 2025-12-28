@@ -45,7 +45,7 @@ When adding or updating websites, use the `fetchMetadata` utility in [src/lib/ut
 - Use **Zod** for form validation (see [src/lib/utils/validations.ts](src/lib/utils/validations.ts)).
 
 ## 🚀 Developer Workflows
-- **Development**: `npm run dev` (uses Turbopack)
+- **Development**: `npm run dev && sleep 20` (uses Turbopack)，attention:the web server will be ready  at least 20 seconds after run command.
 - **Database Migrations**: `npx prisma migrate dev`
 - **Seed Data**: `npm run init-data` (runs [src/lib/utils/init-data.ts](src/lib/utils/init-data.ts))
 - **Prisma Studio**: `npx prisma studio` to view/edit data

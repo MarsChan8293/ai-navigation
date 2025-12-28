@@ -25,11 +25,13 @@ import { useSettings } from "@/hooks/use-settings";
 export function WebsiteForm({ 
   onSuccess, 
   defaultValues,
-  hideIpdCategory = false
+  hideIpdCategory = false,
+  hideCategory = false
 }: { 
   onSuccess?: () => void;
   defaultValues?: Partial<FormInputs>;
   hideIpdCategory?: boolean;
+  hideCategory?: boolean;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
@@ -73,7 +75,17 @@ export function WebsiteForm({
     },
   });
 
-  const { watch, setValue } = form;
+  const { watch, setValue, reset } = form;
+
+  useEffect(() => {
+    if (defaultValues) {
+      reset({
+        ...form.getValues(),
+        ...defaultValues
+      });
+    }
+  }, [defaultValues, reset]);
+
   const url = watch("url");
   const isValidUrl = url && url.startsWith("http");
 
@@ -162,7 +174,7 @@ export function WebsiteForm({
           label="网站地址"
           name="url"
           form={form}
-          placeholder="https://example.com"
+          placeholder="网站链接 (https://...)"
         />
         <Button
           type="button"
@@ -186,53 +198,55 @@ export function WebsiteForm({
           label="网站标题"
           name="title"
           form={form}
-          placeholder="输入网站标题"
+          placeholder="网站名称"
         />
 
         <FormField
           label="网站描述"
           name="description"
           form={form}
-          placeholder="描述这个网站"
+          placeholder="网站描述..."
           textarea
         />
       </motion.div>
 
       {/* Category Selection */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        <label className="block text-sm font-medium mb-2 text-foreground/80">
-          分类
-        </label>
-        <Select
-          onValueChange={(value) => setValue("category_id", value)}
-          value={watch("category_id")}
-          disabled={isSubmitting}
+      {!hideCategory && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
         >
-          <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
-            <SelectValue placeholder="选择分类" />
-          </SelectTrigger>
-          <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
-            {categories
-              .filter((c: { slug: string }) => !c.slug.startsWith("ipd-"))
-              .map((category: { id: number; name: string }) => (
-                <SelectItem
-                  key={category.id}
-                  value={category.id.toString()}
-                  className="hover:bg-primary/10 focus:bg-primary/10"
-                >
-                  {category.name}
-                </SelectItem>
-              ))}
-          </SelectContent>
-        </Select>
-        {form.formState.errors.category_id && (
-          <p className="text-sm text-red-500/70 mt-1">请选择网站分类</p>
-        )}
-      </motion.div>
+          <label className="block text-sm font-medium mb-2 text-foreground/80">
+            分类
+          </label>
+          <Select
+            onValueChange={(value) => setValue("category_id", value)}
+            value={watch("category_id")}
+            disabled={isSubmitting}
+          >
+            <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
+              <SelectValue placeholder="选择分类" />
+            </SelectTrigger>
+            <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
+              {categories
+                .filter((c: { slug: string }) => !c.slug.startsWith("ipd-"))
+                .map((category: { id: number; name: string }) => (
+                  <SelectItem
+                    key={category.id}
+                    value={category.id.toString()}
+                    className="hover:bg-primary/10 focus:bg-primary/10"
+                  >
+                    {category.name}
+                  </SelectItem>
+                ))}
+            </SelectContent>
+          </Select>
+          {form.formState.errors.category_id && (
+            <p className="text-sm text-red-500/70 mt-1">请选择网站分类</p>
+          )}
+        </motion.div>
+      )}
 
       {/* IPD Category Selection */}
       {!hideIpdCategory && (
