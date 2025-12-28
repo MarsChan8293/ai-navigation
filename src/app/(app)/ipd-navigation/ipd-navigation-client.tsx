@@ -358,7 +358,7 @@ export function IpdNavigationClient() {
                       <div className="text-center py-12 text-muted-foreground">
                         <p>暂无相关网站资源</p>
                         <p className="text-sm mt-2">
-                          您可以通过"提交网站"功能为此阶段添加相关资源
+                          您可以通过&ldquo;提交网站&rdquo;功能为此阶段添加相关资源
                         </p>
                       </div>
                     )}
