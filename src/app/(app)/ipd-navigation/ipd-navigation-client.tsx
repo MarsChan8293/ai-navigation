@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Star, ExternalLink } from "lucide-react";
+import { Search, ExternalLink } from "lucide-react";
 import { Card } from "@/ui/common/card";
 import { Input } from "@/ui/common/input";
 import { cn } from "@/lib/utils/utils";
@@ -231,9 +231,6 @@ export function IpdNavigationClient() {
                               "hover:shadow-lg"
                             )}
                           >
-                            {item.important && (
-                              <Star className="absolute top-2 right-2 h-5 w-5 text-red-500 fill-red-500" />
-                            )}
                             <div className="font-medium">{item.name}</div>
                           </motion.button>
                         ))}
@@ -272,10 +269,7 @@ export function IpdNavigationClient() {
                         "hover:shadow-md"
                       )}
                     >
-                      {item.important && (
-                        <Star className="absolute top-2 right-2 h-4 w-4 text-red-500 fill-red-500" />
-                      )}
-                      <div className="text-sm font-medium pr-6">{item.name}</div>
+                      <div className="text-sm font-medium">{item.name}</div>
                     </motion.button>
                   ))}
                 </div>
@@ -304,10 +298,7 @@ export function IpdNavigationClient() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h2 className="text-2xl font-bold flex items-center gap-2">
-                        {selectedItem.important && (
-                          <Star className="h-6 w-6 text-red-500 fill-red-500" />
-                        )}
+                      <h2 className="text-2xl font-bold">
                         {selectedItem.name}
                       </h2>
                       <p className="text-muted-foreground mt-2">
