@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { AjaxResponse } from "@/lib/utils";
+import { prisma } from "@/lib/db/db";
 
-const prisma = new PrismaClient();
 
 // GET: 查询所有分类
 export async function GET() {

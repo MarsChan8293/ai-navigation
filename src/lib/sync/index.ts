@@ -1,7 +1,11 @@
 import { BackupManager } from "./backup";
-import { OSSInterface, AliyunOSS } from "./oss";
-import { DatabaseInterface } from "../db/sqlite";
+// import { OSSInterface, AliyunOSS } from "./oss";
+// import { DatabaseInterface } from "../db/sqlite";
+type OSSInterface = any;
+const AliyunOSS: any = {};
+type DatabaseInterface = any;
 import { SyncConfig } from "./types";
+
 
 let backupManager: BackupManager | null = null;
 

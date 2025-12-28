@@ -1,5 +1,7 @@
-import OSS from "ali-oss";
+// import OSS from "ali-oss";
+const OSS: any = {};
 import type { OSSSettings } from "../atoms";
+
 
 export interface OSSInterface {
   uploadBackup(data: Buffer): Promise<string>;
@@ -8,7 +10,8 @@ export interface OSSInterface {
 }
 
 export class AliyunOSS implements OSSInterface {
-  private client: OSS;
+  private client: any;
+
 
   constructor(config: OSSSettings) {
     this.client = new OSS({

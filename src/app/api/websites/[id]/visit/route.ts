@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { AjaxResponse } from "@/lib/utils";
+import { prisma } from "@/lib/db/db";
 
-const prisma = new PrismaClient();
 
 // POST /api/websites/[id]/visit
 export async function POST(

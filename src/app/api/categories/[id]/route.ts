@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import type { Category } from "@/lib/types";
 import { AjaxResponse } from "@/lib/utils";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db/db";
 
-const prisma = new PrismaClient();
 
 // PUT: 更新分类
 export async function PUT(

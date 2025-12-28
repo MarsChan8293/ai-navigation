@@ -1,6 +1,6 @@
 import { prisma } from '../db/db';
-import type { Prisma, Category } from '@prisma/client';
 import { WebsiteSettings } from '../constraint';
+
 
 
 
@@ -388,8 +388,9 @@ export async function initializeData() {
     // 获取所有分类的映射
     const categories = await prisma.category.findMany();
     const categoryMap = new Map(
-      categories.map((c: Category) => [c.slug, c.id])
+      categories.map((c: any) => [c.slug, c.id])
     );
+
 
     // 初始化网站
     await Promise.all(
@@ -398,19 +399,16 @@ export async function initializeData() {
         const category_id = categoryMap.get(category_slug);
         
         if (category_id) {
-          const createData: Prisma.WebsiteCreateInput = {
+          const createData = {
             ...websiteData,
-            category: { 
-              connect: { id: Number(category_id) } 
-            }
+            category_id: Number(category_id)
           };
 
-          const updateData: Prisma.WebsiteUpdateInput = {
+          const updateData = {
             ...websiteData,
-            category: { 
-              connect: { id: Number(category_id) } 
-            }
+            category_id: Number(category_id)
           };
+
 
           const existingWebsite = await prisma.website.findUnique({
             where: { url: website.url }

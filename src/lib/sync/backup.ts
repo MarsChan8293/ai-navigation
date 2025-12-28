@@ -1,9 +1,12 @@
 import { nanoid } from "nanoid";
 import type { BackupMetadata, SyncConfig } from "./types";
-import { OSSInterface } from "./oss";
-import { DatabaseInterface } from "../db/sqlite";
+// import { OSSInterface } from "./oss";
+// import { DatabaseInterface } from "../db/sqlite";
+type OSSInterface = any;
+type DatabaseInterface = any;
 
 export class BackupManager {
+
   private db: DatabaseInterface;
   private autoBackupTimer: NodeJS.Timeout | null = null;
   private oss: OSSInterface;

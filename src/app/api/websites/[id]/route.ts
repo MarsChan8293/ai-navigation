@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db/db";
 
-const prisma = new PrismaClient();
 
 // GET /api/websites/[id]
 // 获取单个网站
