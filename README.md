@@ -216,7 +216,37 @@ docker run -d \
      - `Alt + N`: 收藏资讯
    - 右键菜单：通过 Tampermonkey 扩展菜单操作
 
-## 🛠️ 技术栈
+## � 数据管理
+
+本项目使用本地 JSON 文件作为数据库，同时也支持通过 JSON 文件管理初始种子数据。
+
+### 种子数据 (Seed Data)
+
+初始网站数据存储在 `data/websites.json` 中。这是一个标准的 JSON 文件，用于维护项目的默认数据。
+
+- **位置**: `data/websites.json`
+- **用途**: 存储初始化的网站列表
+- **修改**: 您可以直接编辑此文件来添加、删除或修改默认网站数据
+
+### 初始化/重置数据
+
+如果您修改了 `data/websites.json`，可以通过以下命令将更改应用到数据库：
+
+```bash
+npm run init-data
+```
+
+> **注意**: 此命令会更新现有记录（基于 URL 匹配）或创建新记录，不会删除用户添加的数据。
+
+### 运行时数据库
+
+应用程序的实际运行数据存储在 `data/db.json` 中。
+
+- **位置**: `data/db.json`
+- **用途**: 存储应用程序的实时状态（包括用户提交、点赞、浏览量等）
+- **警告**: 请勿在程序运行时手动修改此文件
+
+## �🛠️ 技术栈
 
 - **前端框架**:
 
@@ -237,9 +267,8 @@ docker run -d \
 
 - **数据存储**:
 
-  - SQLite (Prisma)
-  - Prisma ORM
-  - Redis
+  - JSON File (Lowdb)
+  - Custom JSON Client (Prisma-like API)
 
 - **认证授权**:
 
