@@ -1,62 +1,41 @@
-# AI Navigation Project Instructions
+# AI Navigation Codebase Instructions
 
-You are an expert AI coding agent working on the AI Navigation project, a modern AI tool directory built with Next.js 15.
+## Project Overview
+This is a Next.js 15 (App Router) project for an AI tools navigation directory. It uses a lightweight JSON-based database (`lowdb`) instead of a traditional SQL database, but implements a Prisma-like API for data access.
 
-## 🏗 Architecture & Tech Stack
-- **Framework**: Next.js 15 (App Router)
-- **Database**: Prisma 6 with SQLite
-- **State Management**: 
-  - **Server State**: SWR and React Query (TanStack Query)
-  - **Client State**: Jotai (atoms located in [src/lib/atoms/index.ts](src/lib/atoms/index.ts))
-- **Styling**: Tailwind CSS + Framer Motion for animations
-- **UI Components**: Radix UI primitives (common components in [src/ui/common](src/ui/common))
+## Architecture & Data Layer
+- **Database**: Uses `lowdb` storing data in `data/db.json`.
+- **Data Access**: DO NOT use standard Prisma. Use the custom wrapper in `src/lib/db/json-client.ts` which mimics the Prisma API (`findMany`, `create`, etc.).
+  - Import `prisma` from `@/lib/db/db` (which aliases the JSON client).
+  - **Critical**: Data is stored in JSON files. Large datasets may impact performance.
+- **State Management**: Uses `jotai` for global client state (e.g., `categoriesAtom`).
+- **API Responses**: Use `AjaxResponse` class from `@/lib/utils/utils` for consistent API return formats (`AjaxResponse.ok()`, `AjaxResponse.fail()`).
 
-## 🛠 Key Patterns & Conventions
+## Project Structure
+- `src/app/(admin)`: Admin dashboard routes.
+- `src/app/(app)`: Public facing application routes.
+- `src/lib/db`: Database logic. `json-db.ts` defines the schema interfaces (`Website`, `Category`, etc.).
+- `data/`: Contains the JSON database files.
 
-### 1. API Responses
-All API routes should return a consistent response format using the `AjaxResponse` class from [src/lib/utils/utils.ts](src/lib/utils/utils.ts).
-```typescript
-import { AjaxResponse } from "@/lib/utils";
-import { NextResponse } from "next/server";
+## Key Workflows & Commands
+- **Initialize Data**: `npm run init-data` (Creates `data/db.json` if missing).
+- **Backup/Restore**: 
+  - Export: `npm run db:export`
+  - Import: `npm run db:import`
+  - Reset: `npm run db:reset`
+- **Development**: `npm run dev` (Turbopack enabled).
 
-export async function GET() {
-  const data = await prisma.website.findMany();
-  return NextResponse.json(AjaxResponse.ok(data));
-}
-```
+## Conventions
+- **Styling**: Tailwind CSS with `clsx` and `tailwind-merge` (via `cn` helper).
+- **Components**: Radix UI primitives for accessible interactive components.
+- **Icons**: Lucide React.
+- **Types**: defined in `src/lib/types.ts` and `src/lib/db/json-db.ts`.
 
-### 2. Database Access
-Always use the shared Prisma instance from [src/lib/db/db.ts](src/lib/db/db.ts) to avoid multiple connection issues in development.
-- **Avoid**: `new PrismaClient()` inside routes.
-- **Prefer**: `import { prisma } from "@/lib/db/db";`
+## Common Patterns
+- **Fetching Data**: Server Components fetch data directly using the `prisma` wrapper.
+- **Client Updates**: Use Server Actions or API routes (`src/app/api/`) for mutations, then revalidate paths.
+- **Metadata**: `fetchMetadata` utility in `src/lib/utils/utils.ts` is used to scrape website info (title, description, icon) when adding new tools.
 
-### 3. Global State
-Use Jotai atoms for cross-component state.
-- Persistent state (like theme or admin mode) uses `atomWithStorage`.
-- Example: `isAdminModeAtom` in [src/lib/atoms/index.ts](src/lib/atoms/index.ts).
-
-### 4. Metadata Fetching
-When adding or updating websites, use the `fetchMetadata` utility in [src/lib/utils/utils.ts](src/lib/utils/utils.ts) to scrape title, description, and thumbnails.
-
-### 5. UI Development
-- Use the `cn` utility for conditional Tailwind classes.
-- Prefer components from [src/ui/common](src/ui/common) (shadcn/ui style).
-- Use Framer Motion for entry animations and transitions.
-- Use **Zod** for form validation (see [src/lib/utils/validations.ts](src/lib/utils/validations.ts)).
-
-## 🚀 Developer Workflows
-- **Development**: `npm run dev` (uses Turbopack)
-- **Database Migrations**: `npx prisma migrate dev`
-- **Seed Data**: `npm run init-data` (runs [src/lib/utils/init-data.ts](src/lib/utils/init-data.ts))
-- **Prisma Studio**: `npx prisma studio` to view/edit data
-
-## 📂 Directory Structure
-- `src/app/api`: Backend API endpoints.
-- `src/app/(admin)`: Admin-only pages and layouts.
-- `src/components`: Feature-specific components (website, footer, header).
-- `src/lib`: Core business logic, types, and utilities.
-- `src/ui`: Reusable UI primitives.
-
-## ⚠️ Important Notes
-- The project uses a simple password-based admin authentication (see [src/app/api/login/route.ts](src/app/api/login/route.ts)).
-- Website thumbnails are often stored as Base64 in the database (`thumbnail_base64`) for faster initial loading.
+## Warnings
+- **Authentication**: The admin panel currently lacks robust authentication middleware. Be cautious when exposing to public networks.
+- **File System**: The app relies on writing to the local filesystem (`data/db.json`). Ensure write permissions in deployment environments.

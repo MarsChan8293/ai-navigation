@@ -5,13 +5,13 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-%5E18.2.0-blue.svg)
-![Next.js](https://img.shields.io/badge/next.js-14.1.0-black)
+![Next.js](https://img.shields.io/badge/next.js-15.1.2-black)
 
 </div>
 
 ## 📖 简介
 
-AI 导航是一个现代化的人工智能网站导航系统，致力于帮助用户发现、分享和管理优质的 AI 工具与资源。项目采用最新的 Web 技术栈构建，提供流畅的用户体验和强大的管理功能。
+AI 导航是一个现代化的人工智能网站导航系统，致力于帮助用户发现、分享和管理优质的 AI 工具与资源。项目采用最新的 Web 技术栈构建，使用轻量级 JSON 数据库，无需复杂的数据库配置即可快速部署。
 
 ### ✨ 特性
 
@@ -19,9 +19,9 @@ AI 导航是一个现代化的人工智能网站导航系统，致力于帮助�
 - 🔍 **智能搜索**: 支持多搜索引擎集成和实时搜索
 - 🎨 **现代设计**: 精美的 UI 设计，支持浅色/深色主题
 - 📱 **响应式**: 完美适配桌面端、平板和移动设备
-- 🚀 **智能抓取**: 自动获取网站标题、描述和图片
+- 🚀 **轻量高效**: 基于 JSON 文件存储数据，无需数据库服务，易于备份和迁移
 - 👮‍♂️ **后台管理**: 完善的管理员功能和审核机制
-- 💾 **数据安全**: 支持数据备份与云端同步
+- 💾 **数据安全**: 支持数据导出与导入，方便数据管理
 
 ## 🚀 界面展示
 
@@ -69,7 +69,7 @@ AI 导航是一个现代化的人工智能网站导航系统，致力于帮助�
 2. 克隆项目到本地:
 
 ```bash
-git clone https://github.com/liyown/AI-NAV.git
+git clone https://github.com/YOUR_USERNAME/ai-navigation.git
 cd AI-NAV
 ```
 
@@ -88,11 +88,14 @@ cp .env.example .env.local
 # 编辑 .env.local 文件，填入必要的环境变量
 ```
 
-5. 初始化数据库:
+5. 初始化数据:
 
 ```bash
-npx prisma migrate dev
+# 初始化数据（如果 data/db.json 不存在）
 npm run init-data
+
+# 或者重置数据
+npm run db:reset
 ```
 
 ### 3. 开发流程

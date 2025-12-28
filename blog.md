@@ -57,8 +57,8 @@ AI-NAV 采用了最新的技术栈，包括 Next.js 15、React 18 和 TypeScript
   - Tailwind CSS
   - shadcn/ui 组件库
 - **数据存储**：
-  - SQLite 数据库
-  - 阿里云 OSS
+  - JSON 文件存储 (LowDB)
+  - 阿里云 OSS (图片存储)
 - **开发工具**：
   - ESLint
   - Prettier
