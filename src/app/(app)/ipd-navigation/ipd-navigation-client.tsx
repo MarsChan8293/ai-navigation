@@ -296,15 +296,6 @@ export function IpdNavigationClient() {
                 <div className="flex gap-2">
                   <Button
                     size="sm"
-                    variant={viewMode === "list" ? "default" : "outline"}
-                    onClick={() => setViewMode("list")}
-                    className="flex items-center gap-2"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                    <span>查看网站</span>
-                  </Button>
-                  <Button
-                    size="sm"
                     variant={viewMode === "submit" ? "default" : "outline"}
                     onClick={() => setViewMode("submit")}
                     className="flex items-center gap-2"
