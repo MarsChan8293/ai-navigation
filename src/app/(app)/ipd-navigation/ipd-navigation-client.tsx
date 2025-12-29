@@ -315,8 +315,8 @@ export function IpdNavigationClient() {
                 </div>
               </div>
 
-              <div className="grid gap-6 lg:grid-cols-3">
-                <div className="space-y-2 lg:col-span-1">
+              <div className="flex gap-6 flex-col lg:flex-row">
+                <div className="space-y-2 flex-shrink-0">
                   {currentPhase.items.map((item) => (
                     <motion.button
                       key={item.id}
@@ -337,7 +337,7 @@ export function IpdNavigationClient() {
                   ))}
                 </div>
 
-                <div ref={resultsRef} className="lg:col-span-2">
+                <div ref={resultsRef} className="flex-1">
                   {selectedItem ? (
                     <div className="space-y-4">
                       <div>
