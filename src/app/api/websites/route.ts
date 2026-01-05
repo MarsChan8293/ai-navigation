@@ -13,6 +13,7 @@ export async function GET(request: Request) {
   const categoryId = searchParams.get("category_id");
   const ipdCategoryId = searchParams.get("ipd_category_id");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const where: any = { status: status === "all" ? undefined : status };
   if (categoryId) where.category_id = Number(categoryId);
   if (ipdCategoryId) where.ipd_category_id = Number(ipdCategoryId);
@@ -85,7 +86,7 @@ export async function POST(request: Request) {
     // Validate URL format
     try {
       new URL(data.url);
-    } catch (error) {
+    } catch {
       return NextResponse.json(AjaxResponse.fail("Invalid URL format"), {
         status: 400,
       });

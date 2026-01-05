@@ -9,16 +9,6 @@ export interface Settings {
   siteFooter: string;
 }
 
-interface SettingItem {
-  key: string;
-  value: string;
-}
-
-interface SettingsResponse {
-  success: boolean;
-  data: SettingItem[];
-}
-
 export function useSettings() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +31,7 @@ export function useSettings() {
         };
 
         setSettings(settingsObject);
-      } catch (error) {
+      } catch {
         toast({
           title: '加载设置失败', 
           description: '使用默认设置继续',

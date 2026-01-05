@@ -17,7 +17,7 @@ export async function GET() {
       },
     });
     return NextResponse.json(AjaxResponse.ok(links));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("获取页脚链接失败"));
   }
 }
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     // 验证 URL 格式
     try {
       new URL(url);
-    } catch (e) {
+    } catch {
       return NextResponse.json(AjaxResponse.fail("请输入有效的URL地址"));
     }
 
@@ -47,6 +47,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(AjaxResponse.ok(link));
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((error as any).code === "P2002") {
       return NextResponse.json(AjaxResponse.fail("该URL已存在"));
     }
@@ -73,6 +74,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json(AjaxResponse.ok(link));
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((error as any).code === "P2025") {
       return NextResponse.json(AjaxResponse.fail("链接不存在"));
     }
@@ -96,6 +98,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json(AjaxResponse.ok("success"));
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((error as any).code === "P2025") {
       return NextResponse.json(AjaxResponse.fail("链接不存在"));
     }

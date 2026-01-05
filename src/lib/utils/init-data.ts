@@ -46,6 +46,7 @@ export async function initializeData() {
     // 获取所有分类的映射
     const categories = await prisma.category.findMany();
     const categoryMap = new Map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       categories.map((c: any) => [c.slug, c.id])
     );
 

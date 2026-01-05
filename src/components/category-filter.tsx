@@ -2,15 +2,7 @@
 
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { selectedCategoryAtom } from "@/lib/atoms/index";
-import { Button } from "../ui/common/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/common/dropdown-menu";
 import type { Category } from "@/lib/types";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils/utils";

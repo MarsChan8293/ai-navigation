@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, List, Loader2, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Search, Plus, Loader2, ChevronRight } from "lucide-react";
 import { Card } from "@/ui/common/card";
 import { Input } from "@/ui/common/input";
 import { Button } from "@/ui/common/button";

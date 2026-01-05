@@ -107,7 +107,7 @@ async function importData() {
       // Remove fields that shouldn't be directly imported or need transformation
       // We keep created_at/updated_at if they exist in JSON to preserve history, 
       // but Prisma might override updated_at on update.
-      const { id, category_slug, ipd_category_slug, rank, ...data } = item;
+      const data = item;
 
       // Convert date strings to Date objects if they exist
       const formattedData = {

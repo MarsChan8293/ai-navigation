@@ -14,9 +14,9 @@ export function Analytics({ googleAnalyticsId, baiduAnalyticsId }: AnalyticsProp
     if (baiduAnalyticsId) {
       window._hmt = window._hmt || [];
       (function() {
-        var hm = document.createElement("script");
+        const hm = document.createElement("script");
         hm.src = `https://hm.baidu.com/hm.js?${baiduAnalyticsId}`;
-        var s = document.getElementsByTagName("script")[0]; 
+        const s = document.getElementsByTagName("script")[0]; 
         if (s && s.parentNode) {
           s.parentNode.insertBefore(hm, s);
         } else {
@@ -54,6 +54,7 @@ export function Analytics({ googleAnalyticsId, baiduAnalyticsId }: AnalyticsProp
 // 为了 TypeScript 支持百度统计
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     _hmt: any[];
   }
 } 

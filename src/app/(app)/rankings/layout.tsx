@@ -1,5 +1,4 @@
 import { Trophy } from "lucide-react";
-import { prisma } from "@/lib/db/db";
 
 export default async function RankingsLayout({
   children,

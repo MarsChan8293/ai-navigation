@@ -47,7 +47,7 @@ export function WebsiteForm({
           return res.json();
         });
         setCategories(categoryData.data);
-      } catch (error) {
+      } catch {
         toast({
           title: "加载分类失败",
           description: "请刷新页面重试",
@@ -81,7 +81,7 @@ export function WebsiteForm({
         ...defaultValues
       });
     }
-  }, [defaultValues, reset]);
+  }, [defaultValues, reset, form]);
 
   const url = watch("url");
   const isValidUrl = url && url.startsWith("http");
@@ -100,7 +100,7 @@ export function WebsiteForm({
         title: "获取成功",
         description: "网站信息已自动填充",
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "获取元数据失败",
         description: "请手动填写网站信息",

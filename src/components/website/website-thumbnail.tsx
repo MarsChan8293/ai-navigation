@@ -42,9 +42,9 @@ export function WebsiteThumbnail({
           className="w-5 h-5"
           unoptimized
           onError={(e) => {
-            // @ts-ignore - nextjs Image 组件的 error 事件类型定义问题
+            // @ts-expect-error - nextjs Image 组件的 error 事件类型定义问题
             e.target.style.display = "none";
-            // @ts-ignore
+            // @ts-expect-error - nextjs Image 组件的 error 事件类型定义问题
             e.target.nextElementSibling?.classList.remove("hidden");
           }}
         />
