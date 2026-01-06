@@ -1,9 +1,7 @@
 "use client";
 
-import { JSX, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Search, Globe, ChevronDown } from "lucide-react";
-import { Input } from "@/ui/common/input";
+import { JSX, useState, useEffect, useCallback } from "react";
+import { Search, ChevronDown } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import {
   DropdownMenu,
@@ -75,14 +73,19 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
   );
   const [localValue, setLocalValue] = useState(value);
 
+  // Memoize onChange to prevent unnecessary re-renders
+  const handleChange = useCallback((newValue: string) => {
+    onChange(newValue);
+  }, [onChange]);
+
   // 处理搜索引擎切换
   useEffect(() => {
     if (selectedEngine.id === "local") {
-      onChange(localValue); // 切换到站内搜索时，同步当前输入值
+      handleChange(localValue); // 切换到站内搜索时，同步当前输入值
     } else {
-      onChange(""); // 切换到外部搜索时，清空站内搜索
+      handleChange(""); // 切换到外部搜索时，清空站内搜索
     }
-  }, [selectedEngine.id]);
+  }, [selectedEngine.id, localValue, handleChange]);
 
   const handleSearch = () => {
     if (!localValue.trim()) return;

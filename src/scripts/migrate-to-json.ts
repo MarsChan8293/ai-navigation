@@ -14,7 +14,9 @@ async function migrate() {
   const settings = JSON.parse(fs.readFileSync(path.join(dataDir, 'settings.json'), 'utf-8'))
   const footerLinks = JSON.parse(fs.readFileSync(path.join(dataDir, 'footer-links.json'), 'utf-8'))
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const websites = websitesRaw.map((w: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const category = categories.find((c: any) => c.slug === w.category_slug)
     return {
       id: w.id,

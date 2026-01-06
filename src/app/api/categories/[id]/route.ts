@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import type { Category } from "@/lib/types";
 import { AjaxResponse } from "@/lib/utils";
 import { prisma } from "@/lib/db/db";
 

@@ -11,6 +11,7 @@ import { ListFilter, Settings } from "lucide-react";
 export function SettingsPageClient({
   initialSettings,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialSettings: any;
 }) {
   const [settings, setSettings] = useState(

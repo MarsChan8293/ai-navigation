@@ -4,14 +4,12 @@ import fs from 'fs';
 import path from 'path';
 
 const defaultCategories = [
-  { id: 7, name: '需求研究', slug: 'ipd-requirement-research' },
-  { id: 8, name: '需求分析', slug: 'ipd-requirement-analysis' },
-  { id: 11, name: '架构设计', slug: 'ipd-design-architecture' },
-  { id: 12, name: '概念设计', slug: 'ipd-design-concept' },
-  { id: 16, name: '代码编写', slug: 'ipd-coding-code-write' },
-  { id: 22, name: '构建清洗', slug: 'ipd-build-cleancode' },
-  { id: 30, name: '测试设计', slug: 'ipd-test-test-design' },
-  { id: 36, name: '发布实施', slug: 'ipd-release-release-publish' },
+  { id: 7, name: 'IPD需求阶段', slug: 'ipd-requirement' },
+  { id: 8, name: 'IPD设计阶段', slug: 'ipd-design' },
+  { id: 9, name: 'IPD编码阶段', slug: 'ipd-coding' },
+  { id: 10, name: 'IPD构建阶段', slug: 'ipd-build' },
+  { id: 11, name: 'IPD测试阶段', slug: 'ipd-test' },
+  { id: 12, name: 'IPD实施阶段', slug: 'ipd-release' },
 ];
 
 interface WebsiteInput {
@@ -46,6 +44,7 @@ export async function initializeData() {
     // 获取所有分类的映射
     const categories = await prisma.category.findMany();
     const categoryMap = new Map(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       categories.map((c: any) => [c.slug, c.id])
     );
 

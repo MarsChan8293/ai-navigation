@@ -3,15 +3,14 @@
 import { motion } from "framer-motion";
 import { Card } from "@/ui/common/card";
 import { Button } from "@/ui/common/button";
-import { Badge } from "@/ui/common/badge";
-import { Heart, Globe, ArrowUpRight } from "lucide-react";
+import { Heart, Globe } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import {
   cardHoverVariants,
   sharedLayoutTransition,
 } from "@/ui/animation/variants/animations";
 import type { Website } from "@/lib/types";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { WebsiteThumbnail } from "./website-thumbnail";
 import { toast } from "@/hooks/use-toast";
 import { useCardTilt } from "@/hooks/use-card-tilt";

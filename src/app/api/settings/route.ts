@@ -27,7 +27,7 @@ export async function GET() {
     );
 
     return NextResponse.json(AjaxResponse.ok(settingsObject));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("Failed to fetch settings"));
   }
 }
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(AjaxResponse.ok(settings));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("Failed to get settings"), {
       status: 500,
     });

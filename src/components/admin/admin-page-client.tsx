@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { categoriesAtom } from "@/lib/atoms";
 import { WebsiteList } from "@/components/admin/website-list";
-import { Button } from "@/ui/common/button";
 import { Badge } from "@/ui/common/badge";
 import {
   Select,
@@ -26,6 +25,7 @@ export function AdminPageClient({
   initialCategories,
 }: {
   initialWebsites: Website[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialCategories: any[];
 }) {
   const [categories, setCategories] = useAtom(categoriesAtom);

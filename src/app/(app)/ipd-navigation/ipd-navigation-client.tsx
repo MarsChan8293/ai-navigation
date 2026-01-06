@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, List, Loader2, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Search, Plus, Loader2 } from "lucide-react";
 import { Card } from "@/ui/common/card";
 import { Input } from "@/ui/common/input";
 import { Button } from "@/ui/common/button";
@@ -16,93 +16,29 @@ import type { Website } from "@/lib/types";
 interface IpdPhase {
   id: string;
   name: string;
-  items: IpdItem[];
-}
-
-interface IpdItem {
-  id: string;
-  name: string;
-  phaseId: string;
-  important?: boolean;
-  color?: "yellow" | "green" | "default" | "dark";
 }
 
 const ipdPhases: IpdPhase[] = [
-  {
-    id: "requirement",
-    name: "需求阶段",
-    items: [
-      { id: "research", name: "需求调研", color: "default", phaseId: "requirement" },
-      { id: "analysis", name: "需求分析", color: "yellow", phaseId: "requirement" },
-      { id: "coding", name: "需求编写", color: "yellow", phaseId: "requirement" },
-      { id: "review", name: "需求审讲&反审讲", color: "default", phaseId: "requirement" },
-    ],
-  },
-  {
-    id: "design",
-    name: "设计阶段",
-    items: [
-      { id: "architecture", name: "架构设计", color: "yellow", important: true, phaseId: "design" },
-      { id: "concept", name: "概要设计", color: "yellow", phaseId: "design" },
-      { id: "detail", name: "详细设计", color: "yellow", important: true, phaseId: "design" },
-      { id: "design-review", name: "设计评审", color: "default", phaseId: "design" },
-      { id: "security", name: "网络安全设计", color: "default", phaseId: "design" },
-    ],
-  },
-  {
-    id: "coding",
-    name: "编码阶段",
-    items: [
-      { id: "code-write", name: "代码编写", color: "green", important: true, phaseId: "coding" },
-      { id: "code-read", name: "代码走读", color: "dark", phaseId: "coding" },
-      { id: "code-check", name: "代码检视", color: "green", important: true, phaseId: "coding" },
-      { id: "unit-test", name: "单元测试", color: "green", important: true, phaseId: "coding" },
-      { id: "code-union", name: "代码联调", color: "dark", phaseId: "coding" },
-      { id: "issue-fix", name: "问题单修改", color: "yellow", phaseId: "coding" },
-    ],
-  },
-  {
-    id: "build",
-    name: "构建阶段",
-    items: [
-      { id: "cleancode", name: "CleanCode门禁检查", color: "dark", phaseId: "build" },
-      { id: "script-build", name: "构建脚本编写", color: "dark", important: true, phaseId: "build" },
-      { id: "auto-script", name: "自动化脚本编写", color: "dark", important: true, phaseId: "build" },
-      { id: "personal-build", name: "个人构建", color: "dark", phaseId: "build" },
-      { id: "daily-build", name: "每日构建", color: "dark", phaseId: "build" },
-      { id: "version-build", name: "版本级构建", color: "dark", phaseId: "build" },
-      { id: "smoke-test", name: "冒烟测试", color: "dark", phaseId: "build" },
-      { id: "leak-scan", name: "开源漏洞扫描", color: "dark", phaseId: "build" },
-    ],
-  },
-  {
-    id: "test",
-    name: "测试阶段",
-    items: [
-      { id: "test-design", name: "测试方案设计", color: "yellow", phaseId: "test" },
-      { id: "test-case-write", name: "测试用例编写", color: "yellow", important: true, phaseId: "test" },
-      { id: "test-case-auto", name: "自动化脚本编写", color: "yellow", important: true, phaseId: "test" },
-      { id: "version-test", name: "版本级测试", color: "dark", phaseId: "test" },
-      { id: "issue-list", name: "提交问题单", color: "dark", phaseId: "test" },
-      { id: "leak-analysis", name: "漏测分析", color: "dark", phaseId: "test" },
-    ],
-  },
-  {
-    id: "release",
-    name: "实施阶段",
-    items: [
-      { id: "release-publish", name: "版本发布上网", color: "dark", important: true, phaseId: "release" },
-      { id: "deploy-online", name: "部署上线", color: "dark", phaseId: "release" },
-      { id: "tech-support", name: "技术支持、运维", color: "dark", important: true, phaseId: "release" },
-      { id: "qa-improve", name: "网上问题修改", color: "yellow", phaseId: "release" },
-    ],
-  },
+  { id: "requirement", name: "需求阶段" },
+  { id: "design", name: "设计阶段" },
+  { id: "coding", name: "编码阶段" },
+  { id: "build", name: "构建阶段" },
+  { id: "test", name: "测试阶段" },
+  { id: "release", name: "实施阶段" },
 ];
+
+const stageSlugMap: Record<string, string> = {
+  requirement: "ipd-requirement",
+  design: "ipd-design",
+  coding: "ipd-coding",
+  build: "ipd-build",
+  test: "ipd-test",
+  release: "ipd-release",
+};
 
 export function IpdNavigationClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStage, setSelectedStage] = useState<string | null>("requirement");
-  const [selectedItem, setSelectedItem] = useState<IpdItem | null>(null);
   const [viewMode, setViewMode] = useState<"list" | "submit">("list");
   const [websites, setWebsites] = useState<Website[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,18 +49,15 @@ export function IpdNavigationClient() {
 
   const filteredPhases = useMemo(
     () =>
-      ipdPhases.map((phase) => ({
-        ...phase,
-        items: phase.items.filter((item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ),
-      })),
+      ipdPhases.filter((phase) =>
+        phase.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ),
     [searchQuery]
   );
 
   const currentPhase = useMemo(
-    () => filteredPhases.find((p) => p.id === selectedStage),
-    [filteredPhases, selectedStage]
+    () => ipdPhases.find((p) => p.id === selectedStage),
+    [selectedStage]
   );
 
   useEffect(() => {
@@ -146,33 +79,12 @@ export function IpdNavigationClient() {
   }, [categories.length, setCategories]);
 
   useEffect(() => {
-    if (!currentPhase) {
-      setSelectedItem(null);
-      setWebsites([]);
-      return;
-    }
-
-    const firstItem = currentPhase.items[0];
-    if (!firstItem) {
-      setSelectedItem(null);
-      setWebsites([]);
-      return;
-    }
-
-    const exists = currentPhase.items.some((item) => item.id === selectedItem?.id);
-    if (!exists) {
-      setSelectedItem(firstItem);
-      setViewMode("list");
-    }
-  }, [currentPhase, selectedItem]);
-
-  useEffect(() => {
-    if (!selectedItem) {
+    if (!selectedStage) {
       setCurrentCategoryId(null);
       return;
     }
 
-    const slug = `ipd-${selectedItem.phaseId}-${selectedItem.id}`;
+    const slug = stageSlugMap[selectedStage];
     const category = categories.find((c) => c.slug === slug);
 
     if (category) {
@@ -180,12 +92,12 @@ export function IpdNavigationClient() {
     } else {
       setCurrentCategoryId(null);
     }
-  }, [selectedItem, categories]);
+  }, [selectedStage, categories]);
 
   const fetchWebsites = useCallback(async (categoryId: number) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/websites?category_id=${categoryId}`);
+      const response = await fetch(`/api/websites?ipd_category_id=${categoryId}`);
       const data = await response.json();
       if (data.success) {
         setWebsites(data.data);
@@ -203,9 +115,9 @@ export function IpdNavigationClient() {
     }
   }, [currentCategoryId, viewMode, fetchWebsites]);
 
-  const handleItemClick = useCallback((item: IpdItem, mode: "list" | "submit" = "list") => {
-    setSelectedItem(item);
-    setViewMode(mode);
+  const handleStageClick = useCallback((stageId: string) => {
+    setSelectedStage(stageId);
+    setViewMode("list");
 
     setTimeout(() => {
       resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -243,7 +155,7 @@ export function IpdNavigationClient() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="搜索IPD流程阶段或活动..."
+              placeholder="搜索IPD流程阶段..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 h-12 text-base"
@@ -266,10 +178,7 @@ export function IpdNavigationClient() {
               {filteredPhases.map((phase, index) => (
                 <div key={phase.id} className="flex items-center gap-4">
                   <button
-                    onClick={() => {
-                      setSelectedStage(phase.id);
-                      setSelectedItem(null);
-                    }}
+                    onClick={() => handleStageClick(phase.id)}
                     className={cn(
                       "px-6 py-3 rounded-lg font-semibold whitespace-nowrap transition-all duration-200",
                       selectedStage === phase.id
@@ -306,69 +215,38 @@ export function IpdNavigationClient() {
                 </div>
               </div>
 
-              <div className="flex gap-6 flex-col lg:flex-row">
-                <div className="space-y-2 flex-shrink-0">
-                  {currentPhase.items.map((item) => (
-                    <motion.button
-                      key={item.id}
-                      whileHover={{ x: 4 }}
-                      onClick={() => handleItemClick(item, "list")}
-                      className={cn(
-                        "w-full max-w-[180px] text-left p-3 rounded-lg border transition-all duration-200 flex items-center justify-between gap-2.5",
-                        selectedItem?.id === item.id
-                          ? "border-primary bg-primary/5 text-primary shadow-md"
-                          : "bg-card border-border hover:border-primary/50 hover:shadow-sm"
-                      )}
-                    >
-                      <div className="flex-1">
-                        <div className="font-semibold leading-snug">{item.name}</div>
-                      </div>
-                      <ChevronRight className="h-4 w-4 flex-shrink-0" />
-                    </motion.button>
-                  ))}
+              <div ref={resultsRef} className="space-y-4">
+                <div>
+                  <div className="text-xs font-bold uppercase text-primary tracking-widest">当前阶段</div>
+                  <h3 className="text-2xl font-bold mt-1">{currentPhase.name}</h3>
+                  <p className="text-sm text-muted-foreground">{viewMode === "list" ? "为您精选的相关网站" : "提交新的相关资源"}</p>
                 </div>
 
-                <div ref={resultsRef} className="flex-1">
-                  {selectedItem ? (
-                    <div className="space-y-4">
-                      <div>
-                        <div className="text-xs font-bold uppercase text-primary tracking-widest">当前活动</div>
-                        <h3 className="text-2xl font-bold mt-1">{selectedItem.name}</h3>
-                        <p className="text-sm text-muted-foreground">{viewMode === "list" ? "为您精选的相关网站" : "提交新的相关资源"}</p>
-                      </div>
-
-                      {viewMode === "list" ? (
-                        isLoading ? (
-                          <div className="flex items-center justify-center py-16 text-muted-foreground">
-                            <Loader2 className="h-6 w-6 animate-spin mr-2" />
-                            <span>正在加载资源...</span>
-                          </div>
-                        ) : (
-                          <WebsiteGrid
-                            websites={websites}
-                            categories={categories}
-                            className="mt-2"
-                          />
-                        )
-                      ) : (
-                        <div className="bg-muted/30 p-6 rounded-2xl border border-border/50">
-                          <WebsiteForm
-                            onSuccess={handleSubmissionSuccess}
-                            hideIpdCategory={true}
-                            hideCategory={true}
-                            defaultValues={{
-                              category_id: "2",
-                              ipd_category_id: currentCategoryId?.toString() || ""
-                            }}
-                          />
-                        </div>
-                      )}
+                {viewMode === "list" ? (
+                  isLoading ? (
+                    <div className="flex items-center justify-center py-16 text-muted-foreground">
+                      <Loader2 className="h-6 w-6 animate-spin mr-2" />
+                      <span>正在加载资源...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center h-full min-h-[240px] text-muted-foreground">
-                    </div>
-                  )}
-                </div>
+                    <WebsiteGrid
+                      websites={websites}
+                      categories={categories}
+                      className="mt-2"
+                    />
+                  )
+                ) : (
+                  <div className="bg-muted/30 p-6 rounded-2xl border border-border/50">
+                    <WebsiteForm
+                      onSuccess={handleSubmissionSuccess}
+                      hideCategory={true}
+                      defaultValues={{
+                        category_id: "2",
+                        ipd_category_id: currentCategoryId?.toString()
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             </Card>
           )}

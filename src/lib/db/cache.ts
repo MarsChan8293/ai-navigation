@@ -9,6 +9,7 @@ const CACHE_STATS = {
 
 // Add cache persistence check
 function shouldRefreshCache(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cachedData: CacheEntry<any>,
   options: CacheOptions
 ): boolean {

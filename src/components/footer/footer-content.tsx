@@ -17,7 +17,6 @@ import { Input } from "@/ui/common/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils/utils";
 import type { FooterSettings } from "@/lib/types";
-import { useAtomValue } from "jotai";
 import { isAdminModeAtom } from "@/lib/atoms";
 
 export default function FooterContent({
@@ -29,7 +28,7 @@ export default function FooterContent({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newLink, setNewLink] = useState({ title: "", url: "" });
   const { toast } = useToast();
-  const [isAdminMode, setIsAdminMode] = useAtom(isAdminModeAtom);
+  const [isAdminMode] = useAtom(isAdminModeAtom);
 
   // Initialize settings
   useEffect(() => {
@@ -84,7 +83,7 @@ export default function FooterContent({
         title: "添加成功",
         description: "新的页脚链接已添加",
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "添加失败",
         description: "添加页脚链接时出错",
@@ -123,7 +122,7 @@ export default function FooterContent({
         title: "删除成功",
         description: "页脚链接已删除",
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "删除失败",
         description: "删除页脚链接时出错",

@@ -50,6 +50,7 @@ export interface Data {
 
 const defaultData: Data = { settings: [], websites: [], categories: [], footer_links: [] }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let dbInstance: any = null
 
 // Initialize the database

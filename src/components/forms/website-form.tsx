@@ -22,13 +22,13 @@ import { useToast } from "@/hooks/use-toast";
 import type { FormInputs } from "@/lib/types";
 import { useSettings } from "@/hooks/use-settings";
 
-export function WebsiteForm({ 
-  onSuccess, 
+export function WebsiteForm({
+  onSuccess,
   defaultValues,
   hideCategory = false
-}: { 
+}: {
   onSuccess?: () => void;
-  defaultValues?: Partial<FormInputs>;
+  defaultValues?: Partial<FormInputs & { ipd_category_id?: string }>;
   hideCategory?: boolean;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,7 +47,7 @@ export function WebsiteForm({
           return res.json();
         });
         setCategories(categoryData.data);
-      } catch (error) {
+      } catch {
         toast({
           title: "加载分类失败",
           description: "请刷新页面重试",
@@ -61,7 +61,7 @@ export function WebsiteForm({
     }
   }, [categories.length, setCategories, toast]);
 
-  const form = useForm<FormInputs>({
+  const form = useForm<FormInputs & { ipd_category_id?: string }>({
     resolver: zodResolver(websiteFormSchema),
     defaultValues: {
       title: defaultValues?.title || "",
@@ -69,6 +69,7 @@ export function WebsiteForm({
       description: defaultValues?.description || "",
       category_id: defaultValues?.category_id || "",
       thumbnail: defaultValues?.thumbnail || "",
+      ipd_category_id: defaultValues?.ipd_category_id || "",
     },
   });
 
@@ -81,7 +82,7 @@ export function WebsiteForm({
         ...defaultValues
       });
     }
-  }, [defaultValues, reset]);
+  }, [defaultValues, reset, form]);
 
   const url = watch("url");
   const isValidUrl = url && url.startsWith("http");
@@ -100,7 +101,7 @@ export function WebsiteForm({
         title: "获取成功",
         description: "网站信息已自动填充",
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "获取元数据失败",
         description: "请手动填写网站信息",
@@ -111,7 +112,7 @@ export function WebsiteForm({
     }
   };
 
-  const onSubmit = async (values: FormInputs) => {
+  const onSubmit = async (values: FormInputs & { ipd_category_id?: string }) => {
     if (!values.category_id) {
       toast({
         title: "请选择分类",
@@ -133,7 +134,10 @@ export function WebsiteForm({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          ipd_category_id: values.ipd_category_id || undefined,
+        }),
       });
 
       if (!response.ok) {

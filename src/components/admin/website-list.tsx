@@ -43,9 +43,8 @@ export function WebsiteList({
   showActions = false,
 }: WebsiteListProps) {
   const { toast } = useToast();
-  const [deleteId, setDeleteId] = useState<number | null>(null);
   const [websites, setWebsites] = useState(initialWebsites);
-  const [allWebsites, setAllWebsites] = useAtom(websitesAtom);
+  useAtom(websitesAtom);
 
   useEffect(() => {
     setWebsites(initialWebsites);

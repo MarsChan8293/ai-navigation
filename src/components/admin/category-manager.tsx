@@ -67,8 +67,9 @@ export function CategoryManager() {
       } else {
           throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "添加分类失败", variant: "destructive" });
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toast({ title: "错误", description: (error as any).message || "添加分类失败", variant: "destructive" });
     }
   };
 
@@ -95,8 +96,9 @@ export function CategoryManager() {
       } else {
            throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "更新分类失败", variant: "destructive" });
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toast({ title: "错误", description: (error as any).message || "更新分类失败", variant: "destructive" });
     }
   };
 
@@ -113,8 +115,9 @@ export function CategoryManager() {
       } else {
           throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "删除分类失败", variant: "destructive" });
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      toast({ title: "错误", description: (error as any).message || "删除分类失败", variant: "destructive" });
     }
   };
 
