@@ -1,0 +1,245 @@
+"use client";
+
+import { useAtom } from "jotai";
+import { motion } from "framer-motion";
+import {
+    Globe,
+    MessageSquare,
+    Palette,
+    PenTool,
+    Code2,
+    Wrench,
+    Brain,
+    ChevronLeft,
+    ChevronRight,
+    LayoutGrid,
+    Trophy,
+    Plus,
+    Settings,
+    Info,
+    Server,
+    Bot,
+    Command,
+    MessageCircle,
+    Briefcase,
+    Search
+} from "lucide-react";
+import type { Category } from "@/lib/types";
+import { cn } from "@/lib/utils/utils";
+import { useState } from "react";
+import { Button } from "@/ui/common/button";
+import Link from "next/link";
+import ThemeSwitch from "@/components/theme-switcher/theme-switch";
+import { usePathname } from "next/navigation";
+
+interface SidebarProps {
+    categories: Category[];
+}
+
+const iconMap: Record<string, typeof Globe> = {
+    "all": LayoutGrid,
+    "ai-chat": MessageCircle,
+    "ai-drawing": Palette,
+    "ai-writing": PenTool,
+    "ai-coding": Code2,
+    "ai-tools": Wrench,
+    "ai-model": Brain,
+    "ai-agent": Bot,
+    "ai-prompt": Command,
+    "ai-infra": Server,
+    "ai-office": Briefcase,
+    "ai-search": Search,
+    "ai-hubs": Brain,
+    "ai-agents": Bot,
+    "ai-art": Palette,
+    "ai-others": Wrench,
+};
+
+function SidebarItem({ href, label, isCollapsed, isAll, slug }: { href: string, label: string, isCollapsed: boolean, isAll: boolean, slug: string }) {
+    const pathname = usePathname();
+    const isActive = isAll ? (pathname === "/" || pathname === "/category/all") : pathname === `/category/${slug}`;
+
+    return (
+        <Link
+            href={href}
+            className={cn(
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative",
+                isActive
+                    ? "bg-primary text-primary-foreground shadow-sm shadow-primary/10"
+                    : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
+            )}
+        >
+            {!isCollapsed && (
+                <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-left">
+                    {label}
+                </span>
+            )}
+            {isActive && !isCollapsed && (
+                <motion.div
+                    layoutId="active-indicator"
+                    className="ml-auto w-1.5 h-1.5 rounded-full bg-primary-foreground"
+                />
+            )}
+
+            {isCollapsed && (
+                <div className="absolute left-full ml-4 px-3 py-1.5 bg-popover text-popover-foreground text-xs font-bold rounded-lg border border-border opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-xl z-[100]">
+                    {label}
+                </div>
+            )}
+        </Link>
+    )
+}
+
+export function Sidebar({ categories }: SidebarProps) {
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const pathname = usePathname();
+
+    const categoriesWithAll = [
+        { id: null, name: "全部资料", slug: "all" },
+        ...categories,
+    ];
+
+    const mainNavLinks = [
+        { name: "使用案例", href: "/use-cases", icon: MessageSquare },
+        { name: "排行榜", href: "/rankings", icon: Trophy },
+        { name: "提交网站", href: "/submit", icon: Plus },
+        { name: "管理", href: "/admin", icon: Settings },
+        { name: "关于我们", href: "/about", icon: Info },
+    ];
+
+    return (
+        <div
+            className={cn(
+                "relative h-screen bg-card/20 backdrop-blur-3xl border-r border-border/40 transition-all duration-300 flex flex-col z-50",
+                isCollapsed ? "w-[72px]" : "w-64"
+            )}
+        >
+            {/* Sidebar Header / Logo */}
+            <div className={cn(
+                "p-6 flex items-center transition-all duration-300",
+                isCollapsed ? "justify-center" : "justify-start gap-4"
+            )}>
+                <Link href="/" className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
+                        <Brain className="w-5.5 h-5.5 text-primary-foreground" />
+                    </div>
+                    {!isCollapsed && (
+                        <div className="flex flex-col">
+                            <span className="font-black text-lg tracking-tighter leading-none italic uppercase">AI Nav</span>
+                            <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Discover AI</span>
+                        </div>
+                    )}
+                </Link>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-4 py-2 space-y-1.5 custom-scrollbar">
+                <div className="mb-4">
+                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">分类浏览</p>}
+                    {categoriesWithAll.map((category) => {
+                        const href = category.slug === "all" ? "/" : `/category/${category.slug}`;
+                        const isAll = category.slug === "all";
+
+                        return (
+                            <SidebarItem
+                                key={category.slug || "all"}
+                                href={href}
+                                label={category.name}
+                                isCollapsed={isCollapsed}
+                                isAll={isAll}
+                                slug={category.slug || "all"}
+                            />
+                        );
+                    })}
+                </div>
+
+                <div className="pt-4 border-t border-border/40">
+                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">导航链接</p>}
+                    {mainNavLinks.map((link) => {
+                        const isActive = pathname === link.href;
+                        const isExternal = link.href.startsWith("http");
+
+                        if (isExternal) {
+                            return (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={cn(
+                                        "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative",
+                                        "text-muted-foreground hover:bg-primary/5 hover:text-primary"
+                                    )}
+                                >
+                                    <link.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6 mx-auto" : "w-5 h-5")} />
+                                    {!isCollapsed && (
+                                        <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis">
+                                            {link.name}
+                                        </span>
+                                    )}
+                                    {isCollapsed && (
+                                        <div className="absolute left-full ml-4 px-3 py-1.5 bg-popover text-popover-foreground text-xs font-bold rounded-lg border border-border opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-xl z-[100]">
+                                            {link.name}
+                                        </div>
+                                    )}
+                                </a>
+                            );
+                        }
+
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={cn(
+                                    "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative",
+                                    isActive
+                                        ? "bg-primary text-primary-foreground shadow-sm shadow-primary/10"
+                                        : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
+                                )}
+                            >
+                                <link.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6 mx-auto" : "w-5 h-5")} />
+                                {!isCollapsed && (
+                                    <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {link.name}
+                                    </span>
+                                )}
+                                {isCollapsed && (
+                                    <div className="absolute left-full ml-4 px-3 py-1.5 bg-popover text-popover-foreground text-xs font-bold rounded-lg border border-border opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-xl z-[100]">
+                                        {link.name}
+                                    </div>
+                                )}
+                            </Link>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* Sidebar Footer / Toggle */}
+            <div className="p-4 border-t border-border/40 flex flex-col gap-3">
+                {!isCollapsed && (
+                    <div className="flex items-center justify-between px-2 bg-muted/40 rounded-xl p-2.5">
+                        <span className="text-[10px] font-bold text-muted-foreground uppercase py-1">暗色模式</span>
+                        <ThemeSwitch />
+                    </div>
+                )}
+
+                {isCollapsed && (
+                    <div className="flex justify-center">
+                        <ThemeSwitch />
+                    </div>
+                )}
+
+                <Button
+                    variant="secondary"
+                    size="sm"
+                    className={cn(
+                        "w-full flex items-center justify-center gap-2 h-9 rounded-xl font-bold text-xs transition-all",
+                        isCollapsed && "p-0 h-9 w-9 mx-auto"
+                    )}
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                >
+                    {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <><ChevronLeft className="h-4 w-4" /> 收起侧栏</>}
+                </Button>
+            </div>
+        </div>
+    );
+}
