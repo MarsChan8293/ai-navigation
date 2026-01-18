@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense } from "react";
 import { SearchBox } from "@/components/search-box";
 import CategoryFilter from "@/components/category-filter";
 import Fallback from "@/components/loading/fallback";

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAtom } from "jotai";
-import { categoriesAtom } from "@/lib/atoms";
+import { useHydrateAtoms } from "jotai/utils";
+import { categoriesAtom, websitesAtom } from "@/lib/atoms";
 import { WebsiteList } from "@/components/admin/website-list";
-import { Button } from "@/ui/common/button";
 import { Badge } from "@/ui/common/badge";
 import {
   Select,
@@ -26,15 +26,15 @@ export function AdminPageClient({
   initialCategories,
 }: {
   initialWebsites: Website[];
-  initialCategories: any[];
+  initialCategories: { id: number; name: string; slug: string }[];
 }) {
-  const [categories, setCategories] = useAtom(categoriesAtom);
+  useHydrateAtoms([
+    [categoriesAtom, initialCategories],
+    [websitesAtom, initialWebsites],
+  ]);
 
-  useEffect(() => {
-    if (initialCategories) {
-      setCategories(initialCategories);
-    }
-  }, [initialCategories, setCategories]);
+  const [categories, setCategories] = useAtom(categoriesAtom);
+  const [allWebsites, setAllWebsites] = useAtom(websitesAtom);
 
   const [activeStatus, setActiveStatus] =
     useState<Website["status"]>("pending");
@@ -43,7 +43,7 @@ export function AdminPageClient({
   if (!initialWebsites || !Array.isArray(initialWebsites)) return null;
   if (!initialCategories || !Array.isArray(initialCategories)) return null;
 
-  const filteredWebsites = initialWebsites.filter((website) => {
+  const filteredWebsites = allWebsites.filter((website) => {
     const matchesStatus = website.status === activeStatus;
     const matchesCategory =
       selectedCategory === "all" ||
@@ -52,9 +52,9 @@ export function AdminPageClient({
   });
 
   const statusCounts = {
-    pending: initialWebsites.filter((w) => w.status === "pending").length,
-    approved: initialWebsites.filter((w) => w.status === "approved").length,
-    rejected: initialWebsites.filter((w) => w.status === "rejected").length,
+    pending: allWebsites.filter((w) => w.status === "pending").length,
+    approved: allWebsites.filter((w) => w.status === "approved").length,
+    rejected: allWebsites.filter((w) => w.status === "rejected").length,
   };
 
   const getStatusColor = (status: Website["status"]) => {
@@ -88,7 +88,7 @@ export function AdminPageClient({
               管理网站内容和系统设置
             </p>
           </div>
-          
+
           <TabsList className="grid w-full sm:w-auto grid-cols-3 bg-background/50">
             <TabsTrigger
               value="websites"
@@ -128,11 +128,10 @@ export function AdminPageClient({
                       onClick={() => setActiveStatus(status as Website["status"])}
                       className={`
                         flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200
-                        ${
-                          activeStatus === status
-                            ? "bg-background/40 border-primary/30 shadow-sm " +
-                              getStatusColor(status as Website["status"])
-                            : "bg-background/20 border-border/40 hover:border-border/60 text-muted-foreground hover:text-foreground"
+                        ${activeStatus === status
+                          ? "bg-background/40 border-primary/30 shadow-sm " +
+                          getStatusColor(status as Website["status"])
+                          : "bg-background/20 border-border/40 hover:border-border/60 text-muted-foreground hover:text-foreground"
                         }
                       `}
                     >
@@ -140,15 +139,15 @@ export function AdminPageClient({
                         {status === "pending"
                           ? "待审核"
                           : status === "approved"
-                          ? "已通过"
-                          : "已拒绝"}
+                            ? "已通过"
+                            : "已拒绝"}
                       </span>
                       <Badge
                         variant={activeStatus === status ? "secondary" : "outline"}
                         className={cn(
                           "ml-1 bg-background/50",
                           activeStatus === status &&
-                            getStatusColor(status as Website["status"])
+                          getStatusColor(status as Website["status"])
                         )}
                       >
                         {statusCounts[status as keyof typeof statusCounts]}
@@ -192,9 +191,9 @@ export function AdminPageClient({
         </TabsContent>
 
         <TabsContent value="categories" className="mt-6">
-           <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
-              <CategoryManager />
-           </div>
+          <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
+            <CategoryManager />
+          </div>
         </TabsContent>
       </Tabs>
     </motion.div>

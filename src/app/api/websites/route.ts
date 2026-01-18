@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     // Validate URL format
     try {
       new URL(data.url);
-    } catch (error) {
+    } catch (_error) {
       return NextResponse.json(AjaxResponse.fail("Invalid URL format"), {
         status: 400,
       });
@@ -86,6 +86,7 @@ export async function POST(request: Request) {
         thumbnail: data.thumbnail?.trim() || "",
         status: data.status || "pending",
         thumbnail_base64: imageBase64 as string,
+
       },
     });
 

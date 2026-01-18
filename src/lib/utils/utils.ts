@@ -34,9 +34,14 @@ export class AjaxResponse<T> {
 
 export async function fetchMetadata(url: string) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+    });
     if (!response.ok) {
-      throw new Error("无法访问该网站");
+      throw new Error(`无法访问该网站 (HTTP ${response.status})`);
     }
     const html = await response.text();
 
@@ -115,8 +120,9 @@ export async function fetchMetadata(url: string) {
       title: decodeHTMLEntities(title),
       description: decodeHTMLEntities(description),
       image,
+      screenshot: `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=1280&h=720`,
     };
-  } catch (error) {
+  } catch (_error) {
     throw new Error("获取网站信息失败");
   }
 }

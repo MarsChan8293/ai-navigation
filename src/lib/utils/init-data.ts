@@ -2,16 +2,16 @@ import { prisma } from '../db/db';
 import type { Prisma, Category } from '@prisma/client';
 import { WebsiteSettings } from '../constraint';
 
-
-
-
 const defaultCategories = [
-  { name: 'AI 聊天', slug: 'ai-chat' },
-  { name: 'AI 绘画', slug: 'ai-art' },
-  { name: 'AI 写作', slug: 'ai-writing' },
-  { name: 'AI 编程', slug: 'ai-coding' },
-  { name: 'AI 工具', slug: 'ai-tools' },
-  { name: '大语言模型', slug: 'llm' },
+  { name: 'AI 对话平台', slug: 'ai-chat' },
+  { name: 'AI 模型与社区', slug: 'ai-hubs' },
+  { name: 'AI 编程平台', slug: 'ai-coding' },
+  { name: 'AI Infra 推理框架', slug: 'ai-infra' },
+  { name: 'AI Agent 开发/自动化', slug: 'ai-agents' },
+  { name: 'AI 绘画与设计', slug: 'ai-art' },
+  { name: 'AI 办公与幻灯片', slug: 'ai-office' },
+  { name: 'AI 搜索与深度研究', slug: 'ai-search' },
+  { name: '其他 AI 工具', slug: 'ai-others' },
 ];
 
 interface WebsiteInput {
@@ -24,345 +24,61 @@ interface WebsiteInput {
 }
 
 const defaultWebsites = [
-  {
-    title: 'ChatGPT',
-    url: 'https://chat.openai.com',
-    description: 'OpenAI 开发的 AI 聊天助手，能够进行自然对话并协助完成各种任务。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://chat.openai.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Claude',
-    url: 'https://claude.ai',
-    description: 'Anthropic 开发的 AI 助手，擅长写作、分析和编程等任务。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://claude.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Gemini',
-    url: 'https://gemini.google.com',
-    description: 'Google 开发的多模态 AI 助手，集成 Google 生态，支持多种任务。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.gstatic.com/lamda/images/favicon_v1_150160c13ff2af2630b3.png',
-    status: 'approved',
-  },
-  {
-    title: 'Poe',
-    url: 'https://poe.com',
-    description: 'Quora 推出的 AI 聚合平台，可访问多种领先的 AI 模型。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://poe.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Perplexity',
-    url: 'https://www.perplexity.ai',
-    description: '领先的 AI 搜索引擎，提供带引用的精准回答，改变信息检索方式。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.perplexity.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Kimi',
-    url: 'https://kimi.moonshot.cn',
-    description: '月之暗面开发，支持超长上下文处理，擅长长文本分析。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://kimi.moonshot.cn/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'DeepSeek',
-    url: 'https://www.deepseek.com',
-    description: '深度求索开发的国产开源大模型，在编程和数学方面表现出色。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.deepseek.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '豆包',
-    url: 'https://www.doubao.com',
-    description: '字节跳动推出的 AI 智能助手，国内用户量最大的 AI 应用之一。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.doubao.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '腾讯元宝',
-    url: 'https://yuanbao.tencent.com',
-    description: '腾讯基于混元大模型推出的 AI 助手，深度集成腾讯生态。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://yuanbao.tencent.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '通义千问',
-    url: 'https://tongyi.aliyun.com',
-    description: '阿里巴巴开发的超大规模语言模型，具备多轮对话、文案创作能力。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://img.alicdn.com/imgextra/i4/O1CN0176999917699999999_!!6000000000000-2-tps-128-128.png',
-    status: 'approved',
-  },
-  {
-    title: '文心一言',
-    url: 'https://yiyan.baidu.com',
-    description: '百度推出的知识增强大语言模型，能够回答问题、协助创作。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://yiyan.baidu.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '智谱清言',
-    url: 'https://chatglm.cn',
-    description: '智谱 AI 基于 ChatGLM 开发的 AI 助手，具备强大的对话和理解能力。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://chatglm.cn/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '海螺AI',
-    url: 'https://www.hailuoai.com',
-    description: 'Minimax 推出的生产力助手，以极速响应和高质量语音交互著称。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.hailuoai.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '跃问',
-    url: 'https://www.yuexia.com',
-    description: '阶跃星辰推出的 AI 助手，具备强大的多模态理解和逻辑推理能力。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.yuexia.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '360智脑',
-    url: 'https://chat.360.com',
-    description: '360 集团推出的认知型通用大模型，擅长资料检索和安全分析。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://chat.360.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '万知',
-    url: 'https://www.wanzhi.com',
-    description: '零一万物推出的生产力工具，擅长会议纪要、文档解读和办公协作。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.wanzhi.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '百川大模型',
-    url: 'https://www.baichuan-ai.com',
-    description: '百川智能推出，在中文语境理解和医疗等专业领域表现出色。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://www.baichuan-ai.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Mistral AI',
-    url: 'https://chat.mistral.ai',
-    description: '欧洲 AI 领头羊 Mistral 推出的对话界面，提供强大的开源模型访问。',
-    category_slug: 'ai-chat',
-    thumbnail: 'https://chat.mistral.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Midjourney',
-    url: 'https://www.midjourney.com',
-    description: '强大的 AI 绘画工具，可以通过文字描述生成高质量图片。',
-    category_slug: 'ai-art',
-    thumbnail: 'https://www.midjourney.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'GitHub Copilot',
-    url: 'https://github.com/features/copilot',
-    description: 'GitHub 和 OpenAI 合作开发的 AI 编程助手，提供智能代码补全。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://github.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Claude Code',
-    url: 'https://claude.ai/code',
-    description: 'Anthropic 推出的命令行 AI 助手，可直接在终端编写和调试代码。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://claude.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Trae',
-    url: 'https://www.trae.ai',
-    description: '字节跳动推出的自适应 AI IDE，基于 VS Code 构建，深度集成 AI 能力。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.trae.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Cursor',
-    url: 'https://www.cursor.com',
-    description: '目前最受欢迎的 AI 驱动代码编辑器，提供强大的代码补全和对话功能。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.cursor.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Windsurf',
-    url: 'https://codeium.com/windsurf',
-    description: 'Codeium 推出的新一代 AI IDE，具备强大的上下文理解和代理能力。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://codeium.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Tabnine',
-    url: 'https://www.tabnine.com',
-    description: '专注于私有化部署和企业安全的 AI 编程助手。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.tabnine.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Amazon Q',
-    url: 'https://aws.amazon.com/q/developer',
-    description: '亚马逊推出的 AI 助手，深度集成 AWS 服务。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Codeium',
-    url: 'https://codeium.com',
-    description: '个人用户免费的 AI 编程助手，支持 70 多种编程语言。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://codeium.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Supermaven',
-    url: 'https://supermaven.com',
-    description: '以极速响应和超长上下文窗口 (1M tokens) 著称的 AI 插件。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://supermaven.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Continue',
-    url: 'https://www.continue.dev',
-    description: '开源的 AI 编程助手，支持自定义模型和本地 LLM 部署。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.continue.dev/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Sourcegraph Cody',
-    url: 'https://about.sourcegraph.com/cody',
-    description: '利用代码图谱提供精准上下文的 AI 编程助手。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://about.sourcegraph.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Replit Agent',
-    url: 'https://replit.com/ai',
-    description: 'Replit 推出的 AI 代理，可从零开始构建和部署完整应用。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://replit.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'MarsCode',
-    url: 'https://www.marscode.cn',
-    description: '字节跳动推出的国内版 AI 编程助手，提供云端 IDE 和插件。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.marscode.cn/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Baidu Comate',
-    url: 'https://comate.baidu.com',
-    description: '百度推出的智能代码助手，基于文心大模型。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://comate.baidu.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '通义灵码',
-    url: 'https://lingma.aliyun.com',
-    description: '阿里巴巴推出的 AI 编程助手，深度集成阿里云生态。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://lingma.aliyun.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '腾讯云 AI 代码助手',
-    url: 'https://copilot.tencent.com',
-    description: '腾讯云推出的 AI 编程助手，支持多种主流 IDE。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://copilot.tencent.com/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: '讯飞 iFlyCode',
-    url: 'https://iflycode.xfyun.cn',
-    description: '科大讯飞推出的智能编程助手，基于星火大模型。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://iflycode.xfyun.cn/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Blackbox AI',
-    url: 'https://www.blackbox.ai',
-    description: '专注于快速代码搜索、生成和实时代码分析的 AI 助手。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.blackbox.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Aider',
-    url: 'https://aider.chat',
-    description: '强大的命令行 AI 编程助手，支持与 Git 深度集成进行配对编程。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://aider.chat/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Devin',
-    url: 'https://www.cognition.ai',
-    description: '全球首位 AI 软件工程师，能独立完成复杂的编程任务。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://www.cognition.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Plandex',
-    url: 'https://plandex.ai',
-    description: '开源的 AI 编程代理，擅长处理跨文件的复杂积压任务。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://plandex.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'MutableAI',
-    url: 'https://mutable.ai',
-    description: '专注于自动化文档编写、代码重构和测试生成的 AI 助手。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://mutable.ai/favicon.ico',
-    status: 'approved',
-  },
-  {
-    title: 'Sweep',
-    url: 'https://sweep.dev',
-    description: '将 GitHub Issue 直接转化为代码拉取请求 (PR) 的 AI 代理。',
-    category_slug: 'ai-coding',
-    thumbnail: 'https://sweep.dev/favicon.ico',
-    status: 'approved',
-  },
+  // AI 对话平台
+  { title: 'ChatGPT', url: 'https://chat.openai.com', description: 'OpenAI 旗舰产品，全球领先的通用 AI，插件与 GPTs 生态丰富。 [Top]', category_slug: 'ai-chat', thumbnail: 'https://chat.openai.com/favicon.ico', status: 'approved' },
+  { title: 'DeepSeek', url: 'https://www.deepseek.com', description: '国内技术代表，逻辑推理与代码能力极强，价格极具竞争力的国产之光。 [Top]', category_slug: 'ai-chat', thumbnail: 'https://www.deepseek.com/favicon.ico', status: 'approved' },
+  { title: 'Claude', url: 'https://claude.ai', description: '以长文本理解和安全性著称，代码生成与创意文案质量公认第一。 [Top]', category_slug: 'ai-chat', thumbnail: 'https://claude.ai/favicon.ico', status: 'approved' },
+  { title: 'Kimi', url: 'https://kimi.moonshot.cn', description: '国产长文本处理的先行者，支持超长上下文阅读与联网搜索。 [Top]', category_slug: 'ai-chat', thumbnail: 'https://kimi.moonshot.cn/favicon.ico', status: 'approved' },
+  { title: 'Gemini', url: 'https://gemini.google.com', description: 'Google 旗下的多模态先行者，深度集成 Google Workspace 与 Android 生态。', category_slug: 'ai-chat', thumbnail: 'https://gemini.google.com/favicon.ico', status: 'approved' },
+  { title: 'Mistral / Le Chat', url: 'https://chat.mistral.ai', description: '欧洲开源之王，模型高效且对话体验极简流畅。', category_slug: 'ai-chat', thumbnail: 'https://chat.mistral.ai/favicon.ico', status: 'approved' },
+  { title: 'Grok', url: 'https://x.ai', description: 'X (Twitter) 旗下 AI，主打实时社交数据获取与无限制的对话风格。', category_slug: 'ai-chat', thumbnail: 'https://x.ai/favicon.ico', status: 'approved' },
+  { title: '豆包', url: 'https://www.doubao.com', description: '字节跳动旗下，语音交互体验极佳，国内移动端用户基数庞大。', category_slug: 'ai-chat', thumbnail: 'https://www.doubao.com/favicon.ico', status: 'approved' },
+
+  // AI 模型与社区
+  { title: 'Hugging Face', url: 'https://huggingface.co', description: '全球 AI 开源界的事实标准，“AI 版 GitHub”，托管百万级模型与数据集。 [Top]', category_slug: 'ai-hubs', thumbnail: 'https://huggingface.co/favicon.ico', status: 'approved' },
+  { title: '魔搭社区 ModelScope', url: 'https://modelscope.cn', description: '阿里支持的国内最大开源模型社区，针对国产硬件有深度优化。 [Top]', category_slug: 'ai-hubs', thumbnail: 'https://modelscope.cn/favicon.ico', status: 'approved' },
+  { title: 'OpenRouter', url: 'https://openrouter.ai', description: '聚合全球顶尖大模型的一站式 API 平台，支持按量计费与无缝切换。 [Top]', category_slug: 'ai-hubs', thumbnail: 'https://openrouter.ai/favicon.ico', status: 'approved' },
+  { title: '昇腾', url: 'https://www.hiascend.com', description: '华为主导的国产算力平台，提供从硬件到开发框架的全栈 AI 生态。', category_slug: 'ai-hubs', thumbnail: 'https://www.hiascend.com/favicon.ico', status: 'approved' },
+
+  // AI 编程平台
+  { title: 'GitHub Copilot', url: 'https://github.com/features/copilot', description: '微软与 OpenAI 联手打造，依然是目前集成度最高、生态最稳的标杆。 [Top]', category_slug: 'ai-coding', thumbnail: 'https://github.com/favicon.ico', status: 'approved' },
+  { title: 'Cursor', url: 'https://www.cursor.com', description: '开发者公认的 Top 1 AI 编辑器，原生 AI 集成彻底改变编程工作流认识。 [Recommend]', category_slug: 'ai-coding', thumbnail: 'https://www.cursor.com/favicon.ico', status: 'approved' },
+  { title: 'Windsurf', url: 'https://codeium.com/windsurf', description: 'Codeium 推出的首个 Agentic IDE，具备极强的上下文感知与自主修复能力。 [Recommend]', category_slug: 'ai-coding', thumbnail: 'https://codeium.com/favicon.ico', status: 'approved' },
+  { title: 'Claude Code', url: 'https://claude.ai/code', description: 'Anthropic 推出的命令行编程助手，解决复杂工程问题的能力惊人。 [Top]', category_slug: 'ai-coding', thumbnail: 'https://claude.ai/favicon.ico', status: 'approved' },
+  { title: 'Trae', url: 'https://www.trae.ai', description: '字节跳动推出的 AI 编程新秀，主打“自适应学习”与原生中文支持。 [Top]', category_slug: 'ai-coding', thumbnail: 'https://www.trae.ai/favicon.ico', status: 'approved' },
+
+  // AI Infra 推理框架
+  { title: 'vLLM', url: 'https://github.com/vllm-project/vllm', description: '目前最主流的开源大模型高性能推理引擎，高吞吐量与节省显存的首选。 [Top]', category_slug: 'ai-infra', thumbnail: 'https://github.com/favicon.ico', status: 'approved' },
+  { title: 'Ollama', url: 'https://ollama.com', description: '本地运行大模型的最简单、最流行工具，支持一键部署各种开源模型。 [Top]', category_slug: 'ai-infra', thumbnail: 'https://ollama.com/favicon.ico', status: 'approved' },
+  { title: 'TensorRT-LLM', url: 'https://github.com/NVIDIA/TensorRT-LLM', description: 'NVIDIA 官方加速库，针对英伟达显卡提供极致的硬件性能优化。 [Top]', category_slug: 'ai-infra', thumbnail: 'https://github.com/favicon.ico', status: 'approved' },
+  { title: 'SGLang', url: 'https://github.com/sgl-project/sglang', description: '优秀的结构化生成框架，在处理长文本与复杂 Prompt 时推理速度极快。', category_slug: 'ai-infra', thumbnail: 'https://github.com/favicon.ico', status: 'approved' },
+  { title: 'Mooncake/LMCache', url: 'https://github.com/kvcache-ai/Mooncake', description: '专注于 KVCache 优化，显著降低超长对话的推理成本与延迟。', category_slug: 'ai-infra', thumbnail: 'https://github.com/favicon.ico', status: 'approved' },
+
+  // AI Agent 开发/自动化
+  { title: 'Dify', url: 'https://dify.ai', description: '最流行的开源 LLM 应用开发平台，支持可视化的工作流编排与模型管理。 [Top]', category_slug: 'ai-agents', thumbnail: 'https://dify.ai/favicon.ico', status: 'approved' },
+  { title: 'Coze (扣子)', url: 'https://www.coze.cn', description: '字节出品，拥有极其丰富的插件与工作流组件，Agent 搭建门槛最低。 [Top]', category_slug: 'ai-agents', thumbnail: 'https://www.coze.cn/favicon.ico', status: 'approved' },
+  { title: 'LangGraph', url: 'https://www.langchain.com/langgraph', description: 'LangChain 团队推出的有向无环图框架，是构建复杂、有状态 Agent 的工业级选择。', category_slug: 'ai-agents', thumbnail: 'https://www.langchain.com/favicon.ico', status: 'approved' },
+  { title: 'n8n', url: 'https://n8n.io', description: '支持上千种集成的自动化工作流平台，通过 AI 节点可轻松连接现有业务系统。', category_slug: 'ai-agents', thumbnail: 'https://n8n.io/favicon.ico', status: 'approved' },
+
+  // AI 绘画与设计
+  { title: 'Midjourney', url: 'https://www.midjourney.com', description: '艺术表现力与设计感的天花板，风格极其多样且审美在线. [Top]', category_slug: 'ai-art', thumbnail: 'https://www.midjourney.com/favicon.ico', status: 'approved' },
+  { title: 'Flux.1', url: 'https://blackforestlabs.ai', description: '2025 年最强开源黑马，人物手部、身体结构及图片文字渲染效果惊人. [Top]', category_slug: 'ai-art', thumbnail: 'https://blackforestlabs.ai/favicon.ico', status: 'approved' },
+  { title: 'Ideogram', url: 'https://ideogram.ai', description: '图像内文本渲染领域的世界第一，平面设计与海报生成的专业选. [Recommend]', category_slug: 'ai-art', thumbnail: 'https://ideogram.ai/favicon.ico', status: 'approved' },
+  { title: 'Stable Diffusion', url: 'https://stability.ai', description: '自由度最高的开源方案，支持插件扩展、深度定制与本地离线部署. [Top]', category_slug: 'ai-art', thumbnail: 'https://stability.ai/favicon.ico', status: 'approved' },
+  { title: 'Adobe Firefly', url: 'https://firefly.adobe.com', description: '唯一大规模商用合规的 AI，深度集成于 Photoshop，提供强大的填充与修改能力。', category_slug: 'ai-art', thumbnail: 'https://firefly.adobe.com/favicon.ico', status: 'approved' },
+
+  // AI 办公与幻灯片
+  { title: 'Gamma', url: 'https://gamma.app', description: '重新定义演示文稿，只需一个大纲或描述即可生成精美、交互式的页面。 [Top]', category_slug: 'ai-office', thumbnail: 'https://gamma.app/favicon.ico', status: 'approved' },
+  { title: 'Notion AI', url: 'https://www.notion.so/product/ai', description: '嵌入式 AI 助手，擅长整理会议纪要、润色文档、头脑风暴及翻译列表。 [Top]', category_slug: 'ai-office', thumbnail: 'https://www.notion.so/favicon.ico', status: 'approved' },
+  { title: 'Canva Magic Studio', url: 'https://www.canva.com/magic-studio', description: '设计小白的创意中心，自动排版、扩图、去背景等 AI 功能极大提升作图效率。', category_slug: 'ai-office', thumbnail: 'https://www.canva.com/favicon.ico', status: 'approved' },
+  { title: 'WPS AI / Microsoft Copilot', url: 'https://ai.wps.cn', description: '深度集成在 Office 套件中，自动化处理表格、文档与幻灯片生成。', category_slug: 'ai-office', thumbnail: 'https://ai.wps.cn/favicon.ico', status: 'approved' },
+
+  // AI 搜索与深度研究
+  { title: 'Perplexity', url: 'https://www.perplexity.ai', description: '重新定义搜索，直接给出带权威信源引用的答案，彻底告别广告干扰。 [Top]', category_slug: 'ai-search', thumbnail: 'https://www.perplexity.ai/favicon.ico', status: 'approved' },
+  { title: 'Genspark', url: 'https://www.genspark.ai', description: '搜索即生成，自动为你的查询聚合所有相关信息并生成精美的专题网页。 [Top]', category_slug: 'ai-search', thumbnail: 'https://www.genspark.ai/favicon.ico', status: 'approved' },
+  { title: 'Felo', url: 'https://felo.ai', description: '国内出海的热门搜索，内置极强的跨语言翻译搜索能力，一键阅读全球一手资料。', category_slug: 'ai-search', thumbnail: 'https://felo.ai/favicon.ico', status: 'approved' },
+  { title: '秘塔 AI 搜索', url: 'https://metaso.cn', description: '国内学术与深度调研的首选，支持结构化思维导图展示与大规模文档参考。', category_slug: 'ai-search', thumbnail: 'https://metaso.cn/favicon.ico', status: 'approved' },
 ] as WebsiteInput[];
-
-
 
 interface FooterLinkInput {
   title: string;
@@ -372,6 +88,7 @@ interface FooterLinkInput {
 const defaultFooterLinks: FooterLinkInput[] = [
   { title: 'GitHub', url: 'https://github.com' }
 ];
+
 export async function initializeData() {
   try {
     // 初始化分类
@@ -498,4 +215,4 @@ if (require.main === module) {
       process.exit(1);
     }
   })();
-} 
+}

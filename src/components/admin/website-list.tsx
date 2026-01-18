@@ -11,6 +11,7 @@ import {
   Trash2,
   ExternalLink,
   Clock,
+  Pencil,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAtom } from "jotai";
@@ -27,6 +28,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/ui/common/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/ui/common/dialog";
+import { WebsiteForm } from "@/components/forms/website-form";
 import { cn } from "@/lib/utils/utils";
 import type { Website, Category } from "@/lib/types";
 import { motion, AnimatePresence } from "framer-motion";
@@ -43,9 +51,10 @@ export function WebsiteList({
   showActions = false,
 }: WebsiteListProps) {
   const { toast } = useToast();
-  const [deleteId, setDeleteId] = useState<number | null>(null);
   const [websites, setWebsites] = useState(initialWebsites);
-  const [allWebsites, setAllWebsites] = useAtom(websitesAtom);
+  const [, setAllWebsites] = useAtom(websitesAtom);
+  const [editingWebsite, setEditingWebsite] = useState<Website | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   useEffect(() => {
     setWebsites(initialWebsites);
@@ -78,25 +87,67 @@ export function WebsiteList({
     }
   };
 
+  const handleLike = async (id: number, increment: boolean) => {
+    try {
+      const response = await fetch(`/api/websites/${id}/like`, {
+        method: increment ? "POST" : "DELETE",
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        const newLikes = result.data.likes;
+
+        setWebsites((prev) =>
+          prev.map((w) => (w.id === id ? { ...w, likes: newLikes } : w))
+        );
+        setAllWebsites((prev) =>
+          prev.map((w) => (w.id === id ? { ...w, likes: newLikes } : w))
+        );
+
+        toast({
+          title: increment ? "点赞成功" : "已踩",
+          description: `当前点赞数：${newLikes}`,
+        });
+      }
+    } catch (error) {
+      console.error("Like error:", error);
+    }
+  };
+
   const handleDelete = async (id: number) => {
-    const response = await fetch(`/api/websites/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      const response = await fetch(`/api/websites/${id}`, {
+        method: "DELETE",
+      });
 
-    if (response.ok) {
-      setAllWebsites((prevWebsites) =>
-        prevWebsites.filter((website) => website.id !== id)
-      );
+      const result = await response.json();
 
-      setWebsites((prevWebsites) =>
-        prevWebsites.filter((website) => website.id !== id)
-      );
+      if (result.success) {
+        setAllWebsites((prevWebsites) =>
+          prevWebsites.filter((website) => website.id !== id)
+        );
 
-      setDeleteId(null);
+        setWebsites((prevWebsites) =>
+          prevWebsites.filter((website) => website.id !== id)
+        );
 
+        toast({
+          title: "删除成功",
+          description: "网站已被删除",
+        });
+      } else {
+        toast({
+          title: "删除失败",
+          description: result.message || "无法删除该网站",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
       toast({
-        title: "删除成功",
-        description: "网站已被删除",
+        title: "错误",
+        description: "网络错误，请稍后再试",
+        variant: "destructive",
       });
     }
   };
@@ -129,6 +180,11 @@ export function WebsiteList({
       default:
         return "";
     }
+  };
+
+  const openEditDialog = (website: Website) => {
+    setEditingWebsite(website);
+    setIsEditDialogOpen(true);
   };
 
   if (websites.length === 0) {
@@ -215,41 +271,78 @@ export function WebsiteList({
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => handleVisit(website.url)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleVisit(website.url);
+                      }}
+                      title="访问网站"
                       className="h-7 w-7 text-muted-foreground hover:text-foreground hover:bg-background/50"
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                     </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLike(website.id, true);
+                      }}
+                      title="点赞"
+                      className="h-7 w-7 text-pink-600/70 hover:text-pink-600 hover:bg-pink-500/20"
+                    >
+                      <ThumbsUp className="h-3.5 w-3.5" />
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLike(website.id, false);
+                      }}
+                      title="踩"
+                      className="h-7 w-7 text-gray-600/70 hover:text-gray-600 hover:bg-gray-500/20"
+                    >
+                      <ThumbsDown className="h-3.5 w-3.5" />
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openEditDialog(website);
+                      }}
+                      title="编辑"
+                      className="h-7 w-7 text-blue-600/70 hover:text-blue-600 hover:bg-blue-500/20"
+                    >
+                      <Pencil className="h-3.5 w-3.5" />
+                    </Button>
+
                     {website.status !== "approved" && (
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() =>
-                          handleStatusUpdate(website.id, "approved")
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleStatusUpdate(website.id, "approved");
+                        }}
+                        title="审核通过"
                         className="h-7 w-7 text-green-600/70 hover:text-green-600 hover:bg-green-500/20"
                       >
-                        <ThumbsUp className="h-3.5 w-3.5" />
+                        <Heart className="h-3.5 w-3.5" />
                       </Button>
                     )}
-                    {website.status !== "rejected" && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() =>
-                          handleStatusUpdate(website.id, "rejected")
-                        }
-                        className="h-7 w-7 text-red-600/70 hover:text-red-600 hover:bg-red-500/20"
-                      >
-                        <ThumbsDown className="h-3.5 w-3.5" />
-                      </Button>
-                    )}
+
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button
                           variant="ghost"
                           size="icon"
+                          title="删除"
                           className="h-7 w-7 text-red-600/70 hover:text-red-600 hover:bg-red-500/20"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </Button>
@@ -266,7 +359,10 @@ export function WebsiteList({
                             取消
                           </AlertDialogCancel>
                           <AlertDialogAction
-                            onClick={() => handleDelete(website.id)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleDelete(website.id);
+                            }}
                             className="bg-red-600/90 hover:bg-red-600"
                           >
                             确认删除
@@ -281,6 +377,26 @@ export function WebsiteList({
           ))}
         </AnimatePresence>
       </div>
+
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="max-w-2xl bg-background/95 backdrop-blur-sm">
+          <DialogHeader>
+            <DialogTitle>编辑网站</DialogTitle>
+          </DialogHeader>
+          {editingWebsite && (
+            <WebsiteForm
+              initialData={editingWebsite}
+              onSuccess={() => {
+                setIsEditDialogOpen(false);
+                setEditingWebsite(null);
+                // The website form will refresh the router, but we want to update the local state if possible
+                // For simplicity here, let the page refresh
+                window.location.reload();
+              }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -9,7 +9,7 @@ const CACHE_STATS = {
 
 // Add cache persistence check
 function shouldRefreshCache(
-  cachedData: CacheEntry<any>,
+  cachedData: CacheEntry<unknown>,
   options: CacheOptions
 ): boolean {
   if (!cachedData) return true;

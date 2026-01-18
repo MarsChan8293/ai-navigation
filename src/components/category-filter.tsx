@@ -1,9 +1,7 @@
 "use client";
 
-import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { selectedCategoryAtom } from "@/lib/atoms/index";
 import { Button } from "../ui/common/button";
 import {
   DropdownMenu,
@@ -13,26 +11,44 @@ import {
 } from "../ui/common/dropdown-menu";
 import type { Category } from "@/lib/types";
 import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 interface CategoryFilterProps {
   categories: Category[];
 }
 
 export default function CategoryFilter({ categories }: CategoryFilterProps) {
-  const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
+  const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const selectedCategoryName = selectedCategory
-    ? categories?.find((c) => c.id === Number(selectedCategory))?.name ||
-      "未知分类"
-    : categories[0]?.name || "未知分类";
+  const categoriesWithAll = [
+    { id: -1, name: "全部资料", slug: "all", likes: 0 },
+    ...categories,
+  ];
 
-  const handleCategorySelect = (categoryId: number) => {
-    setSelectedCategory(categoryId);
+  // Determine active category based on pathname
+  // / -> all
+  // /category/ai-chat -> ai-chat
+  const currentSlug = pathname === "/" || pathname === "/category/all"
+    ? "all"
+    : pathname.startsWith("/category/")
+      ? pathname.split("/category/")[1]
+      : "all";
+
+  const selectedCategory = categoriesWithAll.find(c => c.slug === currentSlug) || categoriesWithAll[0];
+  const selectedCategoryName = selectedCategory.name;
+
+  const handleCategorySelect = (slug: string) => {
+    if (slug === "all") {
+      router.push("/");
+    } else {
+      router.push(`/category/${slug}`);
+    }
   };
 
   if (!mounted) {
@@ -53,7 +69,7 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
                 initial={false}
                 animate={{
                   color:
-                    selectedCategory === null
+                    currentSlug === "all"
                       ? "hsl(var(--primary))"
                       : "hsl(var(--foreground))",
                 }}
@@ -82,15 +98,14 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="py-1"
             >
-              {categories.map((category) => (
+              {categoriesWithAll.map((category) => (
                 <DropdownMenuItem
-                  key={category.id}
-                  onClick={() => handleCategorySelect(category.id)}
-                  className={`${
-                    selectedCategory?.toString() === category.id.toString()
+                  key={category.slug}
+                  onClick={() => handleCategorySelect(category.slug)}
+                  className={`${currentSlug === category.slug
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-foreground/80 hover:text-foreground"
-                  } h-11 flex items-center px-4 hover:bg-accent/50 focus:bg-accent active:bg-accent/70 transition-colors duration-200`}
+                    } h-11 flex items-center px-4 hover:bg-accent/50 focus:bg-accent active:bg-accent/70 transition-colors duration-200`}
                 >
                   {category.name}
                 </DropdownMenuItem>
@@ -103,21 +118,20 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
       {/* Desktop: Tiled Categories */}
       <div className="hidden md:block">
         <div className="flex flex-wrap items-center justify-center gap-2 px-4">
-          {categories.map((category) => (
+          {categoriesWithAll.map((category) => (
             <motion.button
-              key={category.id ?? "all"}
-              onClick={() => handleCategorySelect(category.id)}
+              key={category.slug}
+              onClick={() => handleCategorySelect(category.slug)}
               className={`h-8 px-4 text-sm whitespace-nowrap transition-colors duration-300 rounded-md
-                ${
-                  selectedCategory === category.id
-                    ? "bg-white dark:bg-primary text-primary dark:text-primary-foreground font-medium shadow-[0_2px_12px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_2px_12px_-2px_rgba(0,0,0,0.4)]"
-                    : "text-muted-foreground hover:text-foreground hover:bg-background/40"
+                ${currentSlug === category.slug
+                  ? "bg-white dark:bg-primary text-primary dark:text-primary-foreground font-medium shadow-[0_2px_12px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_2px_12px_-2px_rgba(0,0,0,0.4)]"
+                  : "text-muted-foreground hover:text-foreground hover:bg-background/40"
                 }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               animate={{
-                scale: selectedCategory === category.id ? 1.08 : 1,
-                y: selectedCategory === category.id ? -1 : 0,
+                scale: currentSlug === category.slug ? 1.08 : 1,
+                y: currentSlug === category.slug ? -1 : 0,
               }}
               transition={{
                 type: "spring",

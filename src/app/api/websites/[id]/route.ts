@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/db/db";
 
 // GET /api/websites/[id]
 // 获取单个网站
@@ -39,11 +37,19 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    if (!(await params).id) {
-      return NextResponse.json(AjaxResponse.fail("Website ID is required"), {});
+    const { id } = await params;
+    if (!id) {
+      return NextResponse.json(AjaxResponse.fail("Website ID is required"), {
+        status: 400,
+      });
     }
 
-    const websiteId = parseInt((await params).id);
+    const websiteId = parseInt(id);
+    if (isNaN(websiteId)) {
+      return NextResponse.json(AjaxResponse.fail("Invalid Website ID"), {
+        status: 400,
+      });
+    }
 
     // Check if website exists first
     const website = await prisma.website.findUnique({
@@ -86,7 +92,8 @@ export async function PUT(
 ) {
   try {
     const data = await request.json();
-    const websiteId = parseInt((await params).id);
+    const { id } = await params;
+    const websiteId = parseInt(id);
 
     const existingWebsite = await prisma.website.findUnique({
       where: { id: websiteId },

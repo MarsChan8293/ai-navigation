@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API测试报告</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    .summary { background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .test-result { margin-bottom: 10px; padding: 10px; border-radius: 5px; }
+    .passed { background-color: #d4edda; color: #155724; }
+    .failed { background-color: #f8d7da; color: #721c24; }
+    .test-details { margin-left: 20px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>API测试报告</h1>
+  <div class="summary">
+    <p>测试时间: 2026/1/18 18:43:33</p>
+    <p>总测试数: 32</p>
+    <p>通过测试数: 32</p>
+    <p>失败测试数: 0</p>
+    <p>通过率: 100.00%</p>
+  </div>
+  <h2>测试用例结果</h2>
+  
+    <div class="test-result passed">
+      <strong>登录 - 正确密码</strong> (POST /login)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>登录 - 错误密码</strong> (POST /login)
+      <div class="test-details">
+        <p>预期状态: 401, 实际状态: 401</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>登录 - 缺少密码</strong> (POST /login)
+      <div class="test-details">
+        <p>预期状态: 401, 实际状态: 401</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取网站列表 - 默认状态（approved）</strong> (GET /websites)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取网站列表 - 所有状态</strong> (GET /websites?status=all)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取网站列表 - 待审核状态</strong> (GET /websites?status=pending)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建网站 - 有效数据</strong> (POST /websites)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建网站 - 缺少必填字段</strong> (POST /websites)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建网站 - 无效URL格式</strong> (POST /websites)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建网站 - 不存在的分类</strong> (POST /websites)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取单个网站 - 有效ID</strong> (GET /websites/1)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取单个网站 - 无效ID</strong> (GET /websites/9999)
+      <div class="test-details">
+        <p>预期状态: 404, 实际状态: 404</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取单个网站 - 非数字ID</strong> (GET /websites/abc)
+      <div class="test-details">
+        <p>预期状态: 500, 实际状态: 500</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新网站 - 有效数据</strong> (PUT /websites/1)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新网站 - 缺少必填字段</strong> (PUT /websites/1)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新网站 - 无效ID</strong> (PUT /websites/9999)
+      <div class="test-details">
+        <p>预期状态: 404, 实际状态: 404</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>删除网站 - 无效ID</strong> (DELETE /websites/9999)
+      <div class="test-details">
+        <p>预期状态: 404, 实际状态: 404</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>检查网站活跃度 - 有效URL</strong> (POST /websites/active)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>检查网站活跃度 - 缺少URL</strong> (POST /websites/active)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>检查网站活跃度 - 无效ID</strong> (POST /websites/active)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>点赞网站 - 有效ID</strong> (POST /websites/1/like)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>取消点赞网站 - 有效ID</strong> (DELETE /websites/1/like)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新网站状态 - 有效状态</strong> (PUT /websites/1/status)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>增加网站访问量 - 有效ID</strong> (POST /websites/1/visit)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取所有分类 - 正常情况</strong> (GET /categories)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建分类 - 有效数据</strong> (POST /categories)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新分类 - 有效数据</strong> (PUT /categories/1)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>删除分类 - 分类下有网站</strong> (DELETE /categories/1)
+      <div class="test-details">
+        <p>预期状态: 400, 实际状态: 400</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>获取所有页脚链接 - 正常情况</strong> (GET /footer-links)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建页脚链接 - 有效数据</strong> (POST /footer-links)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>创建页脚链接 - 无效URL</strong> (POST /footer-links)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+    <div class="test-result passed">
+      <strong>更新缩略图 - 正常情况</strong> (POST /admin/update-thumbnails)
+      <div class="test-details">
+        <p>预期状态: 200, 实际状态: 200</p>
+        
+      </div>
+    </div>
+  
+</body>
+</html>
+  

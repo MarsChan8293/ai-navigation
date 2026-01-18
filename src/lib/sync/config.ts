@@ -1,5 +1,4 @@
-import { atomWithStorage } from "jotai/utils";
-import type { SyncConfig, SyncStatus } from "./types";
+import type { SyncConfig } from "./types";
 
 export const defaultSyncConfig: SyncConfig = {
   autoBackup: false,

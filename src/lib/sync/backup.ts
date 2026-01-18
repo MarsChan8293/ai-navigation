@@ -1,5 +1,4 @@
-import { nanoid } from "nanoid";
-import type { BackupMetadata, SyncConfig } from "./types";
+import type { SyncConfig } from "./types";
 import { OSSInterface } from "./oss";
 import { DatabaseInterface } from "../db/sqlite";
 

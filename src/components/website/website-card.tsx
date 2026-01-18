@@ -1,32 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Card } from "@/ui/common/card";
 import { Button } from "@/ui/common/button";
-import { Badge } from "@/ui/common/badge";
 import {
   ThumbsUp,
   ThumbsDown,
-  ArrowUpRight,
   Heart,
-  Circle,
 } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
-import {
-  cardHoverVariants,
-  sharedLayoutTransition,
-} from "@/ui/animation/variants/animations";
 import type { Website, Category } from "@/lib/types";
 import { useState } from "react";
 import { WebsiteThumbnail } from "./website-thumbnail";
 import { toast } from "@/hooks/use-toast";
 import { useCardTilt } from "@/hooks/use-card-tilt";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/ui/common/tooltip";
 
 interface WebsiteCardProps {
   website: Website;
@@ -38,27 +24,14 @@ interface WebsiteCardProps {
 
 export function WebsiteCard({
   website,
-  category,
   isAdmin,
   onVisit,
   onStatusUpdate,
 }: WebsiteCardProps) {
   const [likes, setLikes] = useState(website.likes);
+  const [dislikes, setDislikes] = useState(website.dislikes || 0);
+  const [isDeleted, setIsDeleted] = useState(false);
   const { cardRef, tiltProps } = useCardTilt();
-
-  const statusColors: Record<Website["status"], string> = {
-    pending: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
-    approved: "bg-green-500/10 text-green-600 dark:text-green-400",
-    rejected: "bg-red-500/10 text-red-600 dark:text-red-400",
-    all: "",
-  };
-
-  const statusText: Record<Website["status"], string> = {
-    pending: "待审核",
-    approved: "已通过",
-    rejected: "已拒绝",
-    all: "",
-  };
 
   const handleLike = async () => {
     const key = `website-${website.id}-liked`;
@@ -67,7 +40,7 @@ export function WebsiteCard({
 
     if (lastLiked) {
       const lastLikedTime = parseInt(lastLiked);
-      const oneDay = 24 * 60 * 60 * 1000; // 24小时的毫秒数
+      const oneDay = 24 * 60 * 60 * 1000;
 
       if (now - lastLikedTime < oneDay) {
         toast({
@@ -84,6 +57,48 @@ export function WebsiteCard({
     setLikes(likes + 1);
   };
 
+  const handleDislike = async () => {
+    const key = `website-${website.id}-disliked`;
+    const lastDisliked = localStorage.getItem(key);
+    const now = new Date().getTime();
+
+    // Check local (optimistic) first, but server is truth?
+    // User wants 24h limit, reused from likes
+    if (lastDisliked) {
+      const lastDislikedTime = parseInt(lastDisliked);
+      const oneDay = 24 * 60 * 60 * 1000;
+
+      if (now - lastDislikedTime < oneDay) {
+        toast({
+          title: "已踩",
+          description: "每天只能踩一次哦，明天再来吧 (｡•́︿•̀｡)",
+        });
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch(`/api/websites/${website.id}/dislike`, { method: "POST" });
+      const result = await response.json();
+
+      if (result.success) {
+        localStorage.setItem(key, now.toString());
+        setDislikes(result.data.dislikes);
+        if (result.data.deleted) {
+          setIsDeleted(true);
+          toast({
+            title: "已删除",
+            description: "该网站因踩数过多已被删除",
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Failed to dislike:", error);
+    }
+  };
+
+  if (isDeleted) return null;
+
   return (
     <div
       ref={cardRef}
@@ -92,188 +107,85 @@ export function WebsiteCard({
       onMouseLeave={tiltProps.onMouseLeave}
       className="card-container relative [perspective:1000px]"
     >
-      <motion.div
-        variants={cardHoverVariants}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
-        layoutId={`website-${website.id}`}
-        transition={sharedLayoutTransition}
-        className="h-full"
-      >
+      <div className="h-full">
         <Card
           className={cn(
-            "group relative flex flex-col overflow-hidden",
-            "bg-background",
-            "border-white/5 dark:border-white/10",
-            "hover:bg-background/95",
-            "shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]",
-            "dark:shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)]",
-            "transition-all duration-500 ease-out",
-            "rounded-2xl sm:rounded-lg"
+            "group relative flex flex-col overflow-hidden h-full",
+            "bg-transparent border-none shadow-none",
+            "transition-all duration-300 ease-out",
+            "rounded-xl"
           )}
         >
-          {/* 状态指示点 */}
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div className="absolute top-0 right-0 z-10 w-6 h-6 flex justify-center items-center">
-                  <Circle
-                    className={cn(
-                      "w-2 h-2",
-                      website.active
-                        ? "fill-green-500 text-green-500"
-                        : "fill-red-500 text-red-500"
-                    )}
-                  />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{website.active ? "网站可访问" : "网站不可访问"}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          {/* Top Image Section */}
+          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-muted/10 border border-border/10 group-hover:border-primary/20 transition-all duration-300 shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/5">
+            <WebsiteThumbnail
+              url={website.url}
+              thumbnail={website.thumbnail}
+              thumbnail_base64={website.thumbnail_base64}
+              title={website.title}
+              variant="large"
+            />
 
-          {/* Background Gradient */}
-          <div className="absolute inset-0 z-[3]">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+
+
+            {/* Status Indicator (Subtle) */}
+            <div className="absolute top-2 right-2 z-10">
+              <div className={cn(
+                "w-1.5 h-1.5 rounded-full shadow-sm",
+                website.active ? "bg-green-500" : "bg-red-500"
+              )} />
+            </div>
+
+            {/* Visit Button Overlay (Hover only) */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+              <Button
+                onClick={() => onVisit(website)}
+                size="sm"
+                className="rounded-full font-bold text-xs px-6 bg-white text-black hover:bg-white/90"
+              >
+                View Site
+              </Button>
+            </div>
           </div>
 
-          {/* Card Content Container */}
-          <div className="relative z-[4] flex flex-col flex-1">
-            {/* Website Icon and Status */}
-            <div className="relative p-2 sm:p-3 flex items-center justify-between card-content">
-              <div className="flex items-center gap-2 sm:gap-3 max-w-[75%]">
-                <WebsiteThumbnail
-                  url={website.url}
-                  thumbnail={website.thumbnail}
-                  thumbnail_base64={website.thumbnail_base64}
-                  title={website.title}
-                />
-                <div className="space-y-0.5 min-w-0">
-                  <h3 className="text-sm sm:text-base font-medium truncate group-hover:text-primary transition-colors">
-                    {website.title}
-                  </h3>
-                  <Badge
-                    variant="secondary"
-                    className={cn(
-                      "font-normal text-[10px] sm:text-xs",
-                      statusColors[website.status]
-                    )}
-                  >
-                    {statusText[website.status]}
-                  </Badge>
-                </div>
-              </div>
-              <Badge
-                variant="outline"
-                className={cn(
-                  "text-[10px] sm:text-xs font-normal",
-                  "bg-background shrink-0",
-                  "absolute top-1.5 right-1.5 sm:static",
-                  "rounded-xl sm:rounded-lg"
-                )}
+          {/* Content Section (Simplified) */}
+          <div className="py-3 px-1 flex flex-col gap-1">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold truncate group-hover:text-primary transition-colors leading-tight tracking-tight text-foreground/90">
+                {website.title}
+              </h3>
+            </div>
+
+            <p className="text-[12px] text-muted-foreground/60 line-clamp-1 leading-relaxed font-medium">
+              {website.description}
+            </p>
+
+            {/* Stats (Very subtle) */}
+            <div className="flex items-center gap-3 mt-1 text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest">
+              <span>{website.visits} visits</span>
+              <button
+                onClick={handleLike}
+                className="hover:text-primary transition-colors flex items-center gap-1"
               >
-                {category?.name || "未分类"}
-              </Badge>
-            </div>
-
-            {/* Description */}
-            <div className="relative px-2 py-1.5 sm:px-3 sm:py-2 flex-1">
-              <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
-                {website.description}
-              </p>
-            </div>
-
-            {/* Stats and Actions */}
-            <div className="relative px-2 py-1.5 sm:px-3 sm:py-2 flex items-center justify-between border-t border-border/5">
-              {/* Stats */}
-              <div className="flex items-center gap-3 text-[10px] sm:text-xs text-muted-foreground">
-                <span>{website.visits} 次访问</span>
-                <div className="flex items-center gap-1">
-                  <Heart className="w-3 h-3" />
-                  <span>{likes}</span>
+                <Heart className={cn("w-3 h-3", likes > website.likes && "fill-primary text-primary")} /> {likes}
+              </button>
+              <button
+                onClick={handleDislike}
+                className="hover:text-red-500 transition-colors flex items-center gap-1"
+                title="踩一下 (超过10次会自动删除)"
+              >
+                <ThumbsDown className={cn("w-3 h-3", dislikes > (website.dislikes || 0) && "fill-red-500 text-red-500")} /> {dislikes}
+              </button>
+              {isAdmin && (
+                <div className="ml-auto flex gap-2">
+                  <button onClick={() => onStatusUpdate(website.id, "approved")} className="hover:text-green-500"><ThumbsUp className="w-3 h-3" /></button>
+                  <button onClick={() => onStatusUpdate(website.id, "rejected")} className="hover:text-red-500"><ThumbsDown className="w-3 h-3" /></button>
                 </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => onVisit(website)}
-                  className={cn(
-                    "h-7 sm:h-8 px-3 sm:flex-1 text-xs sm:text-sm",
-                    "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                    "hover:bg-white/[0.04] hover:border-white/20 hover:text-primary",
-                    "dark:bg-white/[0.01] dark:hover:bg-white/[0.02]",
-                    "transition-all duration-300"
-                  )}
-                >
-                  <span className="hidden sm:inline">访问网站</span>
-                  <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleLike}
-                  className={cn(
-                    "h-7 w-7 sm:h-8 sm:w-8 p-0",
-                    "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                    "hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500",
-                    "dark:bg-white/[0.01] dark:hover:bg-red-500/10",
-                    "transition-all duration-300"
-                  )}
-                >
-                  <motion.div
-                    whileTap={{ scale: 1.4 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </motion.div>
-                </Button>
-
-                {isAdmin && website.status !== "approved" && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onStatusUpdate(website.id, "approved")}
-                    className={cn(
-                      "h-7 sm:h-8 px-1.5 sm:px-2",
-                      "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                      "hover:bg-green-500/5 hover:border-green-500/20 hover:text-green-500",
-                      "dark:bg-white/[0.01] dark:hover:bg-green-500/10",
-                      "transition-all duration-300"
-                    )}
-                  >
-                    <ThumbsUp className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </Button>
-                )}
-
-                {isAdmin && website.status !== "rejected" && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      onStatusUpdate(website.id, "rejected");
-                    }}
-                    className={cn(
-                      "h-7 sm:h-8 px-1.5 sm:px-2",
-                      "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                      "hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500",
-                      "dark:bg-white/[0.01] dark:hover:bg-red-500/10",
-                      "transition-all duration-300"
-                    )}
-                  >
-                    <ThumbsDown className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </Button>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </Card>
-      </motion.div>
+      </div>
     </div>
   );
 }

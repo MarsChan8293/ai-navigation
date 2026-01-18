@@ -2,7 +2,8 @@ import { prisma } from "@/lib/db/db";
 import HomePage from "@/app/home-page";
 import { cachedPrismaQuery } from "@/lib/db/cache";
 
-export const dynamic = "force-dynamic";
+// 使用ISR（增量静态再生）替代force-dynamic
+export const revalidate = 3600; // 每小时重新生成页面
 
 export default async function Home() {
   const startTime = Date.now();
@@ -28,7 +29,7 @@ export default async function Home() {
             active: true,
           },
         }),
-      { ttl: 1 } // 1天缓存
+      { ttl: 86400 } // 1天缓存（秒）
     ),
     cachedPrismaQuery(
       "all-categories",
@@ -38,9 +39,11 @@ export default async function Home() {
             id: true,
             name: true,
             slug: true,
+            // @ts-ignore
+            likes: true,
           },
         }),
-      { ttl: 1 } // 1周缓存
+      { ttl: 604800 } // 1周缓存（秒）
     ),
   ]);
 
@@ -50,13 +53,15 @@ export default async function Home() {
   // 预处理数据，减少客户端计算
   const preFilteredWebsites = websitesData.map((website) => ({
     ...website,
+    status: website.status as "approved" | "pending" | "rejected" | "all",
     searchText: `${website.title.toLowerCase()} ${website.description.toLowerCase()}`,
   }));
 
   return (
     <HomePage
       initialWebsites={preFilteredWebsites}
-      initialCategories={categoriesData}
+      initialCategories={categoriesData as any}
+      categorySlug="all"
     />
   );
 }

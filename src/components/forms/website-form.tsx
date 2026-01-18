@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAtom } from "jotai";
 import { categoriesAtom, isAdminModeAtom } from "@/lib/atoms";
-import { fetchMetadata } from "@/lib/utils";
 import { websiteFormSchema } from "@/lib/utils";
 import { FormField } from "./form-field";
 import { Button } from "@/ui/common/button";
@@ -22,7 +21,13 @@ import { useToast } from "@/hooks/use-toast";
 import type { FormInputs } from "@/lib/types";
 import { useSettings } from "@/hooks/use-settings";
 
-export function WebsiteForm() {
+export function WebsiteForm({
+  initialData,
+  onSuccess,
+}: {
+  initialData?: Website;
+  onSuccess?: () => void;
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [categories, setCategories] = useAtom(categoriesAtom);
@@ -40,7 +45,7 @@ export function WebsiteForm() {
           return res.json();
         });
         setCategories(categoryData.data);
-      } catch (error) {
+      } catch (_error) {
         toast({
           title: "加载分类失败",
           description: "请刷新页面重试",
@@ -57,11 +62,11 @@ export function WebsiteForm() {
   const form = useForm<FormInputs>({
     resolver: zodResolver(websiteFormSchema),
     defaultValues: {
-      title: "",
-      url: "",
-      description: "",
-      category_id: "",
-      thumbnail: "",
+      title: initialData?.title || "",
+      url: initialData?.url || "",
+      description: initialData?.description || "",
+      category_id: initialData?.category_id?.toString() || "",
+      thumbnail: initialData?.thumbnail || "",
     },
   });
 
@@ -74,19 +79,30 @@ export function WebsiteForm() {
 
     setIsFetching(true);
     try {
-      const metadata = await fetchMetadata(url);
+      const response = await fetch(`/api/metadata?url=${encodeURIComponent(url)}`);
+      if (!response.ok) throw new Error("获取元数据失败");
+
+      const result = await response.json();
+      if (!result.success) throw new Error(result.message);
+
+      const metadata = result.data;
       if (metadata.title) setValue("title", metadata.title);
       if (metadata.description) setValue("description", metadata.description);
-      if (metadata.image) setValue("thumbnail", metadata.image);
+      // Prioritize the generated screenshot for quality consistent 16:9 thumbnails
+      if (metadata.screenshot) {
+        setValue("thumbnail", metadata.screenshot);
+      } else if (metadata.image) {
+        setValue("thumbnail", metadata.image);
+      }
 
       toast({
         title: "获取成功",
-        description: "网站信息已自动填充",
+        description: "网站信息与应用截图已自动获取",
       });
     } catch (error) {
       toast({
         title: "获取元数据失败",
-        description: "请手动填写网站信息",
+        description: error instanceof Error ? error.message : "请手动填写网站信息",
         variant: "destructive",
       });
     } finally {
@@ -107,12 +123,17 @@ export function WebsiteForm() {
     setIsSubmitting(true);
     try {
       // Check if submissions are allowed based on settings
-      if (!isAdmin && settings?.allowSubmissions === false) {
+      if (!isAdmin && settings?.allowSubmissions === false && !initialData) {
         throw new Error("网站提交功能暂时关闭");
       }
 
-      const response = await fetch("/api/websites", {
-        method: "POST",
+      const url = initialData
+        ? `/api/websites/${initialData.id}`
+        : "/api/websites";
+      const method = initialData ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -120,18 +141,25 @@ export function WebsiteForm() {
       });
 
       if (!response.ok) {
-        throw new Error((await response.text()) || "Failed to submit website");
+        const errorText = await response.text();
+        throw new Error(errorText || `Failed to ${initialData ? "update" : "submit"} website`);
       }
 
       toast({
-        title: "提交成功！",
+        title: initialData ? "更新成功！" : "提交成功！",
         description: isAdmin
-          ? "网站已添加到已通过列表。"
+          ? initialData
+            ? "网站信息已更新。"
+            : "网站已添加到已通过列表。"
           : "您的网站已提交审核。",
       });
 
-      router.push(isAdmin ? "/admin" : "/");
-      router.refresh();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push(isAdmin ? "/admin" : "/");
+        router.refresh();
+      }
     } catch (error) {
       toast({
         title: "错误",
@@ -221,6 +249,8 @@ export function WebsiteForm() {
         )}
       </motion.div>
 
+
+
       {/* Thumbnail URL */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -247,7 +277,7 @@ export function WebsiteForm() {
           disabled={isSubmitting}
           className="w-full h-11 bg-primary/90 hover:bg-primary text-primary-foreground shadow-[0_2px_10px_-3px_rgba(var(--primary),0.3)] transition-all duration-300"
         >
-          {isSubmitting ? "提交中..." : "提交网站"}
+          {isSubmitting ? (initialData ? "更新中..." : "提交中...") : (initialData ? "更新网站" : "提交网站")}
         </Button>
       </motion.div>
     </form>

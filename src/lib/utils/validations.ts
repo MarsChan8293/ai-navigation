@@ -14,3 +14,23 @@ export const websiteFormSchema = z.object({
   thumbnail: z.string().url("请输入有效的图片地址").optional(),
 });
 
+const imageFileSchema = z
+  .any()
+  .refine(
+    (file) => !file || (typeof File !== "undefined" && file instanceof File),
+    "请上传有效的图片文件"
+  )
+  .refine(
+    (file) => !file || file.size <= 2 * 1024 * 1024,
+    "图片不能超过2MB"
+  );
+
+export const useCaseFormSchema = z.object({
+  title: z
+    .string()
+    .min(1, "标题不能为空")
+    .max(100, "标题不能超过100个字符"),
+  content: z.string().min(20, "内容至少需要20个字符"),
+  website_id: z.string().min(1, "请选择关联网站"),
+  image: imageFileSchema.optional(),
+});

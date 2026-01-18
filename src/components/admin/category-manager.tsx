@@ -24,7 +24,7 @@ import {
 } from "@/ui/common/dialog";
 import { Label } from "@/ui/common/label";
 import { useToast } from "@/hooks/use-toast";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Heart, ThumbsUp, ThumbsDown } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,8 +47,8 @@ export function CategoryManager() {
 
   const handleAdd = async () => {
     if (!formData.name || !formData.slug) {
-        toast({ title: "错误", description: "请填写完整信息", variant: "destructive" });
-        return;
+      toast({ title: "错误", description: "请填写完整信息", variant: "destructive" });
+      return;
     }
     try {
       const res = await fetch("/api/categories", {
@@ -56,27 +56,27 @@ export function CategoryManager() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      
+
       const response = await res.json();
-      
+
       if (res.ok && response.code === 200) {
-          setCategories([...categories, response.data]);
-          setIsAddDialogOpen(false);
-          setFormData({ name: "", slug: "" });
-          toast({ title: "成功", description: "分类已添加" });
+        setCategories([...categories, response.data]);
+        setIsAddDialogOpen(false);
+        setFormData({ name: "", slug: "" });
+        toast({ title: "成功", description: "分类已添加" });
       } else {
-          throw new Error(response.message || "Failed");
+        throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "添加分类失败", variant: "destructive" });
+    } catch (error) {
+      toast({ title: "错误", description: error instanceof Error ? error.message : "添加分类失败", variant: "destructive" });
     }
   };
 
   const handleEdit = async () => {
     if (!currentCategory) return;
     if (!formData.name || !formData.slug) {
-        toast({ title: "错误", description: "请填写完整信息", variant: "destructive" });
-        return;
+      toast({ title: "错误", description: "请填写完整信息", variant: "destructive" });
+      return;
     }
     try {
       const res = await fetch(`/api/categories/${currentCategory.id}`, {
@@ -87,16 +87,16 @@ export function CategoryManager() {
 
       const response = await res.json();
       if (res.ok && response.code === 200) {
-          setCategories(categories.map(c => c.id === currentCategory.id ? response.data : c));
-          setIsEditDialogOpen(false);
-          setCurrentCategory(null);
-          setFormData({ name: "", slug: "" });
-          toast({ title: "成功", description: "分类已更新" });
+        setCategories(categories.map(c => c.id === currentCategory.id ? response.data : c));
+        setIsEditDialogOpen(false);
+        setCurrentCategory(null);
+        setFormData({ name: "", slug: "" });
+        toast({ title: "成功", description: "分类已更新" });
       } else {
-           throw new Error(response.message || "Failed");
+        throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "更新分类失败", variant: "destructive" });
+    } catch (error) {
+      toast({ title: "错误", description: error instanceof Error ? error.message : "更新分类失败", variant: "destructive" });
     }
   };
 
@@ -108,13 +108,35 @@ export function CategoryManager() {
 
       const response = await res.json();
       if (res.ok && response.code === 200) {
-          setCategories(categories.filter(c => c.id !== id));
-          toast({ title: "成功", description: "分类已删除" });
+        setCategories(categories.filter(c => c.id !== id));
+        toast({ title: "成功", description: "分类已删除" });
       } else {
-          throw new Error(response.message || "Failed");
+        throw new Error(response.message || "Failed");
       }
-    } catch (error: any) {
-      toast({ title: "错误", description: error.message || "删除分类失败", variant: "destructive" });
+    } catch (error) {
+      toast({ title: "错误", description: error instanceof Error ? error.message : "删除分类失败", variant: "destructive" });
+    }
+  };
+
+  const handleLike = async (id: number, increment: boolean) => {
+    try {
+      const response = await fetch(`/api/categories/${id}/like`, {
+        method: increment ? "POST" : "DELETE",
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        const newLikes = result.data.likes;
+
+        setCategories(categories.map(c => c.id === id ? { ...c, likes: newLikes } : c));
+
+        toast({
+          title: increment ? "点赞成功" : "已踩",
+          description: `当前点赞数：${newLikes}`,
+        });
+      }
+    } catch (error) {
+      console.error("Like error:", error);
     }
   };
 
@@ -174,6 +196,7 @@ export function CategoryManager() {
               <TableHead className="w-[100px]">ID</TableHead>
               <TableHead>名称</TableHead>
               <TableHead>Slug</TableHead>
+              <TableHead>点赞数</TableHead>
               <TableHead className="text-right">操作</TableHead>
             </TableRow>
           </TableHeader>
@@ -183,14 +206,49 @@ export function CategoryManager() {
                 <TableCell>{category.id}</TableCell>
                 <TableCell className="font-medium">{category.name}</TableCell>
                 <TableCell>{category.slug}</TableCell>
-                <TableCell className="text-right space-x-2">
-                  <Button variant="ghost" size="icon" onClick={() => openEditDialog(category)}>
+                <TableCell>
+                  <div className="flex items-center gap-1">
+                    <Heart className="w-3 h-3 text-pink-500" />
+                    <span>{category.likes || 0}</span>
+                  </div>
+                </TableCell>
+                <TableCell className="text-right space-x-1">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleLike(category.id, true)}
+                    title="点赞"
+                    className="h-8 w-8 text-pink-600/70 hover:text-pink-600 hover:bg-pink-500/10"
+                  >
+                    <ThumbsUp className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleLike(category.id, false)}
+                    title="踩"
+                    className="h-8 w-8 text-gray-600/70 hover:text-gray-600 hover:bg-gray-500/10"
+                  >
+                    <ThumbsDown className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => openEditDialog(category)}
+                    title="编辑"
+                    className="h-8 w-8 text-blue-600/70 hover:text-blue-600 hover:bg-blue-500/10"
+                  >
                     <Pencil className="w-4 h-4" />
                   </Button>
-                  
+
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        title="删除"
+                        className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </AlertDialogTrigger>
@@ -203,7 +261,10 @@ export function CategoryManager() {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>取消</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleDelete(category.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                        <AlertDialogAction onClick={(e) => {
+                          e.preventDefault();
+                          handleDelete(category.id);
+                        }} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
                           删除
                         </AlertDialogAction>
                       </AlertDialogFooter>
@@ -213,11 +274,11 @@ export function CategoryManager() {
               </TableRow>
             ))}
             {categories.length === 0 && (
-                <TableRow>
-                    <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                        暂无分类
-                    </TableCell>
-                </TableRow>
+              <TableRow>
+                <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                  暂无分类
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

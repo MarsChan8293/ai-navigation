@@ -72,19 +72,15 @@ export default function WebsiteGrid({
       <motion.div
         layout
         className={cn(
-          "grid gap-2 sm:gap-4",
+          "grid gap-5 sm:gap-6",
           isCompact
-            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6"
         )}
       >
         <AnimatePresence mode="popLayout">
           {!websites || websites.length === 0 ? (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               className="col-span-full flex items-center justify-center"
             >
               <div className="text-center space-y-4">
@@ -100,20 +96,19 @@ export default function WebsiteGrid({
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ) : (
             websites.map((website, index) => (
               <motion.div
                 key={website.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30,
-                  delay: index * 0.05,
+                  type: "tween",
+                  duration: 0.2,
+                  delay: index * 0.01, // 减少延迟
                 }}
               >
                 {isCompact ? (
