@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils/utils";
 import type { UseCase } from "@/lib/types";
@@ -26,9 +27,11 @@ export function UseCaseCard({ useCase }: UseCaseCardProps) {
       <div className="flex flex-col gap-4">
         {useCase.image_base64 && (
           <div className="overflow-hidden rounded-xl border border-border/30">
-            <img
+            <Image
               src={useCase.image_base64}
               alt={useCase.title}
+              width={400}
+              height={160}
               className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>

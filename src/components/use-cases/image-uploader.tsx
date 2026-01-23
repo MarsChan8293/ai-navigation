@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import imageCompression from "browser-image-compression";
 import { Button } from "@/ui/common/button";
 import { cn } from "@/lib/utils/utils";
@@ -54,9 +55,11 @@ export function ImageUploader({ value, onImageReady, error }: ImageUploaderProps
         )}
       >
         {value ? (
-          <img
+          <Image
             src={value}
             alt="已上传图片预览"
+            width={320}
+            height={160}
             className="max-h-40 w-auto rounded-lg border border-border/40 object-contain"
           />
         ) : (

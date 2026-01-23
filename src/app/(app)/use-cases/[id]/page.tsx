@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -63,9 +64,11 @@ export default async function UseCaseDetailPage({
 
         {useCase.image_base64 && (
           <div className="overflow-hidden rounded-2xl border border-border/40">
-            <img
-              src={useCase.image_base64}
+            <Image
+              src={`data:image/png;base64,${useCase.image_base64}`}
               alt={useCase.title}
+              width={800}
+              height={256}
               className="h-64 w-full object-cover"
             />
           </div>
