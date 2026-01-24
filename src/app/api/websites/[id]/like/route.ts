@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 // POST /api/websites/[id]/like - Add like
 export async function POST(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -27,7 +27,7 @@ export async function POST(
 
 // DELETE /api/websites/[id]/like - Remove like
 export async function DELETE(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {

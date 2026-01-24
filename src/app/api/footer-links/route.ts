@@ -15,7 +15,7 @@ export async function GET() {
       },
     });
     return NextResponse.json(AjaxResponse.ok(links));
-  } catch (_error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("获取页脚链接失败"));
   }
 }
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     // 验证 URL 格式
     try {
       new URL(url);
-    } catch (_e) {
+    } catch {
       return NextResponse.json(AjaxResponse.fail("请输入有效的URL地址"));
     }
 

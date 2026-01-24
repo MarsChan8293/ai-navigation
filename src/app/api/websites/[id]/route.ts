@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
 import { prisma } from "@/lib/db/db";
+import { websiteFormSchema } from "@/lib/utils/validations";
 
 // GET /api/websites/[id]
 // 获取单个网站
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -33,7 +34,7 @@ export async function GET(
 // DELETE /api/websites/[id]
 // 删除网站
 export async function DELETE(
-  request: Request,
+  _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -91,7 +92,17 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const data = await request.json();
+    const json = await request.json();
+    const result = websiteFormSchema.safeParse(json);
+
+    if (!result.success) {
+      return NextResponse.json(
+        AjaxResponse.fail(result.error.errors[0].message),
+        { status: 400 }
+      );
+    }
+
+    const data = result.data;
     const { id } = await params;
     const websiteId = parseInt(id);
 
@@ -105,15 +116,6 @@ export async function PUT(
       });
     }
 
-    if (!data.title || !data.url || !data.category_id) {
-      return NextResponse.json(
-        AjaxResponse.fail(
-          "Missing required fields: title, url, or category_id"
-        ),
-        { status: 400 }
-      );
-    }
-
     const category = await prisma.category.findUnique({
       where: { id: Number(data.category_id) },
     });
@@ -124,15 +126,32 @@ export async function PUT(
       });
     }
 
+    // 处理缩略图（如果更新了 URL 或缩略图地址）
+    let imageBase64 = existingWebsite.thumbnail_base64;
+    if (data.thumbnail && data.thumbnail !== existingWebsite.thumbnail) {
+      try {
+        const image = await fetch(data.thumbnail);
+        if (image.ok) {
+          const imageBuffer = await image.arrayBuffer();
+          imageBase64 = `data:${image.headers.get(
+            "content-type"
+          )};base64,${Buffer.from(imageBuffer).toString("base64")}`;
+        }
+      } catch (e) {
+        console.error("Failed to fetch thumbnail:", e);
+      }
+    }
+
     const website = await prisma.website.update({
       where: { id: websiteId },
       data: {
         title: data.title,
         url: data.url,
-        description: data.description || "",
+        description: data.description,
         category_id: Number(data.category_id),
         thumbnail: data.thumbnail || "",
-        status: data.status || existingWebsite.status,
+        thumbnail_base64: imageBase64,
+        status: json.status || existingWebsite.status,
       },
     });
 

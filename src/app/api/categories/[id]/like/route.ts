@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db/db";
 
 // POST /api/categories/[id]/like - Add like
 export async function POST(
-    request: Request,
+    _request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
@@ -25,7 +25,7 @@ export async function POST(
 
 // DELETE /api/categories/[id]/like - Remove like
 export async function DELETE(
-    request: Request,
+    _request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {

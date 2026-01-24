@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { Website } from "@/lib/types";
 import { AjaxResponse } from "@/lib/utils";
 import { prisma } from "@/lib/db/db";
+import { websiteFormSchema } from "@/lib/utils/validations";
 
 // GET /api/websites
 // 获取所有指定分类的网站
@@ -25,17 +26,17 @@ export async function POST(request: Request) {
   }
 
   try {
-    const data = await request.json();
+    const json = await request.json();
+    const result = websiteFormSchema.safeParse(json);
 
-    // Validate required fields
-    if (!data.title || !data.url || !data.category_id) {
+    if (!result.success) {
       return NextResponse.json(
-        AjaxResponse.fail(
-          "Missing required fields: title, url, or category_id"
-        ),
+        AjaxResponse.fail(result.error.errors[0].message),
         { status: 400 }
       );
     }
+
+    const data = result.data;
 
     // Check if category exists
     const category = await prisma.category.findUnique({
@@ -48,8 +49,6 @@ export async function POST(request: Request) {
       });
     }
 
-    console.log(data);
-
     // Check if URL already exists
     const existingWebsite = await prisma.website.findFirst({
       where: { url: data.url },
@@ -61,32 +60,31 @@ export async function POST(request: Request) {
       });
     }
 
-    // Validate URL format
-    try {
-      new URL(data.url);
-    } catch (_error) {
-      return NextResponse.json(AjaxResponse.fail("Invalid URL format"), {
-        status: 400,
-      });
+    // 处理缩略图
+    let imageBase64 = null;
+    if (data.thumbnail) {
+      try {
+        const image = await fetch(data.thumbnail);
+        if (image.ok) {
+          const imageBuffer = await image.arrayBuffer();
+          imageBase64 = `data:${image.headers.get(
+            "content-type"
+          )};base64,${Buffer.from(imageBuffer).toString("base64")}`;
+        }
+      } catch (e) {
+        console.error("Failed to fetch thumbnail:", e);
+      }
     }
-
-    // 将图片转换为base64
-    const image = await fetch(data.thumbnail);
-    const imageBuffer = await image.arrayBuffer();
-    const imageBase64 = `data:${image.headers.get(
-      "content-type"
-    )};base64,${Buffer.from(imageBuffer).toString("base64")}`;
 
     const website = await prisma.website.create({
       data: {
         title: data.title.trim(),
         url: data.url.trim(),
-        description: data.description?.trim() || "",
+        description: data.description.trim(),
         category_id: Number(data.category_id),
         thumbnail: data.thumbnail?.trim() || "",
-        status: data.status || "pending",
-        thumbnail_base64: imageBase64 as string,
-
+        thumbnail_base64: imageBase64,
+        status: "pending", // Default to pending for public submissions
       },
     });
 

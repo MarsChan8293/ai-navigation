@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/ui/common/select";
 import { useToast } from "@/hooks/use-toast";
-import type { FormInputs } from "@/lib/types";
+import type { FormInputs, Website } from "@/lib/types";
 import { useSettings } from "@/hooks/use-settings";
 
 export function WebsiteForm({
@@ -45,7 +45,7 @@ export function WebsiteForm({
           return res.json();
         });
         setCategories(categoryData.data);
-      } catch (_error) {
+      } catch {
         toast({
           title: "加载分类失败",
           description: "请刷新页面重试",
@@ -214,6 +214,24 @@ export function WebsiteForm({
           placeholder="描述这个网站"
           textarea
         />
+
+        {watch("thumbnail") && (
+          <div className="mt-4">
+            <label className="block text-sm font-medium mb-2 text-foreground/80">
+              缩略图预览
+            </label>
+            <div className="relative aspect-[16/9] w-full max-w-[320px] overflow-hidden rounded-xl border border-border/40">
+              <img
+                src={watch("thumbnail")}
+                alt="Thumbnail preview"
+                className="h-full w-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://via.placeholder.com/640x360?text=Invalid+Image+URL";
+                }}
+              />
+            </div>
+          </div>
+        )}
       </motion.div>
 
       {/* Category Selection */}

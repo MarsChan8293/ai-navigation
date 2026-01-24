@@ -8,7 +8,6 @@ import {
   Trophy,
   Search,
   ExternalLink,
-  Sparkles,
 } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import Link from "next/link";

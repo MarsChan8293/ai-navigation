@@ -27,7 +27,7 @@ export async function GET() {
     );
 
     return NextResponse.json(AjaxResponse.ok(settingsObject));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("Failed to fetch settings"));
   }
 }
@@ -63,8 +63,8 @@ export async function PUT(request: Request) {
         total: Object.keys(body).length,
       })
     );
-  } catch (error) {
-    console.error("Failed to update settings:", error);
+  } catch {
+    console.error("Failed to update settings:");
     return NextResponse.json(AjaxResponse.fail("Failed to update settings"));
   }
 }
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(AjaxResponse.ok(settings));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("Failed to get settings"), {
       status: 500,
     });

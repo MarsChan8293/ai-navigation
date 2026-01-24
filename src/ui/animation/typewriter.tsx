@@ -23,7 +23,7 @@ export function Typewriter({ text, speed = 50, delay = 500 }: TypewriterProps) {
   }, [delay]);
 
   useEffect(() => {
-    if (!isTyping) return;
+    if (!isTyping) return undefined;
 
     if (currentIndex < text.length) {
       const timer = setTimeout(() => {
@@ -33,6 +33,7 @@ export function Typewriter({ text, speed = 50, delay = 500 }: TypewriterProps) {
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [currentIndex, text, speed, isTyping]);
 
   return (

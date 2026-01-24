@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useAtom } from "jotai";
-import { useHydrateAtoms } from "jotai/utils";
 import { categoriesAtom, websitesAtom } from "@/lib/atoms";
 import { WebsiteList } from "@/components/admin/website-list";
 import { Badge } from "@/ui/common/badge";
@@ -28,13 +27,8 @@ export function AdminPageClient({
   initialWebsites: Website[];
   initialCategories: { id: number; name: string; slug: string }[];
 }) {
-  useHydrateAtoms([
-    [categoriesAtom, initialCategories],
-    [websitesAtom, initialWebsites],
-  ]);
-
-  const [categories, setCategories] = useAtom(categoriesAtom);
-  const [allWebsites, setAllWebsites] = useAtom(websitesAtom);
+  const [categories] = useAtom(categoriesAtom);
+  const [allWebsites] = useAtom(websitesAtom);
 
   const [activeStatus, setActiveStatus] =
     useState<Website["status"]>("pending");

@@ -39,7 +39,6 @@ export default async function Home() {
             id: true,
             name: true,
             slug: true,
-            // @ts-ignore
             likes: true,
           },
         }),
@@ -60,7 +59,7 @@ export default async function Home() {
   return (
     <HomePage
       initialWebsites={preFilteredWebsites}
-      initialCategories={categoriesData as any}
+      initialCategories={categoriesData}
       categorySlug="all"
     />
   );

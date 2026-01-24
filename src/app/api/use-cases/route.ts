@@ -14,9 +14,9 @@ export async function GET(request: Request) {
   const websiteIdParam = searchParams.get("websiteId");
   const websiteId = websiteIdParam ? Number(websiteIdParam) : null;
 
-  const where = {
+  const where: Record<string, unknown> = {
     status: "published",
-    website_id: Number.isFinite(websiteId) ? websiteId : undefined,
+    ...(websiteId !== null && Number.isFinite(websiteId) ? { website_id: websiteId } : {}),
   };
 
   const [items, total] = await Promise.all([

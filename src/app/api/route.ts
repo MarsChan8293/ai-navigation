@@ -9,10 +9,10 @@ import { AjaxResponse } from "@/lib/utils";
  *     tags:
  *       - 网站
  */
-export async function GET(request: Request) {
+export async function GET() {
   try {
     return NextResponse.json(AjaxResponse.ok("hello world"));
-  } catch (error) {
+  } catch {
     return NextResponse.json(AjaxResponse.fail("Failed to process request"), {
       status: 500,
     });

@@ -43,7 +43,7 @@ export function UseCaseForm() {
         if (!response.ok) throw new Error("Failed to load websites");
         const result = await response.json();
         setWebsites(result.data || []);
-      } catch (_error) {
+      } catch {
         toast({
           title: "加载网站失败",
           description: "请刷新页面重试",

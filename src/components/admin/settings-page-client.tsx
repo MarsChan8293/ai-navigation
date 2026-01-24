@@ -7,11 +7,12 @@ import { Tabs, TabsList, TabsTrigger } from "@/ui/common/tabs";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 import { ListFilter, Settings } from "lucide-react";
+import type { SettingsObject } from "@/app/(admin)/admin/actions";
 
 export function SettingsPageClient({
   initialSettings,
 }: {
-  initialSettings: any;
+  initialSettings: SettingsObject | null;
 }) {
   const [settings, setSettings] = useState(
     initialSettings || {

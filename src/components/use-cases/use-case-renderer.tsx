@@ -59,7 +59,7 @@ export function UseCaseRenderer({ content, className }: UseCaseRendererProps) {
               {children}
             </pre>
           ),
-          a: ({ children, node, className, ...props }) => (
+          a: ({ children, className, ...props }) => (
             <a
               {...props}
               target="_blank"

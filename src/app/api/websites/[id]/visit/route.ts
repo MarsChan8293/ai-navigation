@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 // POST /api/websites/[id]/visit
 export async function POST(
-  request: Request,
+  _request: Request,
   props: { params: Promise<{ id: string }> }
 ) {
   try {

@@ -122,7 +122,7 @@ export async function fetchMetadata(url: string) {
       image,
       screenshot: `https://s0.wp.com/mshots/v1/${encodeURIComponent(url)}?w=1280&h=720`,
     };
-  } catch (_error) {
+  } catch {
     throw new Error("获取网站信息失败");
   }
 }

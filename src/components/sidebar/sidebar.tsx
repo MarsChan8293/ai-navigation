@@ -1,28 +1,10 @@
 "use client";
 
-import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import {
-    Globe,
-    MessageSquare,
-    Palette,
-    PenTool,
-    Code2,
-    Wrench,
-    Brain,
     ChevronLeft,
     ChevronRight,
-    LayoutGrid,
-    Trophy,
-    Plus,
-    Settings,
-    Info,
-    Server,
-    Bot,
-    Command,
-    MessageCircle,
-    Briefcase,
-    Search
+    Brain,
 } from "lucide-react";
 import type { Category } from "@/lib/types";
 import { cn } from "@/lib/utils/utils";
@@ -35,25 +17,6 @@ import { usePathname } from "next/navigation";
 interface SidebarProps {
     categories: Category[];
 }
-
-const iconMap: Record<string, typeof Globe> = {
-    "all": LayoutGrid,
-    "ai-chat": MessageCircle,
-    "ai-drawing": Palette,
-    "ai-writing": PenTool,
-    "ai-coding": Code2,
-    "ai-tools": Wrench,
-    "ai-model": Brain,
-    "ai-agent": Bot,
-    "ai-prompt": Command,
-    "ai-infra": Server,
-    "ai-office": Briefcase,
-    "ai-search": Search,
-    "ai-hubs": Brain,
-    "ai-agents": Bot,
-    "ai-art": Palette,
-    "ai-others": Wrench,
-};
 
 function SidebarItem({ href, label, isCollapsed, isAll, slug }: { href: string, label: string, isCollapsed: boolean, isAll: boolean, slug: string }) {
     const pathname = usePathname();
@@ -100,11 +63,11 @@ export function Sidebar({ categories }: SidebarProps) {
     ];
 
     const mainNavLinks = [
-        { name: "使用案例", href: "/use-cases", icon: MessageSquare },
-        { name: "排行榜", href: "/rankings", icon: Trophy },
-        { name: "提交网站", href: "/submit", icon: Plus },
-        { name: "管理", href: "/admin", icon: Settings },
-        { name: "关于我们", href: "/about", icon: Info },
+        { name: "使用案例", href: "/use-cases" },
+        { name: "排行榜", href: "/rankings" },
+        { name: "提交网站", href: "/submit" },
+        { name: "管理", href: "/admin" },
+        { name: "关于我们", href: "/about" },
     ];
 
     return (
@@ -170,7 +133,6 @@ export function Sidebar({ categories }: SidebarProps) {
                                         "text-muted-foreground hover:bg-primary/5 hover:text-primary"
                                     )}
                                 >
-                                    <link.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6 mx-auto" : "w-5 h-5")} />
                                     {!isCollapsed && (
                                         <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis">
                                             {link.name}
@@ -196,7 +158,6 @@ export function Sidebar({ categories }: SidebarProps) {
                                         : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
                                 )}
                             >
-                                <link.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6 mx-auto" : "w-5 h-5")} />
                                 {!isCollapsed && (
                                     <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis">
                                         {link.name}

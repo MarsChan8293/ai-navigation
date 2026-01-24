@@ -1,34 +1,54 @@
 import { prisma } from "@/lib/db/db";
+import type { Website, Category } from "@/lib/types";
 
-export async function getWebsites() {
+export interface SettingsObject {
+  title: string;
+  description: string;
+  keywords: string;
+  logo: string;
+  siteIcp: string;
+  siteFooter: string;
+  allowSubmissions: string;
+  requireApproval: string;
+  itemsPerPage: string;
+  adminPassword: string;
+  siteUrl: string;
+  siteEmail: string;
+  siteCopyright: string;
+  googleAnalytics: string;
+  baiduAnalytics: string;
+  copyright: string;
+}
+
+export async function getWebsites(): Promise<Website[]> {
   try {
     const websites = await prisma.website.findMany({
       orderBy: {
         created_at: "desc",
       },
     });
-    return websites;
+    return websites as Website[];
   } catch (error) {
     console.error("Error fetching websites:", error);
     return [];
   }
 }
 
-export async function getCategories() {
+export async function getCategories(): Promise<Category[]> {
   try {
     const categories = await prisma.category.findMany({
       orderBy: {
         id: "asc",
       },
     });
-    return categories;
+    return categories as Category[];
   } catch (error) {
     console.error("Error fetching categories:", error);
     return [];
   }
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<SettingsObject | null> {
   try {
     // 获取所有设置
     const settings = await prisma.setting.findMany({
@@ -47,7 +67,7 @@ export async function getSettings() {
 
     console.log(settingsObject);
 
-    return settingsObject;
+    return settingsObject as unknown as SettingsObject;
   } catch (error) {
     console.error("Error fetching settings:", error);
     return null;

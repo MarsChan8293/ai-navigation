@@ -22,7 +22,6 @@ export default async function RootLayout({
       id: true,
       name: true,
       slug: true,
-      // @ts-ignore
       likes: true,
     },
     orderBy: {
@@ -55,7 +54,7 @@ export default async function RootLayout({
         >
           <StoreProvider>
             <div className="flex h-screen w-full overflow-hidden">
-              <Sidebar categories={categories as any} />
+              <Sidebar categories={categories} />
               <main className="flex-1 min-w-0 flex flex-col h-screen overflow-hidden relative">
                 <div className="flex-1 overflow-y-auto w-full custom-scrollbar">
                   {children}

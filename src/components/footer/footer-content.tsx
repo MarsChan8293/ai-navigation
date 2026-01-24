@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import { Button } from "@/ui/common/button";
-import { Plus } from "lucide-react";
 import { isAdminModeAtom, footerSettingsAtom } from "@/lib/atoms";
 import {
   Dialog,
@@ -15,7 +14,6 @@ import {
 } from "@/ui/common/dialog";
 import { Input } from "@/ui/common/input";
 import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils/utils";
 import type { FooterSettings } from "@/lib/types";
 
 export default function FooterContent({
@@ -76,7 +74,7 @@ export default function FooterContent({
         title: "添加成功",
         description: "新的页脚链接已添加",
       });
-    } catch (_error) {
+    } catch {
       toast({
         title: "添加失败",
         description: "添加页脚链接时出错",
@@ -102,7 +100,7 @@ export default function FooterContent({
         title: "删除成功",
         description: "页脚链接已删除",
       });
-    } catch (_error) {
+    } catch {
       toast({
         title: "删除失败",
         description: "删除页脚链接时出错",
@@ -112,99 +110,61 @@ export default function FooterContent({
   };
 
   return (
-    <motion.footer
-      initial={{ opacity: 0, y: 20 }}
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={cn(
-        "w-full border-t border-border",
-        "bg-background/80 backdrop-blur-sm",
-        "transition-colors duration-300"
-      )}
     >
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            {settings.links.length > 0 ? (
-              settings.links.map((link, index) => (
-                <div key={index} className="flex items-center gap-1.5">
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.title}
-                  </a>
-                  {isAdmin && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "h-5 w-5 p-0 rounded-full",
-                        "hover:bg-destructive/10 hover:text-destructive",
-                        "transition-colors duration-200"
-                      )}
-                      onClick={() => handleRemoveLink(index)}
-                    >
-                      ×
-                    </Button>
-                  )}
-                </div>
-              ))
-            ) : (
-              <div className="text-xs text-muted-foreground/60 italic">
-                {isAdmin ? "点击右侧加号添加页脚链接" : "暂无页脚链接"}
-              </div>
-            )}
-            {isAdmin && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  "h-5 w-5 p-0 rounded-full",
-                  "hover:bg-primary/10 hover:text-primary",
-                  "transition-colors duration-200"
-                )}
-                onClick={() => setIsDialogOpen(true)}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+      <footer className="px-8 py-6 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+          <p>{settings.copyright || "© 2024 AI NAV — EXPLORE THE NEW ERA"}</p>
+          {settings.icpBeian && (
             <a
-              href="https://github.com/liyown/ai-navigation"
+              href="https://beian.miit.gov.cn/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors"
+              className="hover:text-primary transition-colors"
             >
-              {settings.copyright}
+              {settings.icpBeian}
             </a>
-            {settings.icpBeian && (
-              <>
-                <span className="hidden md:inline text-muted-foreground/60">
-                  |
-                </span>
-                <a
-                  href="https://beian.miit.gov.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
+          )}
+        </div>
+        <div className="flex flex-wrap justify-center gap-6">
+          {settings.links.map((link, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                {link.title}
+              </a>
+              {isAdmin && (
+                <button
+                  onClick={() => handleRemoveLink(index)}
+                  className="hover:text-destructive transition-colors text-xs"
                 >
-                  {settings.icpBeian}
-                </a>
-              </>
-            )}
-          </div>
+                  [REMOVE]
+                </button>
+              )}
+            </div>
+          ))}
+          {isAdmin && (
+            <button
+              onClick={() => setIsDialogOpen(true)}
+              className="hover:text-primary transition-colors"
+            >
+              [ADD LINK]
+            </button>
+          )}
         </div>
         {settings.customHtml && (
           <div
-            className="mt-2 text-xs text-muted-foreground"
+            className="w-full text-center md:text-right"
             dangerouslySetInnerHTML={{ __html: settings.customHtml }}
           />
         )}
-      </div>
+      </footer>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="bg-background border-border">
@@ -259,6 +219,6 @@ export default function FooterContent({
           </div>
         </DialogContent>
       </Dialog>
-    </motion.footer>
+    </motion.div>
   );
 }
