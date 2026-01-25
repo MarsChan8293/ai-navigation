@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { ScreenshotService } from "@/lib/services/screenshot";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -32,6 +33,12 @@ export class AjaxResponse<T> {
   }
 }
 
-export async function fetchMetadata() {
-  throw new Error("离线模式：无法获取外部网站元数据，请手动输入网站信息");
+export async function fetchMetadata(url: string) {
+  try {
+    const result = await ScreenshotService.captureScreenshot(url);
+    return result;
+  } catch (error) {
+    console.error("Metadata fetch error:", error);
+    throw error;
+  }
 }

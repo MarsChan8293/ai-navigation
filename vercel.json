@@ -1,7 +1,0 @@
-{
-  "framework": "nextjs",
-  "regions": ["hkg1"],
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "buildCommand": "prisma generate && next build"
-}

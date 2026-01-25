@@ -20,8 +20,7 @@ export function WebsiteThumbnail({
   variant = "square",
 }: WebsiteThumbnailProps) {
   const [imageError, setImageError] = useState(false);
-  const isExternalUrl = thumbnail?.startsWith('http://') || thumbnail?.startsWith('https://');
-  const thumbnailSrc = (!isExternalUrl && thumbnail) || "";
+  const thumbnailSrc = thumbnail || "";
   const isLarge = variant === "large";
 
   const renderFallback = () => (

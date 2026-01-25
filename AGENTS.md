@@ -96,25 +96,20 @@
 - **管理员操作**: 对任何破坏性 API 操作，验证 `isAdminMode` 或会话令牌。
 
 ## 6. 离线部署规则（完全本地化环境）
-
-本项目可能部署在无法访问外网的环境中，所有资源必须本地化。以下规则必须严格遵守：
+本项目可能部署在无法访问外网的环境中，资源尽量本地化。以下规则必须严格遵守：
 
 ### 6.1 禁止的外部资源
 - **Google Fonts**: 禁止使用 `fonts.googleapis.com` 和 `fonts.gstatic.com`
-  - 删除 `src/app/layout.tsx:33-34,37-39` 中的预连接和 DNS 预解析
-  - 替代方案：将必需的字体文件下载到 `public/fonts/`，通过 CSS `@font-face` 加载
-- **Favicon 服务**: 禁止使用 `icon.horse`
-  - 删除 `src/app/layout.tsx:32,37` 中的相关预连接
-  - 删除 `src/components/website/website-thumbnail.tsx:26` 的 faviconUrl 引用
-  - 删除 `next.config.ts:14-18` 中的 `remotePatterns` 配置
-  - 替代方案：使用本地图标或从 `public/icons/` 加载默认图标
 - **Google Analytics**: 禁止使用 `googletagmanager.com`
-  - 删除 `src/app/layout.tsx:65` 中的 `<OtherAnalytics>` 组件
-  - 删除 `src/components/analytics.tsx` 中的 Google Analytics 相关代码
 - **百度统计**: 禁止使用 `hm.baidu.com`
-  - 删除 `src/components/analytics.tsx:12-27` 中的百度统计代码
 - **Vercel Analytics**: 禁止使用 `@vercel/analytics`
-  - 删除 `src/app/layout.tsx:8,64` 中的 Vercel Analytics 引入
+
+### 6.2 允许的外部资源
+- **网站缩略图/截图**: 允许使用外部网络
+  - `src/components/website/website-thumbnail.tsx` 支持显示外部 URL 的图片
+  - `src/lib/services/screenshot.ts` 使用 Microlink API 获取网站截图
+  - `src/app/api/metadata` 调用外部 API 获取网站元数据和缩略图
+  - 环境变量配置：`MICROLINK_ENDPOINT` 和 `MICROLINK_API_KEY`
 
 ### 6.5 本地化检查清单
 在提交代码前，确保：

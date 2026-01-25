@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { AjaxResponse } from "@/lib/utils";
 import { fetchMetadata } from "@/lib/utils";
 
 export async function GET(request: Request) {
@@ -6,16 +7,16 @@ export async function GET(request: Request) {
     const url = searchParams.get("url");
 
     if (!url) {
-        return NextResponse.json({ success: false, message: "URL is required" }, { status: 400 });
+        return NextResponse.json(AjaxResponse.fail("URL is required"), { status: 400 });
     }
 
     try {
-        const metadata = await fetchMetadata();
-        return NextResponse.json({ success: true, data: metadata });
+        const metadata = await fetchMetadata(url);
+        return NextResponse.json(AjaxResponse.ok(metadata));
     } catch (error) {
         console.error("Metadata fetch error:", error);
         return NextResponse.json(
-            { success: false, message: error instanceof Error ? error.message : "Failed to fetch metadata" },
+            AjaxResponse.fail(error instanceof Error ? error.message : "Failed to fetch metadata"),
             { status: 500 }
         );
     }

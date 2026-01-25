@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
 import { WebsiteService } from "@/lib/services/website";
 import { websiteFormSchema } from "@/lib/utils/validations";
+import { clearCache } from "@/lib/db/cache";
 
 // GET /api/websites
 // 获取所有指定状态的网站
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
     }
 
     const website = await WebsiteService.createWebsite(result.data);
+    await clearCache("approved-websites");
     return NextResponse.json(AjaxResponse.ok(website));
   } catch (error) {
     console.error("Failed to create website:", error);

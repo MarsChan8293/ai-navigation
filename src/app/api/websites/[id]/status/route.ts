@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db/db";
 import { AjaxResponse } from "@/lib/utils";
+import { clearCache } from "@/lib/db/cache";
 
 export async function PUT(request: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -28,6 +29,8 @@ export async function PUT(request: Request, props: { params: Promise<{ id: strin
       where: { id: websiteId },
       data: { status },
     });
+
+    await clearCache("approved-websites");
 
     return NextResponse.json(AjaxResponse.ok("Status updated"));
   } catch (error) {

@@ -85,7 +85,7 @@ export function WebsiteForm({
     setIsFetching(true);
     try {
       const response = await fetch(`/api/metadata?url=${encodeURIComponent(url)}`);
-      if (!response.ok) throw new Error("获取元数据失败");
+      if (!response.ok) throw new Error("获取网站信息失败");
 
       const result = await response.json();
       if (!result.success) throw new Error(result.message);
@@ -93,6 +93,7 @@ export function WebsiteForm({
       const metadata = result.data;
       if (metadata.title) setValue("title", metadata.title);
       if (metadata.description) setValue("description", metadata.description);
+      if (metadata.thumbnail) setValue("thumbnail", metadata.thumbnail);
 
       toast({
         title: "获取成功",
@@ -100,7 +101,7 @@ export function WebsiteForm({
       });
     } catch (error) {
       toast({
-        title: "获取元数据失败",
+        title: "获取网站信息失败",
         description: error instanceof Error ? error.message : "请手动填写网站信息",
         variant: "destructive",
       });

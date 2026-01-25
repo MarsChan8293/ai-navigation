@@ -109,3 +109,13 @@ export async function cachedPrismaQuery<T>(
 
   return data;
 }
+
+export async function clearCache(key?: string) {
+  if (key) {
+    cache.delete(key);
+    console.log(`[Cache] 已清除缓存: ${key}`);
+  } else {
+    cache.clear();
+    console.log(`[Cache] 已清除所有缓存`);
+  }
+}

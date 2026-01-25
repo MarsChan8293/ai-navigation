@@ -5,12 +5,8 @@ const nextConfig = {
   },
   // 图片优化配置
   images: {
-    // 启用现代图片格式支持
-    formats: ['image/avif', 'image/webp'],
-    // 启用图片缓存
-    minimumCacheTTL: 60,
-    // 禁用未优化提示
-    unoptimized: false,
+    // 禁用 Next.js 图片优化，允许所有外部图片直接加载
+    unoptimized: true,
   },
   // 性能优化配置
   compress: true,
