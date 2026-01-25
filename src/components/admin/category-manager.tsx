@@ -25,22 +25,11 @@ import {
 import { Label } from "@/ui/common/label";
 import { useToast } from "@/hooks/use-toast";
 import { Plus } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/ui/common/alert-dialog";
 
 export function CategoryManager() {
   const [categories, setCategories] = useAtom(categoriesAtom);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [openDeleteId, setOpenDeleteId] = useState<number | null>(null);
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
   const [formData, setFormData] = useState({ name: "", slug: "" });
   const { toast } = useToast();
@@ -211,45 +200,14 @@ export function CategoryManager() {
                       修改
                     </Button>
 
-                    <AlertDialog
-                      open={openDeleteId === category.id}
-                      onOpenChange={(open) =>
-                        setOpenDeleteId(open ? category.id : null)
-                      }
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => void handleDelete(category.id)}
+                      className="text-xs px-3 py-1 rounded-md transition-colors"
                     >
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          className="text-xs px-3 py-1 rounded-md transition-colors"
-                          onClick={() => setOpenDeleteId(category.id)}
-                        >
-                          删除
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>确认删除？</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            此操作无法撤销。删除分类可能会影响属于该分类的网站。
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>取消</AlertDialogCancel>
-                          <Button
-                              type="button"
-                              variant="destructive"
-                              onClick={() => {
-                                setOpenDeleteId(null);
-                                void handleDelete(category.id);
-                              }}
-                              className="text-xs px-3 py-1 rounded-md transition-colors"
-                            >
-                              确认删除
-                            </Button>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                      删除
+                    </Button>
                   </TableCell>
               </TableRow>
             ))}

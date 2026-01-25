@@ -12,17 +12,6 @@ import { useAtom } from "jotai";
 import { websitesAtom } from "@/lib/atoms";
 import { WebsiteThumbnail } from "@/components/website/website-thumbnail";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/ui/common/alert-dialog";
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -108,7 +97,7 @@ export function WebsiteList({
           description: "网站已被删除",
         });
 
-        // 成功删除后不再需要 window.location.reload()，因为已手动更新状态
+        return true;
       } else {
         console.error("Delete failed:", result.message);
         toast({
@@ -116,6 +105,7 @@ export function WebsiteList({
           description: result.message || "无法删除该网站",
           variant: "destructive",
         });
+        return false;
       }
     } catch (error) {
       console.error("Delete error:", error);
@@ -124,6 +114,7 @@ export function WebsiteList({
         description: "网络错误，请稍后再试",
         variant: "destructive",
       });
+      return false;
     }
   };
 
@@ -276,42 +267,17 @@ export function WebsiteList({
                         >
                           修改
                         </Button>
-                        <AlertDialog>
-                          <AlertDialogTrigger asChild>
-                            <Button
-                              variant="default"
-                              size="sm"
-                              className="bg-red-600/90 hover:bg-red-600 text-white text-xs px-3 py-1 rounded-md transition-colors"
-                            >
-                              删除
-                            </Button>
-                          </AlertDialogTrigger>
-                          <AlertDialogContent className="bg-background/95 backdrop-blur-sm border-border/40">
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>确认删除</AlertDialogTitle>
-                              <AlertDialogDescription>
-                                此操作无法撤销，确定要删除这个网站吗？
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel className="bg-background/50">
-                                取消
-                              </AlertDialogCancel>
-                              <AlertDialogAction asChild>
-                                <Button
-                                  type="button"
-                                  variant="destructive"
-                                  onClick={() => {
-                                    void handleDelete(website.id);
-                                  }}
-                                  className="bg-red-600/90 hover:bg-red-600"
-                                >
-                                  确认删除
-                                </Button>
-                              </AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                        <Button
+                          variant="default"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            void handleDelete(website.id);
+                          }}
+                          className="bg-red-600/90 hover:bg-red-600 text-white text-xs px-3 py-1 rounded-md transition-colors"
+                        >
+                          删除
+                        </Button>
                       </>
                     )}
                   </div>
