@@ -69,10 +69,10 @@ interface SearchBoxProps {
 }
 
 export function SearchBox({ value, onChange, className }: SearchBoxProps) {
-  const [selectedEngine, setSelectedEngine] = useState<SearchEngine>(
+  const [selectedEngine, setSelectedEngine] = useState<SearchEngine>(() =>
     searchEngines[0]
   );
-  const [localValue, setLocalValue] = useState(value);
+  const [localValue, setLocalValue] = useState(() => value);
 
   // 处理搜索引擎切换
   const handleEngineChange = useCallback(() => {
