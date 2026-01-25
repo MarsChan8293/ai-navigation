@@ -26,26 +26,26 @@ function SidebarItem({ href, label, isCollapsed, isAll, slug }: { href: string, 
         <Link
             href={href}
             className={cn(
-                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative",
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative border border-transparent",
                 isActive
-                    ? "bg-primary text-primary-foreground shadow-sm shadow-primary/10"
-                    : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
+                    ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]"
+                    : "text-cyan-500/60 hover:bg-cyan-500/10 hover:text-cyan-400 hover:border-cyan-500/20"
             )}
         >
             {!isCollapsed && (
-                <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-left">
+                <span className="text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis w-full text-left font-mono tracking-wide">
                     {label}
                 </span>
             )}
             {isActive && !isCollapsed && (
                 <motion.div
                     layoutId="active-indicator"
-                    className="ml-auto w-1.5 h-1.5 rounded-full bg-primary-foreground"
+                    className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(0,255,255,0.8)]"
                 />
             )}
 
             {isCollapsed && (
-                <div className="absolute left-full ml-4 px-3 py-1.5 bg-popover text-popover-foreground text-xs font-bold rounded-lg border border-border opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-xl z-[100]">
+                <div className="absolute left-full ml-4 px-3 py-1.5 bg-card/95 backdrop-blur text-cyan-300 text-xs font-bold rounded-lg border border-cyan-500/50 opacity backdrop-blur-xl 0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-[0_0_20px_rgba(0,255,255,0.3)] z-[100]">
                     {label}
                 </div>
             )}
@@ -72,7 +72,7 @@ export function Sidebar({ categories }: SidebarProps) {
     return (
         <div
             className={cn(
-                "relative h-screen bg-card/20 backdrop-blur-3xl border-r border-border/40 transition-all duration-300 flex flex-col z-50",
+                "relative h-screen bg-card/60 backdrop-blur-2xl border-r border-cyan-500/20 transition-all duration-300 flex flex-col z-50",
                 isCollapsed ? "w-[72px]" : "w-64"
             )}
         >
@@ -82,13 +82,13 @@ export function Sidebar({ categories }: SidebarProps) {
                 isCollapsed ? "justify-center" : "justify-start gap-4"
             )}>
                 <Link href="/" className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
-                        <Brain className="w-5.5 h-5.5 text-primary-foreground" />
+                    <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500/20 to-fuchsia-500/20 border border-cyan-500/50 flex items-center justify-center shrink-0 tech-border">
+                        <Brain className="w-5.5 h-5.5 text-cyan-300 neon-text" />
                     </div>
                     {!isCollapsed && (
                         <div className="flex flex-col">
-                            <span className="font-black text-lg tracking-tighter leading-none italic uppercase">AI Nav</span>
-                            <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Discover AI</span>
+                            <span className="font-black text-lg tracking-tighter leading-none font-mono text-cyan-300">AI Nav</span>
+                            <span className="text-[9px] font-bold text-cyan-500/60 uppercase tracking-widest mt-1 font-mono">CYBER.DECK</span>
                         </div>
                     )}
                 </Link>
@@ -96,7 +96,7 @@ export function Sidebar({ categories }: SidebarProps) {
 
             <div className="flex-1 overflow-y-auto px-4 py-2 space-y-1.5 custom-scrollbar">
                 <div className="mb-4">
-                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">分类浏览</p>}
+                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-cyan-500/60 uppercase tracking-widest font-mono">分类浏览</p>}
                     {categoriesWithAll.map((category) => {
                         const href = category.slug === "all" ? "/" : `/category/${category.slug}`;
                         const isAll = category.slug === "all";
@@ -114,8 +114,8 @@ export function Sidebar({ categories }: SidebarProps) {
                     })}
                 </div>
 
-                <div className="pt-4 border-t border-border/40">
-                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">导航链接</p>}
+                <div className="pt-4 border-t border-cyan-500/20">
+                    {!isCollapsed && <p className="px-2 mb-2 text-[10px] font-bold text-fuchsia-500/60 uppercase tracking-widest font-mono">导航链接</p>}
                     {mainNavLinks.map((link) => {
                         const isActive = pathname === link.href;
                         const isExternal = link.href.startsWith("http");

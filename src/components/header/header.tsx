@@ -12,28 +12,21 @@ import {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/30 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-cyan-500/20 bg-background/60 backdrop-blur-xl">
       <nav className="container mx-auto px-4 h-14">
         <div className="flex h-full items-center justify-between gap-4">
           {/* Logo and Title */}
           <Link
             href="/"
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 hover:scale-105 transition-transform"
           >
-            <Brain className="h-6 w-6 text-primary" />
+            <Brain className="h-6 w-6 text-cyan-400 neon-text" />
             <div className="flex items-center gap-0.5">
-              <span className="font-bold">AI Nav</span>
+              <span className="font-bold tracking-wider text-cyan-300">AI Nav</span>
               <span
-                className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60 px-1.5 origin-center font-medium font-serif italic"
-                style={{
-                  textShadow:
-                    "0 0 2px rgba(var(--primary), 0.15), 0 0 1px rgba(var(--primary), 0.1)",
-                  letterSpacing: "0.08em",
-                  fontWeight: 500,
-                  WebkitFontSmoothing: "antialiased",
-                }}
+                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-cyan-400 px-1.5 font-medium font-mono text-xs tracking-widest"
               >
-                探索AI新世界
+                CYBER.DECK
               </span>
             </div>
           </Link>
@@ -44,7 +37,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30"
               >
                 <MessageSquare className="h-4 w-4" />
                 <span>使用案例</span>
@@ -55,7 +48,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 text-fuchsia-300 hover:text-fuchsia-200 hover:bg-fuchsia-500/10 border border-transparent hover:border-fuchsia-500/30"
               >
                 <Trophy className="h-4 w-4" />
                 <span>排行榜</span>
@@ -69,15 +62,15 @@ export default function Header() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 text-purple-300 hover:text-purple-200 hover:bg-purple-500/10 border border-transparent hover:border-purple-500/30"
                     >
                       <Download className="h-4 w-4" />
                       <span>安装脚本</span>
                     </Button>
                   </Link>
                 </TooltipTrigger>
-                <TooltipContent className="max-w-[300px] p-3">
-                  <p className="font-medium mb-1">AI导航助手脚本</p>
+                <TooltipContent className="max-w-[300px] p-3 bg-card/95 backdrop-blur border-cyan-500/30">
+                  <p className="font-medium mb-1 text-cyan-300">AI导航助手脚本</p>
                   <p className="text-sm text-muted-foreground">
                     功能：自动识别并采集当前网页的AI工具信息，快速提交到AI导航。
                   </p>
@@ -89,7 +82,7 @@ export default function Header() {
             </TooltipProvider>
 
             <Link href="/submit">
-              <Button size="sm" className="flex items-center gap-2">
+              <Button size="sm" className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-fuchsia-500/20 hover:from-cyan-500/30 hover:to-fuchsia-500/30 border border-cyan-500/50 hover:border-fuchsia-500/50 text-cyan-200">
                 <Plus className="h-4 w-4" />
                 <span>提交网站</span>
               </Button>

@@ -111,13 +111,13 @@ export function WebsiteCard({
         <Card
           className={cn(
             "group relative flex flex-col overflow-hidden h-full",
-            "bg-transparent border-none shadow-none",
+            "bg-card/80 backdrop-blur-sm border border-cyan-500/20",
             "transition-all duration-300 ease-out",
-            "rounded-xl"
+            "rounded-lg tech-border"
           )}
         >
           {/* Top Image Section */}
-          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-muted/10 border border-border/10 group-hover:border-primary/20 transition-all duration-300 shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/5">
+          <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted/10 border-b border-cyan-500/10 group-hover:border-cyan-500/30 transition-all duration-300">
             <WebsiteThumbnail
               thumbnail={website.thumbnail}
               title={website.title}
@@ -135,11 +135,11 @@ export function WebsiteCard({
             </div>
 
             {/* Visit Button Overlay (Hover only) */}
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
               <Button
                 onClick={() => onVisit(website)}
                 size="sm"
-                className="rounded-full font-bold text-xs px-6 bg-white text-black hover:bg-white/90"
+                className="rounded font-bold text-xs px-8 py-3 bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-500/50 hover:border-cyan-400 hover:scale-105 transition-all"
               >
                 View Site
               </Button>
