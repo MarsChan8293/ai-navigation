@@ -4,7 +4,7 @@ import { cachedPrismaQuery } from "@/lib/db/cache";
 import type { Website } from "@/lib/types";
 
 // 使用ISR（增量静态再生）
-export const revalidate = 3600; // 每小时重新生成页面
+export const revalidate = 60; // 1分钟重新生成页面
 
 export default async function RankingsPage() {
   const websites = await cachedPrismaQuery(
@@ -25,10 +25,11 @@ export default async function RankingsPage() {
           active: true,
           status: true,
           visits: true,
+          likes: true,
           dislikes: true,
         },
       }),
-    { ttl: 3600 } // 1小时缓存
+    { ttl: 60 } // 1分钟缓存
   ) as Website[];
 
   return (

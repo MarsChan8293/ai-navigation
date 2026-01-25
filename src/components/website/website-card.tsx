@@ -52,9 +52,17 @@ export function WebsiteCard({
     }
 
     const method = "POST";
-    fetch(`/api/websites/${website.id}/like`, { method });
-    localStorage.setItem(key, now.toString());
-    setLikes(likes + 1);
+    const response = await fetch(`/api/websites/${website.id}/like`, { method });
+    if (response.ok) {
+      localStorage.setItem(key, now.toString());
+      setLikes(likes + 1);
+    } else {
+      toast({
+        title: "点赞失败",
+        description: "请稍后重试",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleDislike = async () => {
