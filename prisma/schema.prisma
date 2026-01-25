@@ -68,14 +68,3 @@ model Category {
   @@map("categories")
 }
 
-model FooterLink {
-  id         Int      @id @default(autoincrement())
-  title      String
-  url        String   @unique
-  isExternal Boolean  @default(true)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@index([url])
-  @@map("footer_links")
-}

@@ -80,15 +80,6 @@ const defaultWebsites = [
   { title: '秘塔 AI 搜索', url: 'https://metaso.cn', description: '国内学术与深度调研的首选，支持结构化思维导图展示与大规模文档参考。', category_slug: 'ai-search', thumbnail: 'https://metaso.cn/favicon.ico', status: 'approved' },
 ] as WebsiteInput[];
 
-interface FooterLinkInput {
-  title: string;
-  url: string;
-}
-
-const defaultFooterLinks: FooterLinkInput[] = [
-  { title: 'GitHub', url: 'https://github.com' }
-];
-
 export async function initializeData() {
   try {
     // 初始化分类
@@ -142,24 +133,6 @@ export async function initializeData() {
             data: createData
           });
         }
-      }
-    }
-
-    // 初始化页脚链接
-    for (const link of defaultFooterLinks) {
-      const existingLink = await prisma.footerLink.findUnique({
-        where: { url: link.url }
-      });
-
-      if (existingLink) {
-        await prisma.footerLink.update({
-          where: { id: existingLink.id },
-          data: link
-        });
-      } else {
-        await prisma.footerLink.create({
-          data: link
-        });
       }
     }
 

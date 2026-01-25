@@ -6,38 +6,22 @@ import { cachedPrismaQuery } from "@/lib/db/cache";
 
 export async function Footer() {
   // 在服务端获取数据
-  const [footerLinks, settings] = await Promise.all([
-    cachedPrismaQuery(
-      "footer-links",
-      () =>
-        prisma.footerLink.findMany({
-          select: {
-            title: true,
-            url: true,
+  const settings = await cachedPrismaQuery(
+    "footer-settings",
+    () =>
+      prisma.setting.findMany({
+        where: {
+          key: {
+            in: [
+              WebsiteSettings.siteIcp,
+              WebsiteSettings.customHtml,
+              WebsiteSettings.siteCopyright,
+            ],
           },
-          orderBy: {
-            created_at: "asc",
-          },
-        }),
-      { ttl: 86400 } // 1天缓存
-    ),
-    cachedPrismaQuery(
-      "footer-settings",
-      () =>
-        prisma.setting.findMany({
-          where: {
-            key: {
-              in: [
-                WebsiteSettings.siteIcp,
-                WebsiteSettings.customHtml,
-                WebsiteSettings.siteCopyright,
-              ],
-            },
-          },
-        }),
-      { ttl: 2592000 } // 1个月缓存
-    ),
-  ]);
+        },
+      }),
+    { ttl: 2592000 } // 1个月缓存
+  );
 
   // 转换设置数据为对象格式
   const settingsMap = settings.reduce((acc, setting) => {
@@ -46,7 +30,7 @@ export async function Footer() {
   }, {} as Record<string, string>);
 
   const footerSettings: FooterSettings = {
-    links: footerLinks,
+    links: [],
     copyright: settingsMap[WebsiteSettings.siteCopyright] || "© 2024 AI导航",
     icpBeian: settingsMap[WebsiteSettings.siteIcp] || "",
     customHtml: settingsMap[WebsiteSettings.customHtml] || "",
