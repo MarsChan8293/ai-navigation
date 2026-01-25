@@ -73,7 +73,7 @@ export function Sidebar({ categories }: SidebarProps) {
         <div
             className={cn(
                 "relative h-screen bg-card/60 backdrop-blur-2xl border-r border-cyan-500/20 transition-all duration-300 flex flex-col z-50",
-                isCollapsed ? "w-[72px]" : "w-64"
+                isCollapsed ? "w-[72px]" : "w-56"
             )}
         >
             {/* Sidebar Header / Logo */}
