@@ -31,7 +31,7 @@ export default function SubmitPage() {
           <Link href="/">
             <Button
               variant="outline"
-              className="w-full sm:w-auto flex items-center gap-2 bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/80 hover:border-border/60 transition-all duration-300"
+              className="w-full sm:w-auto flex items-center gap-2 bg-background/50 apple-glass border-border/40 hover:bg-background/80 hover:border-border/60 transition-all duration-300"
             >
               <ArrowLeft className="h-4 w-4 text-foreground/70" />
               <span>返回主页</span>
@@ -47,10 +47,10 @@ export default function SubmitPage() {
         className="relative"
       >
         {/* 背景效果 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/80 rounded-xl backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/80 rounded-xl apple-glass" />
 
         {/* 内容区域 */}
-        <div className="relative bg-background/20 backdrop-blur-sm rounded-xl border border-border/30 shadow-sm">
+        <div className="relative bg-background/20 apple-glass rounded-xl border border-border/30 shadow-sm">
           <div className="p-4 sm:p-6 md:p-8">
             <WebsiteForm />
           </div>

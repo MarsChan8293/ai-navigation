@@ -186,7 +186,7 @@ export function WebsiteForm({
           variant="outline"
           onClick={fetchWebsiteMetadata}
           disabled={!isValidUrl || isFetching || isSubmitting}
-          className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300"
+          className="w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300"
         >
           {isFetching ? "获取中..." : "自动获取网站信息"}
         </Button>
@@ -233,10 +233,10 @@ export function WebsiteForm({
           }}
           disabled={isSubmitting}
         >
-          <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
+          <SelectTrigger className="w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
             <SelectValue placeholder="选择分类" />
           </SelectTrigger>
-          <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
+          <SelectContent className="bg-background/80 apple-glass border-border/30">
             {categories.map((category: { id: number; name: string }) => (
               <SelectItem
                 key={category.id}

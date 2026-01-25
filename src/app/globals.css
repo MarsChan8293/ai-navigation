@@ -2,241 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes float {
-  0% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.05);
-  }
-  100% {
-    transform: translateY(0px) scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0.4;
-  }
-}
-
-@keyframes grain {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(10%, 10%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* 
-  定义全局 CSS 变量
-  使用 HSL 颜色格式：hsl(色相 饱和度 亮度)
-  例如：--primary: 0 0% 9% 表示：
-  - 色相：0 (红色)
-  - 饱和度：0% (灰度)
-  - 亮度：9% (接近黑色)
-*/
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.1;
-  }
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-@keyframes glitch {
-  0%, 100% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(2px, -2px);
-  }
-  60% {
-    transform: translate(-2px, -2px);
-  }
-  80% {
-    transform: translate(2px, 2px);
-  }
-}
-
-@keyframes neon-pulse {
-  0%, 100% {
-    text-shadow: 
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 20px currentColor,
-      0 0 40px currentColor;
-  }
-  50% {
-    text-shadow: 
-      0 0 2px currentColor,
-      0 0 5px currentColor,
-      0 0 10px currentColor,
-      0 0 20px currentColor;
-  }
-}
-
 @layer base {
   :root {
-    --background: 210 20% 8%;
-    --foreground: 180 100% 95%;
-    --card: 215 25% 10%;
-    --card-foreground: 180 100% 95%;
-    --popover: 215 25% 10%;
-    --popover-foreground: 180 100% 95%;
-    --primary: 180 100% 50%;
-    --primary-foreground: 210 20% 8%;
-    --secondary: 320 100% 60%;
-    --secondary-foreground: 210 20% 8%;
-    --muted: 215 20% 15%;
-    --muted-foreground: 180 50% 70%;
-    --accent: 280 100% 60%;
-    --accent-foreground: 210 20% 8%;
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 20% 8%;
-    --border: 180 50% 25%;
-    --input: 180 50% 20%;
-    --ring: 180 100% 50%;
-    --radius: 0.5remaring: 0 0% 3.9%;
-    --radius: 0.5rem;
-    --primary-rgb: 0, 255, 255;
-    --secondary-rgb: 255, 0, 255;
-    --accent-rgb: 180, 82, 205;
+    /* Apple Design System - Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
+    --card: 240 4% 98%;
+    --card-foreground: 240 10% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+    
+    /* Primary Color - Apple Blue */
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary Color - Gray */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 4%;
+    
+    /* Accent Color - Orange */
+    --accent: 24 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive Color - Red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Muted Colors */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    
+    /* Border & Input */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 210 100% 50%;
+    
+    /* Apple Radius System */
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    
+    /* Apple Shadow System - Light Mode */
+    --shadow-apple: 
+      0 0 0 1px rgba(0,0,0,0.03),
+      0 2px 6px rgba(0,0,0,0.06),
+      0 10px 20px rgba(0,0,0,0.05);
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-xl: 0 16px 48px rgba(0,0,0,0.15);
   }
-}
 
-@layer base {
-  * {
-    @apply border-neutral-200 dark:border-neutral-800;
+  .dark {
+    /* Apple Design System - Dark Mode */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+    --card: 240 8% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4%;
+    --popover-foreground:0 0% 98%;
+    
+    /* Primary Color - Apple Sky Blue */
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary Color */
+    --secondary: 240 7% 12%;
+    --secondary-foreground: 0 0% 98%;
+    
+    /* Accent Color */
+    --accent: 28 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Destructive Color */
+    --destructive: 0 72% 51;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Muted Colors */
+    --muted: 240 7% 12%;
+    --muted-foreground: 240 3% 70%;
+    
+    /* Border & Input */
+    --border: 240 6% 20%;
+    --input: 240 6% 20%;
+    --ring: 200 100% 50%;
+    
+    /* Apple Shadow System - Dark Mode */
+    --shadow-apple: 
+      0 0 0 1px rgba(255,255,255,0.03),
+      0 2px 6px rgba(0,0,0,0.2),
+      0 10px 20px rgba(0,0,0,0.15);
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+    --shadow-xl: 0 16px 48px rgba(0,0,0,0.6);
   }
 
+  /* Apple Font System - Cross-browser consistent rendering */
   html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-family: 
+      -apple-system, 
+      BlinkMacSystemFont, 
+      "SF Pro Display", 
+      "Segoe UI", 
+      Roboto, 
+      "Helvetica Neue", 
+      Arial, 
+      sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  /* Scanline effect overlay */
-  body::before {
-    @apply content-[''] fixed inset-0 pointer-events-none z-0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 255, 255, 0.03) 2px,
-      rgba(0, 255, 255, 0.03) 4px
+    
+    /* Subtle gradient for depth */
+    background-image: radial-gradient(
+      circle at 50% 0%, 
+      hsla(var(--primary), 0.05) 0%, 
+      transparent 50%
     );
-    animation: scanline 8s linear infinite;
-  }
-
-  /* Grid background pattern */
-  body::after {
-    @apply content-[''] fixed inset-0 pointer-events-none z-[-1];
-    background-image: 
-      linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* 主背景效果 - 仅桌面端 */
-  @media (min-width: 768px) {
-    body::before {
-      @apply content-[''] fixed inset-0 pointer-events-none;
-      background: radial-gradient(
-          circle at 50% 50%,
-          rgba(96, 165, 250, 0.2),
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(59, 130, 246, 0.3),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 20% 80%,
-          rgba(236, 72, 153, 0.3),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 0% 0%,
-          rgba(99, 102, 241, 0.25),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 100% 100%,
-          rgba(192, 38, 211, 0.25),
-          transparent 30%
-        );
-      filter: blur(32px);
-      z-index: -2;
-      animation: pulse 8s ease-in-out infinite;
-    }
-
-    /* 点状格子效果 */
-    body::after {
-      @apply content-[''] fixed inset-0 pointer-events-none opacity-40;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      filter: contrast(120%) brightness(100%);
-      z-index: -1;
-      animation: grain 8s linear infinite;
-    }
-
-    /* 暗色模式特殊效果 */
-    .dark body::before {
-      background: radial-gradient(
-          circle at 50% 50%,
-          rgba(59, 130, 246, 0.25),
-          transparent 50%
-        ),
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(37, 99, 235, 0.3),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 20% 80%,
-          rgba(236, 72, 153, 0.3),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 0% 0%,
-          rgba(99, 102, 241, 0.3),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 100% 100%,
-          rgba(192, 38, 211, 0.3),
-          transparent 30%
-        );
-      filter: blur(48px);
-    }
-
-    .dark body::after {
-      opacity: 0.15;
-    }
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -245,41 +138,167 @@
   }
 }
 
-/* 卡片悬浮效果 */
-.card-hover {
-  @apply transition-all duration-300 ease-out;
-  &:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 
-      0 0 20px rgba(0, 255, 255, 0.3),
-      0 0 40px rgba(255, 0, 255, 0.2),
-      0 20px 40px -15px rgba(0, 0, 0, 0.5);
-    border-color: rgba(0, 255, 255, 0.5);
+/* Apple Standard Easing Curve */
+.apple-ease {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.apple-transition {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.apple-transition-fast {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Apple Glass Effect - Cross-browser compatible */
+.apple-glass {
+  @supports (backdrop-filter: blur(20px)) {
+    backdrop-filter: blur(20px) saturate(180%);
+    background-color: hsla(var(--background), 0.72);
+  }
+  
+  @supports not (backdrop-filter: blur(20px)) {
+    background-color: hsla(var(--background), 0.98);
   }
 }
 
-.neon-text {
-  animation: neon-pulse 2s ease-in-out infinite;
+.apple-glass-strong {
+  @supports (backdrop-filter: blur(30px)) {
+    backdrop-filter: blur(30px) saturate(180%);
+    background-color: hsla(var(--background), 0.82);
+  }
+  
+  @supports not (backdrop-filter: blur(30px)) {
+    background-color: hsla(var(--background), 0.99);
+  }
 }
 
-.glitch-effect {
-  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+/* Apple Shadow System */
+.apple-shadow {
+  box-shadow: var(--shadow-apple);
 }
 
-.tech-border {
-  position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, #0ff, #f0f, #0ff);
-    border-radius: inherit;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  &:hover::before {
-    opacity: 1;
-    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  }
+.apple-shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.apple-shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.apple-shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.apple-shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Apple Border System */
+.apple-border {
+  border: 1px solid hsla(var(--border), 0.5);
+}
+
+.apple-border-subtle {
+  border: 1px solid hsla(var(--border), 0.3);
+}
+
+/* Apple Typography Scale */
+.text-display-xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-display-lg {
+  font-size: 1.75rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.text-headline {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-body-lg {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.text-body {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.text-overline {
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Custom Scrollbar - Apple Style */
+.apple-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.apple-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.apple-scrollbar::-webkit-scrollbar-thumb {
+  background: hsla(var(--border), 0.5);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.apple-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsla(var(--border), 0.8);
+}
+
+/* Focus Ring - Apple Style */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, opacity, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable transitions for performance during theme switch */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
 }

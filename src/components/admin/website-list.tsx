@@ -289,7 +289,7 @@ export function WebsiteList({
       </div>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="max-w-2xl bg-background/95 backdrop-blur-sm overflow-y-auto max-h-[90vh]">
+        <DialogContent className="max-w-2xl bg-background/95 apple-glass overflow-y-auto max-h-[90vh]">
           <DialogHeader>
             <DialogTitle>编辑网站</DialogTitle>
           </DialogHeader>

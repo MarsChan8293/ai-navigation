@@ -30,7 +30,7 @@ export function FormField({
       <Component
         {...form.register(name)}
         placeholder={placeholder}
-        className={`w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all duration-300 
+        className={`w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all duration-300 
           ${textarea ? "min-h-[100px] resize-y" : "h-10"}`}
       />
       {form.formState.errors[name] && (

@@ -12,21 +12,21 @@ import {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-cyan-500/20 bg-background/60 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 apple-glass">
       <nav className="container mx-auto px-4 h-14">
         <div className="flex h-full items-center justify-between gap-4">
           {/* Logo and Title */}
           <Link
             href="/"
-            className="flex items-center gap-2 hover:scale-105 transition-transform"
+            className="flex items-center gap-2 hover:scale-105 transition-transform apple-ease"
           >
-            <Brain className="h-6 w-6 text-cyan-400 neon-text" />
+            <Brain className="h-6 w-6 text-primary" />
             <div className="flex items-center gap-0.5">
-              <span className="font-bold tracking-wider text-cyan-300">AI Nav</span>
+              <span className="font-bold tracking-wider text-foreground">AI Nav</span>
               <span
-                className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-cyan-400 px-1.5 font-medium font-mono text-xs tracking-widest"
+                className="text-muted-foreground px-1.5 font-medium text-xs tracking-widest"
               >
-                CYBER.DECK
+                Navigation
               </span>
             </div>
           </Link>

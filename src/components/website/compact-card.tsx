@@ -67,12 +67,9 @@ export function CompactCard({ website, onVisit }: CompactCardProps) {
         <Card
           className={cn(
             "group relative flex flex-col overflow-hidden",
-            "bg-background",
-            "border-primary/15 dark:border-white/10",
-            "hover:border-primary/20 dark:hover:border-primary/20",
-            "hover:bg-background",
-            "shadow-sm hover:shadow-lg",
-            "transition-colors duration-300",
+            "apple-glass apple-shadow-sm",
+            "hover:apple-shadow-md",
+            "transition-all duration-300 apple-ease",
             "rounded-2xl sm:rounded-lg"
           )}
         >
@@ -106,14 +103,12 @@ export function CompactCard({ website, onVisit }: CompactCardProps) {
               </div>
               <div className="flex items-center gap-2 ml-2">
                 <Button
-                  variant="outline"
-                  size="sm"
+                  variant="ghost"
+                  size="icon"
                   onClick={handleLike}
                   className={cn(
-                    "h-8 w-8 p-0",
-                    "bg-white/[0.02] backdrop-blur-xl border-white/10",
-                    "hover:bg-red-500/5 hover:border-red-500/20 hover:text-red-500",
-                    "dark:bg-white/[0.01] dark:hover:bg-red-500/10",
+                    "h-8 w-8",
+                    "hover:text-red-500",
                     "transition-all duration-300"
                   )}
                 >

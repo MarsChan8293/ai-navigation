@@ -77,7 +77,7 @@ export function SettingsPageClient({
       className="container max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 min-h-[calc(100vh-4rem)] space-y-6"
     >
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-background/30 backdrop-blur-sm p-6 rounded-xl border border-border/40">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-background/30 apple-glass p-6 rounded-xl border border-border/40">
         <div>
           <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">
             后台管理
@@ -106,7 +106,7 @@ export function SettingsPageClient({
       </div>
 
       {/* Main Content */}
-      <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
+      <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden apple-glass">
         <form onSubmit={handleSubmit} className="divide-y divide-border/40">
           <div className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

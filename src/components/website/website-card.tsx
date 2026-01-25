@@ -111,13 +111,13 @@ export function WebsiteCard({
         <Card
           className={cn(
             "group relative flex flex-col overflow-hidden h-full",
-            "bg-card/80 backdrop-blur-sm border border-cyan-500/20",
-            "transition-all duration-300 ease-out",
-            "rounded-lg tech-border"
+            "apple-glass border border-border/30",
+            "transition-all duration-300 apple-ease hover:scale-[1.02]",
+            "rounded-lg hover:apple-shadow-md"
           )}
         >
           {/* Top Image Section */}
-          <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted/10 border-b border-cyan-500/10 group-hover:border-cyan-500/30 transition-all duration-300">
+          <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted/10 border-b border-border/20 group-hover:border-border/40 transition-all duration-300">
             <WebsiteThumbnail
               thumbnail={website.thumbnail}
               title={website.title}
@@ -139,7 +139,7 @@ export function WebsiteCard({
               <Button
                 onClick={() => onVisit(website)}
                 size="sm"
-                className="rounded font-bold text-xs px-8 py-3 bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-500/50 hover:border-cyan-400 hover:scale-105 transition-all"
+                className="rounded-lg font-medium text-xs px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/50 hover:scale-105 transition-all"
               >
                 View Site
               </Button>

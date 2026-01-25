@@ -22,13 +22,13 @@ export default function MobileMenu() {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 right-0 mt-2 mx-4 p-4 rounded-xl shadow-lg bg-background/90 backdrop-blur-xl border">
+        <div className="absolute left-0 right-0 mt-2 mx-4 p-4 rounded-lg apple-glass-strong border border-border/50">
           <div className="flex flex-col gap-3">
             <div className="space-y-2">
               <Link href="/use-cases" className="w-full">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start hover:bg-primary/5 font-medium text-base rounded-lg h-12"
+                  className="w-full justify-start font-medium text-base rounded-lg h-12"
                 >
                   <MessageSquare className="h-5 w-5 mr-3 text-primary" />
                   使用案例
@@ -37,7 +37,7 @@ export default function MobileMenu() {
               <Link href="/rankings" className="w-full">
                 <Button
                   variant="ghost"
-                  className="w-full justify-start hover:bg-primary/5 font-medium text-base rounded-lg h-12"
+                  className="w-full justify-start font-medium text-base rounded-lg h-12"
                 >
                   <Trophy className="h-5 w-5 mr-3 text-primary" />
                   排行榜
@@ -52,7 +52,7 @@ export default function MobileMenu() {
                     >
                       <Button
                         variant="ghost"
-                        className="w-full justify-start hover:bg-primary/5 font-medium text-base rounded-lg h-12"
+                        className="w-full justify-start font-medium text-base rounded-lg h-12"
                       >
                         <Download className="h-5 w-5 mr-3 text-primary" />
                         安装脚本

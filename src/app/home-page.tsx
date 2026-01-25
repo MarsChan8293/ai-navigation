@@ -84,16 +84,16 @@ export default function HomePage({
   return (
     <div className="flex flex-col min-h-full bg-background/80">
       {/* Top Header Section */}
-      <header className="sticky top-0 z-30 w-full bg-background/80 backdrop-blur-2xl border-b border-cyan-500/20 px-6 py-5">
+      <header className="sticky top-0 z-30 w-full bg-background/80 apple-glass-strong border-b border-border/50 px-6 py-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div className="space-y-1">
-            <h2 className="text-2xl font-black tracking-tighter text-cyan-300 uppercase font-mono leading-none glitch-effect">
+            <h2 className="text-2xl font-semibold tracking-tight text-foreground leading-none">
               {currentCategory?.name || "全部工具"}
             </h2>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
-                <p className="text-[10px] font-bold text-cyan-500/60 uppercase tracking-widest font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
                   Discover the best AI resources
                 </p>
               </div>
@@ -102,7 +102,7 @@ export default function HomePage({
 
           <div className="w-full md:w-[400px] relative group">
             <SearchBox value={searchQuery} onChange={(val) => setSearchQuery(val)} />
-            <div className="absolute inset-0 bg-cyan-500/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute inset-0 bg-primary/10 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
           </div>
         </div>
       </header>

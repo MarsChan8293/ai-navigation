@@ -108,7 +108,7 @@ export function UseCaseForm() {
         <Input
           {...form.register("title")}
           placeholder="简洁概括本次使用案例"
-          className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all duration-300"
+          className="w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all duration-300"
         />
         {form.formState.errors.title && (
           <p className="text-sm text-red-500/70 mt-1">
@@ -127,10 +127,10 @@ export function UseCaseForm() {
           }
           disabled={isSubmitting}
         >
-          <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
+          <SelectTrigger className="w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
             <SelectValue placeholder="选择要关联的网站" />
           </SelectTrigger>
-          <SelectContent className="bg-background/80 backdrop-blur-md border-border/30">
+          <SelectContent className="bg-background/80 apple-glass border-border/30">
             {websites.map((website) => (
               <SelectItem
                 key={website.id}

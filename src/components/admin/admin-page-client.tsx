@@ -84,7 +84,7 @@ export function AdminPageClient({
     >
       <Tabs defaultValue="websites" className="w-full">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-background/30 backdrop-blur-sm p-6 rounded-xl border border-border/40">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-background/30 apple-glass p-6 rounded-xl border border-border/40">
           <div>
             <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">
               后台管理
@@ -120,7 +120,7 @@ export function AdminPageClient({
 
         {/* Main Content */}
         <TabsContent value="websites" className="mt-6">
-          <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
+          <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden apple-glass">
             {/* Filter Section */}
             <div className="border-b border-border/40 bg-background/20 p-4">
               <div className="flex flex-col sm:flex-row gap-4">
@@ -170,7 +170,7 @@ export function AdminPageClient({
                   </SelectTrigger>
                   <SelectContent
                     align="end"
-                    className="bg-background/95 backdrop-blur-sm"
+                    className="bg-background/95 apple-glass"
                   >
                     <SelectItem value="all">全部分类</SelectItem>
                     {categories.map((category) => (
@@ -196,7 +196,7 @@ export function AdminPageClient({
         </TabsContent>
 
         <TabsContent value="categories" className="mt-6">
-          <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden backdrop-blur-sm">
+          <div className="rounded-xl border border-border/40 bg-background/30 shadow-sm overflow-hidden apple-glass">
             <CategoryManager />
           </div>
         </TabsContent>

@@ -117,7 +117,7 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
 
   return (
     <div className={cn("relative group w-full", className)}>
-      <div className="relative flex items-center gap-2 p-1.5 bg-muted/40 backdrop-blur-3xl rounded-xl border border-border/20 group-hover:border-primary/30 transition-all duration-500 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/5">
+      <div className="relative flex items-center gap-2 p-1.5 bg-card/80 apple-glass rounded-xl border border-border/30 group-hover:border-border/50 transition-all duration-300 apple-ease apple-shadow-sm group-hover:apple-shadow-md">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -132,7 +132,7 @@ export function SearchBox({ value, onChange, className }: SearchBoxProps) {
               <ChevronDown className="h-3 w-3 opacity-30 shrink-0" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-[160px] rounded-xl border-border/40 backdrop-blur-xl bg-background/80 p-1">
+          <DropdownMenuContent align="start" className="w-[160px] rounded-lg apple-glass-strong border-border/40 bg-background/80 p-1">
             {searchEngines.map((engine) => (
               <DropdownMenuItem
                 key={engine.id}
