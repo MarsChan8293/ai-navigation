@@ -195,10 +195,10 @@ testCases.push(new TestCase(
 // 正面测试
  testCases.push(new TestCase(
   '获取单个网站 - 有效ID',
-  '/websites/1',
+  '/websites/24',
   'GET',
   200,
-  () => makeRequest('/websites/1')
+  () => makeRequest('/websites/24')
 ));
 
 // 负面测试
@@ -222,13 +222,13 @@ testCases.push(new TestCase(
 // 正面测试
  testCases.push(new TestCase(
   '更新网站 - 有效数据',
-  '/websites/1',
+  '/websites/24',
   'PUT',
   200,
-  () => makeRequest('/websites/1', 'PUT', {
+  () => makeRequest('/websites/24', 'PUT', {
     title: 'Updated Website',
     url: 'https://updatedwebsite.com',
-    category_id: 1,
+    category_id: 5,
     description: 'Updated description'
   })
 ));
@@ -316,30 +316,30 @@ testCases.push(new TestCase(
 // 正面测试
  testCases.push(new TestCase(
   '点赞网站 - 有效ID',
-  '/websites/1/like',
+  '/websites/24/like',
   'POST',
   200,
-  () => makeRequest('/websites/1/like', 'POST')
+  () => makeRequest('/websites/24/like', 'POST')
 ));
 
 // 2.8 取消点赞网站
 // 正面测试
  testCases.push(new TestCase(
   '取消点赞网站 - 有效ID',
-  '/websites/1/like',
+  '/websites/24/like',
   'DELETE',
   200,
-  () => makeRequest('/websites/1/like', 'DELETE')
+  () => makeRequest('/websites/24/like', 'DELETE')
 ));
 
 // 2.9 更新网站状态
 // 正面测试
  testCases.push(new TestCase(
   '更新网站状态 - 有效状态',
-  '/websites/1/status',
+  '/websites/24/status',
   'PUT',
   200,
-  () => makeRequest('/websites/1/status', 'PUT', {
+  () => makeRequest('/websites/24/status', 'PUT', {
     status: 'approved'
   })
 ));
@@ -348,10 +348,10 @@ testCases.push(new TestCase(
 // 正面测试
  testCases.push(new TestCase(
   '增加网站访问量 - 有效ID',
-  '/websites/1/visit',
+  '/websites/24/visit',
   'POST',
   200,
-  () => makeRequest('/websites/1/visit', 'POST')
+  () => makeRequest('/websites/24/visit', 'POST')
 ));
 
 // 3. 分类API测试

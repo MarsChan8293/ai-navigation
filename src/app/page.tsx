@@ -22,7 +22,6 @@ export default async function Home() {
             description: true,
             category_id: true,
             thumbnail: true,
-            thumbnail_base64: true,
             status: true,
             visits: true,
             likes: true,
@@ -39,7 +38,6 @@ export default async function Home() {
             id: true,
             name: true,
             slug: true,
-            likes: true,
           },
         }),
       { ttl: 604800 } // 1周缓存（秒）

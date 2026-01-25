@@ -31,7 +31,6 @@ export default async function UseCaseDetailPage({
           url: true,
           description: true,
           thumbnail: true,
-          thumbnail_base64: true,
         },
       },
     },

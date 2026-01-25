@@ -7,26 +7,21 @@ import Image from "next/image";
 import { AspectRatio } from "@/ui/common/aspect-ratio";
 
 interface WebsiteThumbnailProps {
-  url: string;
   thumbnail: string | null;
-  thumbnail_base64: string | null;
   title: string;
   className?: string;
   variant?: "square" | "large";
 }
 
 export function WebsiteThumbnail({
-  url,
   thumbnail,
-  thumbnail_base64,
   title,
   className,
   variant = "square",
 }: WebsiteThumbnailProps) {
   const [imageError, setImageError] = useState(false);
-  const hostname = new URL(url).hostname;
-  const faviconUrl = `https://icon.horse/icon/${hostname}`;
-  const thumbnailSrc = thumbnail_base64 || thumbnail || "";
+  const isExternalUrl = thumbnail?.startsWith('http://') || thumbnail?.startsWith('https://');
+  const thumbnailSrc = (!isExternalUrl && thumbnail) || "";
   const isLarge = variant === "large";
 
   const renderFallback = () => (
@@ -43,23 +38,7 @@ export function WebsiteThumbnail({
           <span className="text-xs font-medium">{title}</span>
         </div>
       ) : (
-        <>
-          <Image
-            src={faviconUrl}
-            alt={title}
-            width={20}
-            height={20}
-            className="w-5 h-5 z-10"
-            unoptimized
-            onError={(e) => {
-              // @ts-expect-error - Accessing DOM element style
-              e.target.style.display = "none";
-              // @ts-expect-error - Accessing DOM element sibling
-              e.target.nextElementSibling?.classList.remove("hidden");
-            }}
-          />
-          <Globe className="h-5 w-5 text-primary/50 hidden" />
-        </>
+        <Globe className="h-5 w-5 text-primary/50" />
       )}
     </div>
   );
@@ -79,12 +58,8 @@ export function WebsiteThumbnail({
         fill
         sizes={isLarge ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" : "40px"}
         className="object-cover transition-transform duration-500 group-hover:scale-105"
-        // 启用懒加载
         loading="lazy"
-        // 使用 blurDataURL 作为占位符
-        placeholder={thumbnail_base64 ? "blur" : "empty"}
-        blurDataURL={thumbnail_base64 || undefined}
-        // 启用图片优化
+        placeholder="empty"
         quality={85}
         onError={() => setImageError(true)}
       />

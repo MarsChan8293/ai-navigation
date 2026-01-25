@@ -5,20 +5,17 @@ export interface Website {
   description: string;
   category_id: number;
   thumbnail: string | null;
-  thumbnail_base64: string | null;
   active: number;
-
-  status: "pending" | "approved" | "rejected" | "all";
+  status: "pending" | "approved" | "rejected" | "published" | "all";
   visits: number;
   likes: number;
-  dislikes?: number; // Optional because legacy data might not have it in FE if not returned, though DB has default
+  dislikes?: number;
 }
 
 export interface Category {
   id: number;
   name: string;
   slug: string;
-  likes: number;
 }
 
 export interface FormInputs {
@@ -27,7 +24,6 @@ export interface FormInputs {
   description: string;
   category_id: string;
   thumbnail?: string;
-
 }
 
 export interface UseCase {
@@ -49,7 +45,6 @@ export interface UseCaseFormInputs {
   image_base64?: string;
 }
 
-// 设置
 export interface Setting {
   id: number;
   key: string;
@@ -61,7 +56,6 @@ export interface FooterLink {
   url: string;
 }
 
-// 页脚设置
 export interface FooterSettings {
   links: FooterLink[];
   copyright: string;

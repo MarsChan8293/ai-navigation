@@ -9,6 +9,7 @@ import { useAtom } from "jotai";
 import { categoriesAtom, isAdminModeAtom } from "@/lib/atoms";
 import { websiteFormSchema } from "@/lib/utils";
 import { FormField } from "./form-field";
+import { ThumbnailUploader } from "./thumbnail-uploader";
 import { Button } from "@/ui/common/button";
 import {
   Select,
@@ -36,28 +37,28 @@ export function WebsiteForm({
   const router = useRouter();
   const { toast } = useToast();
 
-  useEffect(() => {
-    // Ensure categories are loaded
-    const loadCategories = async () => {
-      try {
-        const categoryData = await fetch("/api/categories").then((res) => {
-          if (!res.ok) throw new Error("Failed to load categories");
-          return res.json();
-        });
-        setCategories(categoryData.data);
-      } catch {
-        toast({
-          title: "加载分类失败",
-          description: "请刷新页面重试",
-          variant: "destructive",
-        });
-      }
-    };
+  const loadCategories = async () => {
+    try {
+      const res = await fetch("/api/categories");
+      if (!res.ok) throw new Error("Failed to load categories");
+      const categoryData = await res.json();
+      console.log("Loaded categories for form:", categoryData.data.length);
+      setCategories(categoryData.data);
+    } catch (error) {
+      console.error("Load categories error:", error);
+      toast({
+        title: "加载分类失败",
+        description: "请刷新页面重试",
+        variant: "destructive",
+      });
+    }
+  };
 
+  useEffect(() => {
     if (categories.length === 0) {
       loadCategories();
     }
-  }, [categories.length, setCategories, toast]);
+  }, []); // Only run once on mount
 
   const form = useForm<FormInputs>({
     resolver: zodResolver(websiteFormSchema),
@@ -70,9 +71,13 @@ export function WebsiteForm({
     },
   });
 
-  const { watch, setValue } = form;
+  const { watch, setValue, formState: { errors } } = form;
   const url = watch("url");
   const isValidUrl = url && url.startsWith("http");
+
+  useEffect(() => {
+    console.log("Form validation errors:", errors);
+  }, [errors]);
 
   const fetchWebsiteMetadata = async () => {
     if (!isValidUrl) return;
@@ -88,16 +93,10 @@ export function WebsiteForm({
       const metadata = result.data;
       if (metadata.title) setValue("title", metadata.title);
       if (metadata.description) setValue("description", metadata.description);
-      // Prioritize the generated screenshot for quality consistent 16:9 thumbnails
-      if (metadata.screenshot) {
-        setValue("thumbnail", metadata.screenshot);
-      } else if (metadata.image) {
-        setValue("thumbnail", metadata.image);
-      }
 
       toast({
         title: "获取成功",
-        description: "网站信息与应用截图已自动获取",
+        description: "网站信息已自动获取",
       });
     } catch (error) {
       toast({
@@ -215,23 +214,6 @@ export function WebsiteForm({
           textarea
         />
 
-        {watch("thumbnail") && (
-          <div className="mt-4">
-            <label className="block text-sm font-medium mb-2 text-foreground/80">
-              缩略图预览
-            </label>
-            <div className="relative aspect-[16/9] w-full max-w-[320px] overflow-hidden rounded-xl border border-border/40">
-              <img
-                src={watch("thumbnail")}
-                alt="Thumbnail preview"
-                className="h-full w-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://via.placeholder.com/640x360?text=Invalid+Image+URL";
-                }}
-              />
-            </div>
-          </div>
-        )}
       </motion.div>
 
       {/* Category Selection */}
@@ -244,7 +226,11 @@ export function WebsiteForm({
           分类
         </label>
         <Select
-          onValueChange={(value) => setValue("category_id", value)}
+          defaultValue={initialData?.category_id?.toString()}
+          onValueChange={(value) => {
+            console.log("Category changed to:", value);
+            setValue("category_id", value, { shouldValidate: true });
+          }}
           disabled={isSubmitting}
         >
           <SelectTrigger className="w-full bg-background/50 backdrop-blur-sm border-border/40 hover:bg-background/70 hover:border-border/60 transition-all duration-300">
@@ -267,7 +253,20 @@ export function WebsiteForm({
         )}
       </motion.div>
 
-
+      {/* Thumbnail Upload */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <label className="block text-sm font-medium mb-2 text-foreground/80">
+          网站缩略图
+        </label>
+        <ThumbnailUploader
+          value={watch("thumbnail")}
+          onChange={(value) => setValue("thumbnail", value)}
+        />
+      </motion.div>
 
       {/* Thumbnail URL */}
       <motion.div

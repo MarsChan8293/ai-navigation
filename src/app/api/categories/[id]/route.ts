@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { AjaxResponse } from "@/lib/utils";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { CategoryService } from "@/lib/services/category";
 
 // PUT: 更新分类
 export async function PUT(
@@ -21,25 +19,14 @@ export async function PUT(
       );
     }
 
-    const existingCategory = await prisma.category.findUnique({
-      where: { id },
-    });
-
-    if (!existingCategory) {
-      return NextResponse.json(AjaxResponse.fail("Category not found"), {
-        status: 404,
-      });
-    }
-
-    const updatedCategory = await prisma.category.update({
-      where: { id },
-      data: { name, slug },
-    });
-
+    const updatedCategory = await CategoryService.updateCategory(id, { name, slug });
     return NextResponse.json(AjaxResponse.ok(updatedCategory));
   } catch (error) {
     console.error("Error updating category:", error);
-    throw error;
+    const message = error instanceof Error ? error.message : "更新分类失败";
+    return NextResponse.json(AjaxResponse.fail(message), {
+      status: message.includes("not found") ? 404 : 500,
+    });
   }
 }
 
@@ -51,28 +38,13 @@ export async function DELETE(
   const params = await props.params;
   try {
     const id = parseInt(params.id);
-
-    // 检查分类下是否有网站
-    const websiteCount = await prisma.website.count({
-      where: { category_id: id },
-    });
-
-    if (websiteCount > 0) {
-      return NextResponse.json(
-        AjaxResponse.fail(`无法删除：该分类下包含 ${websiteCount} 个网站。请先移除或转移这些网站。`),
-        { status: 400 }
-      );
-    }
-
-    await prisma.category.delete({
-      where: { id },
-    });
-
+    await CategoryService.deleteCategory(id);
     return NextResponse.json(AjaxResponse.ok(null));
   } catch (error) {
     console.error("Error deleting category:", error);
-    return NextResponse.json(AjaxResponse.fail("删除分类失败"), {
-      status: 500,
+    const message = error instanceof Error ? error.message : "删除分类失败";
+    return NextResponse.json(AjaxResponse.fail(message), {
+      status: message.includes("无法删除") ? 409 : 500,
     });
   }
 }

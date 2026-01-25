@@ -27,7 +27,7 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
   }, []);
 
   const categoriesWithAll = [
-    { id: -1, name: "全部资料", slug: "all", likes: 0 },
+    { id: -1, name: "全部资料", slug: "all" },
     ...categories,
   ];
 

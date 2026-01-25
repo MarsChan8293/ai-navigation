@@ -119,9 +119,7 @@ export function WebsiteCard({
           {/* Top Image Section */}
           <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl bg-muted/10 border border-border/10 group-hover:border-primary/20 transition-all duration-300 shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/5">
             <WebsiteThumbnail
-              url={website.url}
               thumbnail={website.thumbnail}
-              thumbnail_base64={website.thumbnail_base64}
               title={website.title}
               variant="large"
             />

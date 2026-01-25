@@ -36,7 +36,6 @@ export default async function CategoryPage({
                         description: true,
                         category_id: true,
                         thumbnail: true,
-                        thumbnail_base64: true,
                         status: true,
                         visits: true,
                         likes: true,
@@ -53,7 +52,6 @@ export default async function CategoryPage({
                         id: true,
                         name: true,
                         slug: true,
-                        likes: true,
                     },
                 }),
             { ttl: 604800 }

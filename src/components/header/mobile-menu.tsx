@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Trophy, Plus, Download, Info, Menu, X, MessageSquare } from "lucide-react";
+import { Trophy, Plus, Download, Menu, X, MessageSquare } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import ThemeSwitch from "@/components/theme-switcher/theme-switch";
 import {
@@ -79,15 +79,6 @@ export default function MobileMenu() {
                 <Button className="w-full justify-start font-medium text-base rounded-lg h-12 bg-primary/10 hover:bg-primary/15 text-primary">
                   <Plus className="h-5 w-5 mr-3" />
                   提交网站
-                </Button>
-              </Link>
-              <Link href="/about" className="w-full">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-primary/5 font-medium text-base rounded-lg h-12"
-                >
-                  <Info className="h-5 w-5 mr-3 text-primary" />
-                  关于
                 </Button>
               </Link>
             </div>

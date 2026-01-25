@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
 import { categoriesAtom, websitesAtom } from "@/lib/atoms";
 import { WebsiteList } from "@/components/admin/website-list";
@@ -14,7 +14,7 @@ import {
 } from "@/ui/common/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/ui/common/tabs";
 import { CategoryManager } from "@/components/admin/category-manager";
-import type { Website } from "@/lib/types";
+import type { Website, Category } from "@/lib/types";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Settings, ListFilter, Tags } from "lucide-react";
@@ -25,10 +25,18 @@ export function AdminPageClient({
   initialCategories,
 }: {
   initialWebsites: Website[];
-  initialCategories: { id: number; name: string; slug: string }[];
+  initialCategories: Category[];
 }) {
-  const [categories] = useAtom(categoriesAtom);
-  const [allWebsites] = useAtom(websitesAtom);
+  const [categories, setCategories] = useAtom(categoriesAtom);
+  const [allWebsites, setAllWebsites] = useAtom(websitesAtom);
+
+  useEffect(() => {
+    console.log("Initializing AdminPage with:", initialWebsites.length, "websites");
+    setAllWebsites(initialWebsites);
+    setCategories(initialCategories);
+  }, [initialWebsites, initialCategories, setAllWebsites, setCategories]);
+
+  console.log("Current allWebsites in atom:", allWebsites.length);
 
   const [activeStatus, setActiveStatus] =
     useState<Website["status"]>("pending");
@@ -38,7 +46,9 @@ export function AdminPageClient({
   if (!initialCategories || !Array.isArray(initialCategories)) return null;
 
   const filteredWebsites = allWebsites.filter((website) => {
-    const matchesStatus = website.status === activeStatus;
+    // Map 'published' to 'approved' for filtering purposes in the UI
+    const normalizedStatus = website.status === "published" ? "approved" : website.status;
+    const matchesStatus = normalizedStatus === activeStatus;
     const matchesCategory =
       selectedCategory === "all" ||
       website.category_id === parseInt(selectedCategory);
@@ -47,7 +57,7 @@ export function AdminPageClient({
 
   const statusCounts = {
     pending: allWebsites.filter((w) => w.status === "pending").length,
-    approved: allWebsites.filter((w) => w.status === "approved").length,
+    approved: allWebsites.filter((w) => w.status === "approved" || w.status === "published").length,
     rejected: allWebsites.filter((w) => w.status === "rejected").length,
   };
 
@@ -56,6 +66,7 @@ export function AdminPageClient({
       case "pending":
         return "text-yellow-500";
       case "approved":
+      case "published":
         return "text-green-500";
       case "rejected":
         return "text-red-500";

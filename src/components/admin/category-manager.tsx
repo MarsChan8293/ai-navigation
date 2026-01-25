@@ -24,10 +24,9 @@ import {
 } from "@/ui/common/dialog";
 import { Label } from "@/ui/common/label";
 import { useToast } from "@/hooks/use-toast";
-import { Pencil, Trash2, Plus, Heart, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -41,6 +40,7 @@ export function CategoryManager() {
   const [categories, setCategories] = useAtom(categoriesAtom);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [openDeleteId, setOpenDeleteId] = useState<number | null>(null);
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
   const [formData, setFormData] = useState({ name: "", slug: "" });
   const { toast } = useToast();
@@ -101,44 +101,38 @@ export function CategoryManager() {
   };
 
   const handleDelete = async (id: number) => {
+    console.log("Deleting category with ID:", id);
     try {
+      console.log("Sending delete request to:", `/api/categories/${id}`);
       const res = await fetch(`/api/categories/${id}`, {
         method: "DELETE",
       });
 
       const response = await res.json();
+      console.log("Delete response status:", res.status, "payload:", response);
       if (res.ok && response.code === 200) {
-        setCategories(categories.filter(c => c.id !== id));
+        setCategories((prev) => {
+          const updated = prev.filter((c) => c.id !== id);
+          console.log("Updating categories atom:", prev.length, "->", updated.length);
+          return updated;
+        });
         toast({ title: "成功", description: "分类已删除" });
       } else {
+        console.error("Delete category failed:", response.message);
         throw new Error(response.message || "Failed");
       }
     } catch (error) {
-      toast({ title: "错误", description: error instanceof Error ? error.message : "删除分类失败", variant: "destructive" });
-    }
-  };
-
-  const handleLike = async (id: number, increment: boolean) => {
-    try {
-      const response = await fetch(`/api/categories/${id}/like`, {
-        method: increment ? "POST" : "DELETE",
+      console.error("Delete category error:", error);
+      toast({
+        title: "错误",
+        description:
+          error instanceof Error ? error.message : "删除分类失败",
+        variant: "destructive",
       });
-
-      if (response.ok) {
-        const result = await response.json();
-        const newLikes = result.data.likes;
-
-        setCategories(categories.map(c => c.id === id ? { ...c, likes: newLikes } : c));
-
-        toast({
-          title: increment ? "点赞成功" : "已踩",
-          description: `当前点赞数：${newLikes}`,
-        });
-      }
-    } catch (error) {
-      console.error("Like error:", error);
     }
   };
+
+
 
   const openEditDialog = (category: Category) => {
     setCurrentCategory(category);
@@ -196,7 +190,7 @@ export function CategoryManager() {
               <TableHead className="w-[100px]">ID</TableHead>
               <TableHead>名称</TableHead>
               <TableHead>Slug</TableHead>
-              <TableHead>点赞数</TableHead>
+
               <TableHead className="text-right">操作</TableHead>
             </TableRow>
           </TableHeader>
@@ -206,71 +200,57 @@ export function CategoryManager() {
                 <TableCell>{category.id}</TableCell>
                 <TableCell className="font-medium">{category.name}</TableCell>
                 <TableCell>{category.slug}</TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-1">
-                    <Heart className="w-3 h-3 text-pink-500" />
-                    <span>{category.likes || 0}</span>
-                  </div>
-                </TableCell>
-                <TableCell className="text-right space-x-1">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleLike(category.id, true)}
-                    title="点赞"
-                    className="h-8 w-8 text-pink-600/70 hover:text-pink-600 hover:bg-pink-500/10"
-                  >
-                    <ThumbsUp className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleLike(category.id, false)}
-                    title="踩"
-                    className="h-8 w-8 text-gray-600/70 hover:text-gray-600 hover:bg-gray-500/10"
-                  >
-                    <ThumbsDown className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => openEditDialog(category)}
-                    title="编辑"
-                    className="h-8 w-8 text-blue-600/70 hover:text-blue-600 hover:bg-blue-500/10"
-                  >
-                    <Pencil className="w-4 h-4" />
-                  </Button>
 
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        title="删除"
-                        className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>确认删除？</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          此操作无法撤销。删除分类可能会影响属于该分类的网站。
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>取消</AlertDialogCancel>
-                        <AlertDialogAction onClick={(e) => {
-                          e.preventDefault();
-                          handleDelete(category.id);
-                        }} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                  <TableCell className="text-right space-x-2">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={() => openEditDialog(category)}
+                      className="bg-blue-600/90 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded-md transition-colors"
+                    >
+                      修改
+                    </Button>
+
+                    <AlertDialog
+                      open={openDeleteId === category.id}
+                      onOpenChange={(open) =>
+                        setOpenDeleteId(open ? category.id : null)
+                      }
+                    >
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="text-xs px-3 py-1 rounded-md transition-colors"
+                          onClick={() => setOpenDeleteId(category.id)}
+                        >
                           删除
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </TableCell>
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>确认删除？</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            此操作无法撤销。删除分类可能会影响属于该分类的网站。
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>取消</AlertDialogCancel>
+                          <Button
+                              type="button"
+                              variant="destructive"
+                              onClick={() => {
+                                setOpenDeleteId(null);
+                                void handleDelete(category.id);
+                              }}
+                              className="text-xs px-3 py-1 rounded-md transition-colors"
+                            >
+                              确认删除
+                            </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </TableCell>
               </TableRow>
             ))}
             {categories.length === 0 && (

@@ -67,7 +67,6 @@ export function Sidebar({ categories }: SidebarProps) {
         { name: "排行榜", href: "/rankings" },
         { name: "提交网站", href: "/submit" },
         { name: "管理", href: "/admin" },
-        { name: "关于我们", href: "/about" },
     ];
 
     return (

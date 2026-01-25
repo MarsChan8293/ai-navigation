@@ -9,17 +9,6 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     // 启用图片缓存
     minimumCacheTTL: 60,
-    // 配置外部图片域名
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
-      },
-    ],
     // 禁用未优化提示
     unoptimized: false,
   },

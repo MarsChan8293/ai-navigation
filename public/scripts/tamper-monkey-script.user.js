@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         AI Navigation Collector
 // @namespace    https://www.liuyaowen.cn
-// @version      1.2.1
-// @description  一键收藏网站到 AI 导航
+// @version      2.0.0
+// @description  一键收藏网站到 AI 导航（支持自动截图）
 // @author       Your Name
 // @match        *://*/*
 // @grant        GM_xmlhttpRequest
@@ -13,6 +13,7 @@
 // @grant        GM_getValue
 // @connect      www.ainavix.com
 // @connect      localhost
+// @require      https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js
 // @icon         https://www.ainavix.com/favicon.ico
 // @run-at       document-end
 // ==/UserScript==
@@ -25,10 +26,9 @@
     apiEndpoint: "http://localhost:3000/api",
     submitWebsiteEndpoint: "http://localhost:3000/api/websites",
     categoriesEndpoint: "http://localhost:3000/api/categories",
-    // 添加拖动和贴边配置
     dragConfig: {
-      snapThreshold: 30, // 贴边吸附阈值（像素）
-      edgeOffset: 60, // 贴边后的偏移量（像素）
+      snapThreshold: 30,
+      edgeOffset: 60,
     },
   };
 
@@ -259,20 +259,46 @@
             }
         }
 
-        .ai-nav-icon-preview {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .ai-nav-thumbnail-section {
+            margin-bottom: 16px;
+        }
+
+        .ai-nav-thumbnail-preview {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
             margin-bottom: 8px;
         }
 
-        .ai-nav-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            object-fit: contain;
-            background: #f5f5f5;
-            padding: 4px;
+        .ai-nav-thumbnail-preview canvas,
+        .ai-nav-thumbnail-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #ai-nav-thumbnail-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .ai-nav-thumbnail-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .ai-nav-thumbnail-actions .ai-nav-btn {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 14px;
         }
 
         .ai-nav-category-error {
@@ -332,8 +358,9 @@
                 background: #0070f3;
             }
 
-            .ai-nav-icon {
+            .ai-nav-thumbnail-preview {
                 background: #2a2a2a;
+                border-color: #333;
             }
 
             .ai-nav-category-error {
@@ -372,7 +399,6 @@
         title: document.title.split(" - ")[0].split(" | ")[0].trim(),
         url: window.location.href,
         description: "",
-        thumbnail: "",
         icon: "",
       };
 
@@ -395,15 +421,6 @@
           } else {
             console.log("未找到页面描述");
           }
-        }
-
-        // 获取缩略图
-        const thumbnailMeta =
-          document.querySelector('meta[property="og:image"]') ||
-          document.querySelector('meta[name="twitter:image"]');
-        if (thumbnailMeta) {
-          metadata.thumbnail = thumbnailMeta.getAttribute("content");
-          console.log("找到页面缩略图:", metadata.thumbnail);
         }
 
         // 获取网站图标
@@ -539,11 +556,10 @@
       GM_notification({
         title,
         text,
-        timeout: 5000, // 增加显示时间到 5 秒
+        timeout: 5000,
         onclick: () => {
           console.log("通知被点击");
           if (type === "error") {
-            // 如果是错误通知，点击时打开控制台
             console.log("详细错误信息:", text);
           }
         },
@@ -583,10 +599,23 @@
                     </div>
                     <form class="ai-nav-form">
                         <div class="ai-nav-form-group">
-                            <label class="ai-nav-label">网站图标</label>
-                            <div class="ai-nav-icon-preview">
-                                <img src="" alt="网站图标" class="ai-nav-icon">
-                                <input type="hidden" name="icon" value="">
+                            <label class="ai-nav-label">网站缩略图</label>
+                            <div class="ai-nav-thumbnail-section">
+                                <div class="ai-nav-thumbnail-preview">
+                                    <canvas id="ai-nav-canvas" style="display: none;"></canvas>
+                                    <img id="ai-nav-thumbnail-preview-img" src="" alt="缩略图预览" style="display: none;">
+                                    <div id="ai-nav-thumbnail-placeholder">暂无缩略图</div>
+                                </div>
+                                <div class="ai-nav-thumbnail-actions">
+                                    <button type="="button" class="ai-nav-btn ai-nav-screenshot-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                        <span>自动截图</span>
+                                    </button>
+                                    <button type="button" class="ai-nav-btn ai-nav-clear-btn" style="display: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        <span>清除截图</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="ai-nav-form-group">
@@ -630,7 +659,7 @@
     modal: null,
     categories: [],
     selectedCategory: null,
-    isFirstVisit: true,
+    screenshotData: null,
 
     async init() {
       console.log("初始化收藏工具...");
@@ -884,9 +913,102 @@
       });
     },
 
+    async captureScreenshot() {
+      const canvas = document.getElementById('ai-nav-canvas');
+      const previewImg = document.getElementById('ai-nav-thumbnail-preview-img');
+      const placeholder = document.getElementById('ai-nav-thumbnail-placeholder');
+      const clearBtn = this.modal.querySelector('.ai-nav-clear-btn');
+      const screenshotBtn = this.modal.querySelector('.ai-nav-screenshot-btn');
+
+      try {
+        screenshotBtn.disabled = true;
+        screenshotBtn.innerHTML = '<span class="spinner" style="display:inline-block;margin-right:8px;"></span>截图中...';
+
+        if (typeof html2canvas === 'undefined') {
+          throw new Error('html2canvas 库未加载，请刷新页面重试');
+        }
+
+        const capturedCanvas = await html2canvas(document.body, {
+          scale: 0.5,
+          useCORS: true,
+          allowTaint: true,
+          logging: false,
+          width: 1280,
+          height: 720,
+          windowWidth: 1280,
+          windowHeight: 720,
+          ignoreElements: (element) => {
+            return element.classList.contains('ai-nav-collector') || 
+                   element.classList.contains('ai-nav-modal');
+          },
+        });
+
+        const base64 = capturedCanvas.toDataURL('image/webp', 0.8);
+        previewImg.src = base64;
+        previewImg.style.display = 'block';
+        placeholder.style.display = 'none';
+        canvas.style.display = 'none';
+        clearBtn.style.display = 'flex';
+
+        this.screenshotData = base64;
+
+        utils.notify("截图成功", "已捕获当前页面截图");
+      } catch (error) {
+        console.error('截图失败:', error);
+        placeholder.innerHTML = '截图失败，点击重试';
+        utils.notify("截图失败", error.message || "未知错误", "error");
+      } finally {
+        screenshotBtn.disabled = false;
+        screenshotBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><span>自动截图</span>';
+      }
+    },
+
+    async uploadScreenshot() {
+      if (!this.screenshotData) return null;
+
+      try {
+        const formData = new FormData();
+        const blob = await fetch(this.screenshotData).then(r => r.blob());
+        formData.append('file', new File([blob], `screenshot-${Date.now()}.webp`, { type: 'image/webp' }));
+
+        const response = await fetch(`${CONFIG.apiEndpoint}/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          return result.data.path;
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (error) {
+        console.error('上传截图失败:', error);
+        throw error;
+      }
+    },
+
+    clearScreenshot() {
+      this.screenshotData = null;
+      const previewImg = document.getElementById('ai-nav-thumbnail-preview-img');
+      const placeholder = document.getElementById('ai-nav-thumbnail-placeholder');
+      const clearBtn = this.modal.querySelector('.ai-nav-clear-btn');
+
+      previewImg.src = '';
+      previewImg.style.display = 'none';
+      placeholder.style.display = 'flex';
+      placeholder.textContent = '暂无缩略图';
+      clearBtn.style.display = 'none';
+    },
+
     setupFormHandlers() {
       const form = this.modal.querySelector(".ai-nav-form");
       const submitBtn = form.querySelector(".ai-nav-submit");
+      const screenshotBtn = this.modal.querySelector('.ai-nav-screenshot-btn');
+      const clearBtn = this.modal.querySelector('.ai-nav-clear-btn');
+
+      screenshotBtn.onclick = () => this.captureScreenshot();
+      clearBtn.onclick = () => this.clearScreenshot();
 
       const setLoading = (loading) => {
         submitBtn.classList.toggle("loading", loading);
@@ -910,7 +1032,7 @@
           description: formData.get("description").trim(),
           url: window.location.href.trim(),
           category_id: Number(this.selectedCategory),
-          thumbnail: (formData.get("icon") || "").trim(),
+          thumbnail: null,
           status: "pending",
         };
 
@@ -930,6 +1052,12 @@
 
         try {
           setLoading(true);
+
+          if (this.screenshotData) {
+            utils.notify("上传中...", "正在上传截图");
+            data.thumbnail = await this.uploadScreenshot();
+          }
+
           utils.notify("提交中...", "正在处理您的请求");
           const result = await utils.sendRequest(
             CONFIG.submitWebsiteEndpoint,
@@ -937,10 +1065,10 @@
           );
           this.modal.classList.remove("show");
           utils.notify("收藏成功 ✨", "网站已提交审核，请等待管理员审核");
+          this.clearScreenshot();
         } catch (error) {
           let errorMsg = error.message || "请稍后重试";
 
-          // 处理常见错误
           if (errorMsg.includes("URL already exists")) {
             errorMsg = "该网站已经被收藏过了";
           } else if (errorMsg.includes("Category does not exist")) {
@@ -966,24 +1094,11 @@
       form.elements.title.value = metadata.title;
       form.elements.description.value = metadata.description;
 
-      const iconImg = form.querySelector(".ai-nav-icon");
-      const iconInput = form.querySelector('input[name="icon"]');
-      if (metadata.icon) {
-        console.log("设置网站图标:", metadata.icon);
-        iconImg.src = metadata.icon;
-        iconInput.value = metadata.icon;
-      } else {
-        console.log("使用默认图标");
-        iconImg.src = "https://www.liuyaowen.cn/favicon.ico";
-        iconInput.value = "";
-      }
-
       this.modal.classList.add("show");
       utils.notify("准备收藏", "请完善信息并选择分类");
     },
   };
 
-  // 初始化
-  console.log("开始初始化收藏工具...");
+  // console.log("开始初始化收藏工具...");
   collector.init();
 })();

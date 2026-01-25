@@ -80,9 +80,7 @@ export function CompactCard({ website, onVisit }: CompactCardProps) {
           <div className="relative py-2 px-3 sm:p-3 flex flex-col gap-2">
             <div className="flex items-center gap-3">
               <WebsiteThumbnail
-                url={website.url}
                 thumbnail={website.thumbnail}
-                thumbnail_base64={website.thumbnail_base64}
                 title={website.title}
                 className="w-9 h-9 sm:w-10 sm:h-10"
               />

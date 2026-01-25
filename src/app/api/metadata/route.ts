@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     }
 
     try {
-        const metadata = await fetchMetadata(url);
+        const metadata = await fetchMetadata();
         return NextResponse.json({ success: true, data: metadata });
     } catch (error) {
         console.error("Metadata fetch error:", error);

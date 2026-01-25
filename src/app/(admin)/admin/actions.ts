@@ -27,7 +27,21 @@ export async function getWebsites(): Promise<Website[]> {
         created_at: "desc",
       },
     });
-    return websites as Website[];
+    
+    // Explicitly map to Website type to ensure only serializable data is sent
+    return websites.map(w => ({
+      id: w.id,
+      title: w.title,
+      url: w.url,
+      description: w.description,
+      category_id: w.category_id,
+      thumbnail: w.thumbnail,
+      status: w.status as Website["status"],
+      visits: w.visits,
+      likes: w.likes,
+      active: w.active,
+      dislikes: w.dislikes,
+    })) as Website[];
   } catch (error) {
     console.error("Error fetching websites:", error);
     return [];
@@ -41,7 +55,11 @@ export async function getCategories(): Promise<Category[]> {
         id: "asc",
       },
     });
-    return categories as Category[];
+    return categories.map(c => ({
+      id: c.id,
+      name: c.name,
+      slug: c.slug,
+    })) as Category[];
   } catch (error) {
     console.error("Error fetching categories:", error);
     return [];

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/db/db";
 import { AjaxResponse } from "@/lib/utils";
 
 interface CheckUrlResponse {
   isAlive: boolean;
 }
 
-const prisma = new PrismaClient();
+// POST: 检查网站活跃度
 
 async function checkUrl(url: string): Promise<CheckUrlResponse> {
   try {

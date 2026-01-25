@@ -14,7 +14,7 @@ export default async function RankingsPage() {
         where: {
           status: "approved",
         },
-        orderBy: [{ visits: "desc" }, { likes: "desc" }],
+        orderBy: [{ visits: "desc" }],
         select: {
           id: true,
           title: true,
@@ -22,11 +22,9 @@ export default async function RankingsPage() {
           description: true,
           category_id: true,
           thumbnail: true,
-          thumbnail_base64: true,
           active: true,
           status: true,
           visits: true,
-          likes: true,
           dislikes: true,
         },
       }),

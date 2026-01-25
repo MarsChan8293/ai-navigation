@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Trophy, Plus, Brain, Download, Info, MessageSquare } from "lucide-react";
+import { Trophy, Plus, Brain, Download, MessageSquare } from "lucide-react";
 import { Button } from "@/ui/common/button";
 import ThemeSwitch from "@/components/theme-switcher/theme-switch";
 import MobileMenu from "./mobile-menu";
@@ -92,17 +92,6 @@ export default function Header() {
               <Button size="sm" className="flex items-center gap-2">
                 <Plus className="h-4 w-4" />
                 <span>提交网站</span>
-              </Button>
-            </Link>
-
-            <Link href="/about">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <Info className="h-4 w-4" />
-                <span>关于</span>
               </Button>
             </Link>
 
