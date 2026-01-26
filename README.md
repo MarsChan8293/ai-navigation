@@ -4,24 +4,25 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)
-![React](https://img.shields.io/badge/react-%5E18.2.0-blue.svg)
-![Next.js](https://img.shields.io/badge/next.js-14.1.0-black)
+![React](https://img.shields.io/badge/react-%5E19.0.0-blue.svg)
+![Next.js](https://img.shields.io/badge/next.js-15.1.2-black)
 
 </div>
 
 ## 📖 简介
 
-AI 导航是一个现代化的人工智能网站导航系统，致力于帮助用户发现、分享和管理优质的 AI 工具与资源。项目采用最新的 Web 技术栈构建，提供流畅的用户体验和强大的管理功能。
+AI 导航是一个由 Apple 风格启发的现代化人工智能网站导航系统，致力于帮助用户发现、分享和管理优质的 AI 工具与资源。项目采用最新的 Next.js 15 和 Tailwind CSS 构建，提供极致流畅的用户体验和强大的管理功能。
 
 ### ✨ 特性
 
+- 🍎 **Apple 风格 UI**: 精致的组件设计，平滑的动画效果和毛玻璃质感
 - 🎯 **精选内容**: 严选优质 AI 网站，分类清晰直观
-- 🔍 **智能搜索**: 支持多搜索引擎集成和实时搜索
-- 🎨 **现代设计**: 精美的 UI 设计，支持浅色/深色主题
-- 📱 **响应式**: 完美适配桌面端、平板和移动设备
-- 🚀 **智能抓取**: 自动获取网站标题、描述和图片
-- 👮‍♂️ **后台管理**: 完善的管理员功能和审核机制
-- 💾 **数据安全**: 支持数据备份与云端同步
+- 🔍 **智能搜索**: 支持多搜索引擎集成和全局实时搜索
+- 📸 **智能截图**: 自动获取网站实时截图，支持 Microlink API
+- 🎨 **主题感应**: 完美支持浅色/深色模式，随系统自动切换
+- 📱 **全端适配**: 完美适配从移动端到超宽屏的各种设备
+- 👮‍♂️ **后台管理**: 强大的管理员仪表盘，支持分类、网站和使用场景管理
+- 💾 **数据安全**: 基于 Prisma 的 SQLite 数据库，支持高效的数据迁移和还原
 
 ## 🚀 界面展示
 
@@ -31,27 +32,27 @@ AI 导航是一个现代化的人工智能网站导航系统，致力于帮助�
 
 ### 界面预览
 
-#### 首页浅色主题
+#### 首页看板 (Apple Redesign)
 
-![首页浅色主题](/public/compose.png)
+![首页看板](/public/compose.png)
 
-#### 首页深色主题
+#### 首页深色模式
 
-![首页深色主题](/public/compose-dark.png)
+![首页深色模式](/public/compose-dark.png)
 
-#### 排行榜
+#### 快捷搜索与过滤
 
 ![排行榜](/public/rankings.png)
 
-#### 深色模式
+#### 响应式设计
 
 ![深色模式](/public/dark.png)
 
-##### 动画效果
+##### 交互动画
 
-![](/public/all.gif)
-![](/public/footer.gif)
-![](/public/header-1735608882123.gif)
+![完整演示](/public/all.gif)
+![底部效果](/public/footer.gif)
+![顶部导航](/public/header-1735608882123.gif)
 
 ## 🛠️ 开发步骤
 
@@ -60,35 +61,34 @@ AI 导航是一个现代化的人工智能网站导航系统，致力于帮助�
 - 安装 [Node.js](https://nodejs.org/) (>= 18.0.0)
 - 安装 [Git](https://git-scm.com/)
 - 准备一个代码编辑器 (推荐 VS Code)
-- 确保有可用的包管理器 (npm >= 8.0.0)
+- 确保有可用的包管理器 (npm / pnpm / yarn)
 
 ### 2. 项目设置
 
-1. Fork 项目仓库到你的 GitHub 账号
-
-2. 克隆项目到本地:
+1. 克隆项目到本地:
 
 ```bash
-git clone https://github.com/liyown/AI-NAV.git
-cd AI-NAV
+git clone https://github.com/MarsChan8293/ai-navigation.git
+cd ai-navigation
 ```
 
-3. 安装项目依赖:
+2. 安装项目依赖:
 
 ```bash
 npm install
 ```
 
-4. 环境变量配置:
+3. 环境变量配置:
 
 ```bash
 # 复制环境变量模板
-cp .env.example .env.local
+cp .env.example .env
 
-# 编辑 .env.local 文件，填入必要的环境变量
+# 编辑 .env 文件，填入必要的环境变量
+# 包括数据库配置、截图 API (MICROLINK_API_KEY) 等
 ```
 
-5. 初始化数据库:
+4. 初始化数据库:
 
 ```bash
 npx prisma migrate dev
@@ -97,167 +97,52 @@ npm run init-data
 
 ### 3. 开发流程
 
-1. 创建新的功能分支:
-
-```bash
-git checkout -b feature/your-feature-name
-```
-
-2. 启动开发服务器:
+1. 启动开发服务器:
 
 ```bash
 npm run dev
 ```
 
-3. 代码质量检查:
+2. 代码质量检查:
 
 ```bash
 # 运行代码检查
 npm run lint
 
 # 运行类型检查
-npm run type-check
-```
-
-4. 提交代码:
-
-```bash
-git add .
-git commit -m "feat: 添加新功能"
-git push origin feature/your-feature-name
+npx tsc --noEmit
 ```
 
 ## 📦 部署步骤
 
-### 1. Vercel 部署（推荐）
+### Vercel 部署
 
-1. Fork 本项目到你的 GitHub 账号
+1. 在 [Vercel](https://vercel.com/) 导入你的 GitHub 仓库
 
-2. 在 [Vercel](https://vercel.com/) 注册账号并连接 GitHub
+2. 配置项目设置:
+   - Framework Preset: Next.js
+   - Node.js Version: 20.x
 
-3. 在 Vercel 中导入项目:
-
-   - 点击 "New Project"
-   - 选择你 fork 的仓库
-   - 配置项目设置:
-     - Framework Preset: Next.js
-     - Root Directory: ./
-     - Node.js Version: 18.x
-
-4. 配置环境变量:
-
-   - 在 Vercel 项目设置中添加必要的环境变量
-   - 确保所有 .env.local 中的变量都已配置
-
-5. 部署项目:
-   - 点击 "Deploy"
-   - 等待部署完成
-   - 访问分配的域名检查部署结果
-
-### 2. 自托管部署
-
-#### Docker 部署
-
-1. 构建 Docker 镜像:
-
-```bash
-docker build -t ai-nav .
-```
-
-2. 运行容器:
-
-```bash
-docker run -d \
-  -p 3000:3000 \
-  -e DATABASE_URL=your_database_url \
-  -e NEXT_PUBLIC_API_URL=your_api_url \
-  --name ai-nav \
-  ai-nav
-```
-
-## 🔧 核心功能
-
-### 网站管理
-
-- **网站提交**
-
-  - 支持手动填写和自动抓取
-  - 分类管理和标签系统
-  - 审核流程和状态追踪
-
-- **资讯管理**
-  - AI 相关新闻和资讯
-  - 自动获取文章摘要
-  - 支持多媒体内容
-
-### 浏览器扩展
-
-- **一键收藏**
-  - 支持快速收藏网站和资讯
-  - 自动提取网页元数据
-  - 快捷键操作支持
-
-#### 安装油猴脚本
-
-1. 安装浏览器扩展
-
-   - Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - Firefox: [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
-   - Edge: [Tampermonkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
-
-2. 安装收藏脚本
-
-   - 点击 [安装脚本](/scripts/tamper-monkey-script.user.js)
-   - 或手动复制 `public/scripts/tamper-monkey-script.user.js` 内容创建新脚本
-
-3. 使用方法
-   - 浮动按钮：页面右下角的收藏按钮
-   - 快捷键：
-     - `Alt + S`: 收藏网站
-     - `Alt + N`: 收藏资讯
-   - 右键菜单：通过 Tampermonkey 扩展菜单操作
+3. 配置环境变量:
+   - `DATABASE_URL`: 你的数据库连接字符串
+   - `ADMIN_PASSWORD`: 管理员登录密码
+   - `MICROLINK_API_KEY`: (可选) 用于获取网页截图
 
 ## 🛠️ 技术栈
 
-- **前端框架**:
+- **前端框架**: Next.js 15 (App Router), React 19, TypeScript
+- **状态管理**: Jotai (全局原子状态), TanStack Query (数据请求缓存)
+- **UI 框架**: Tailwind CSS, Framer Motion (动画), Lucide React (图标)
+- **后端服务**: Prisma ORM, Next.js API Routes (Serverless)
+- **数据存储**: SQLite / PostgreSQL
+- **验证机制**: Zod, JSON Web Token (JWT)
 
-  - Next.js 14 (App Router)
-  - React 18
-  - TypeScript
+## 📄 开源协议
 
-- **状态管理**:
-
-  - Zustand
-  - React Query
-
-- **UI 框架**:
-
-  - Tailwind CSS
-  - shadcn/ui
-  - Framer Motion
-
-- **数据存储**:
-
-  - SQLite (Prisma)
-  - Prisma ORM
-  - Redis
-
-- **认证授权**:
-
-  - NextAuth.js
-  - JWT
-
-- **工具链**:
-  - React Hook Form
-  - Zod
-  - Lucide React
-  - ESLint
-  - Prettier
-
-## 📄 开源协议 本项目采用 [MIT](LICENSE) 协议开源。
+本项目采用 [MIT](LICENSE) 协议开源。
 
 <div align="center">
 
-**AI 导航** © 2024 Made with ❤️
+**AI 导航** © 2026 Made with ❤️
 
 </div>
