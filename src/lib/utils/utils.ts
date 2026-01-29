@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ScreenshotService } from "@/lib/services/screenshot";
+import { MetadataService } from "@/lib/services/metadata";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -35,8 +35,8 @@ export class AjaxResponse<T> {
 
 export async function fetchMetadata(url: string) {
   try {
-    const result = await ScreenshotService.captureScreenshot(url);
-    return result;
+    const metadata = await MetadataService.getMetadata(url);
+    return metadata;
   } catch (error) {
     console.error("Metadata fetch error:", error);
     throw error;
