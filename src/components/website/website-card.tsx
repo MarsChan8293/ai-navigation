@@ -13,6 +13,7 @@ import { useState } from "react";
 import { WebsiteThumbnail } from "./website-thumbnail";
 import { toast } from "@/hooks/use-toast";
 import { useCardTilt } from "@/hooks/use-card-tilt";
+import { WebsiteUseCases } from "./website-use-cases";
 
 interface WebsiteCardProps {
   website: Website;
@@ -184,13 +185,14 @@ export function WebsiteCard({
               </button>
               {isAdmin && (
                 <div className="ml-auto flex gap-2">
-                  <button onClick={() => onStatusUpdate(website.id, "approved")} className="hover:text-green-500"><ThumbsUp className="w-3 h-3" /></button>
-                  <button onClick={() => onStatusUpdate(website.id, "rejected")} className="hover:text-red-500"><ThumbsDown className="w-3 h-3" /></button>
+                  <button onClick={() => onStatusUpdate(website.id, "approved")} className="serif hover:text-green-500"><ThumbsUp className="w-3 h-3" /></button>
+                  <button onClick={() => onStatusUpdate(website.id, "rejected")} className="serif hover:text-red-500"><ThumbsDown className="w-3 h-3" /></button>
                 </div>
               )}
             </div>
           </div>
         </Card>
+        <WebsiteUseCases websiteId={website.id} />
       </div>
     </div>
   );

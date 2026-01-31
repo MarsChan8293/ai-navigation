@@ -47,6 +47,7 @@ model UseCase {
   image_base64 String?
   status       String   @default("published")
   website_id   Int
+  external_link String?
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
   website      Website  @relation(fields: [website_id], references: [id])

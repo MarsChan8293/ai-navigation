@@ -33,6 +33,7 @@ export function UseCaseForm() {
       content: "",
       website_id: "",
       image: null,
+      external_link: "",
     },
   });
 
@@ -74,6 +75,7 @@ export function UseCaseForm() {
           content: values.content,
           website_id: values.website_id,
           image_base64: imageBase64 || null,
+          external_link: values.external_link || null,
         }),
       });
 
@@ -156,6 +158,22 @@ export function UseCaseForm() {
           onChange={(value) => setValue("content", value, { shouldValidate: true })}
           error={form.formState.errors.content?.message}
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium mb-2 text-foreground/80">
+          外部链接（可选）
+        </label>
+        <Input
+          {...form.register("external_link")}
+          placeholder="https://example.com/demo"
+          className="w-full bg-background/50 apple-glass border-border/40 hover:bg-background/70 hover:border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all duration-300"
+        />
+        {form.formState.errors.external_link && (
+          <p className="text-sm text-red-500/70 mt-1">
+            {form.formState.errors.external_link.message}
+          </p>
+        )}
       </div>
 
       <div>

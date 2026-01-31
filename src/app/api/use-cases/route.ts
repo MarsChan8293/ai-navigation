@@ -84,6 +84,7 @@ export async function POST(request: Request) {
         content: data.content.trim(),
         image_base64: data.image_base64 || null,
         website_id: Number(data.website_id),
+        external_link: data.external_link || null,
         status: "published",
       },
       include: {

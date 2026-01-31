@@ -33,4 +33,5 @@ export const useCaseFormSchema = z.object({
   content: z.string().min(20, "内容至少需要20个字符"),
   website_id: z.string().min(1, "请选择关联网站"),
   image: imageFileSchema.optional(),
+  external_link: z.string().url("请输入有效的网址").optional(),
 });

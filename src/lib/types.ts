@@ -34,6 +34,7 @@ export interface UseCase {
   status: "published" | "draft";
   website_id: number;
   website?: Website;
+  external_link?: string | null;
   created_at: string;
 }
 
@@ -43,6 +44,7 @@ export interface UseCaseFormInputs {
   website_id: string;
   image?: File | null;
   image_base64?: string;
+  external_link?: string;
 }
 
 export interface Setting {
